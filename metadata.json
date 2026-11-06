@@ -1,0 +1,6 @@
+{
+  "name": "LoopTracker - AI Visual Concept & Learning Loop",
+  "description": "Escape tutorial hell with hybrid voice/text input, continuous concept graphs, daily Feynman warm-ups, and node-level State of Mind briefings.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

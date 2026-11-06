@@ -1,0 +1,157 @@
+@import "tailwindcss";
+@import "@xyflow/react/dist/style.css";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --canvas-bg: #F5ECE2;
+  --canvas-dots: #D6C4B0;
+  --card-bg: #FAF5ED;
+  --card-border: #C8B69F;
+  --ink-primary: #2C1E16;
+  --ink-secondary: #6F5543;
+  --ink-muted: #9E8572;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+.dark {
+  --canvas-bg: #16100C;
+  --canvas-dots: #2E2218;
+  --card-bg: #221913;
+  --card-border: #473527;
+  --ink-primary: #F3E9DD;
+  --ink-secondary: #CBB6A1;
+  --ink-muted: #8E7A68;
+}
+
+.font-sketch {
+  font-family: 'Kalam', cursive, sans-serif;
+}
+
+.font-hand {
+  font-family: 'Caveat', cursive, sans-serif;
+}
+
+code, pre, .font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Notebook grid / sketch lines texture */
+.paper-texture-light {
+  background-color: #F5ECE2;
+  background-image: 
+    radial-gradient(#D8C7B5 1.2px, transparent 1.2px),
+    linear-gradient(to right, rgba(200, 182, 159, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(200, 182, 159, 0.08) 1px, transparent 1px);
+  background-size: 24px 24px, 24px 24px, 24px 24px;
+}
+
+.paper-texture-dark {
+  background-color: #16100C;
+  background-image: 
+    radial-gradient(#2E2218 1.2px, transparent 1.2px),
+    linear-gradient(to right, rgba(60, 44, 32, 0.25) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(60, 44, 32, 0.25) 1px, transparent 1px);
+  background-size: 24px 24px, 24px 24px, 24px 24px;
+}
+
+/* Sketch note card imperfect borders & tape effect */
+.sketch-card {
+  box-shadow: 2px 3px 0px 0px rgba(71, 53, 39, 0.12), 4px 8px 16px -2px rgba(44, 30, 22, 0.08);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dark .sketch-card {
+  box-shadow: 2px 3px 0px 0px rgba(0, 0, 0, 0.4), 4px 8px 20px -2px rgba(0, 0, 0, 0.6);
+}
+
+.sketch-card:hover {
+  transform: translateY(-2px) rotate(-0.3deg);
+  box-shadow: 4px 6px 0px 0px rgba(71, 53, 39, 0.16), 6px 12px 24px -2px rgba(44, 30, 22, 0.12);
+}
+
+.dark .sketch-card:hover {
+  box-shadow: 4px 6px 0px 0px rgba(0, 0, 0, 0.6), 6px 12px 24px -2px rgba(0, 0, 0, 0.8);
+}
+
+/* Washi tape aesthetic strips */
+.washi-tape-amber {
+  background: rgba(224, 187, 142, 0.55);
+  box-shadow: 0 1px 2px rgba(71, 53, 39, 0.1);
+  transform: rotate(-1.5deg);
+}
+
+.dark .washi-tape-amber {
+  background: rgba(140, 105, 70, 0.45);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+/* Custom coffee scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #EFE4D6;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #1B130E;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C4AF99;
+  border-radius: 6px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #473527;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #A99077;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #6B513D;
+}
+
+/* React Flow Canvas in Milk Coffee theme */
+.react-flow__background {
+  background-color: var(--canvas-bg) !important;
+}
+
+.react-flow__controls {
+  border-radius: 12px !important;
+  overflow: hidden;
+  border: 1px solid var(--card-border) !important;
+  background: var(--card-bg) !important;
+  box-shadow: 2px 4px 10px rgba(44, 30, 22, 0.1) !important;
+}
+
+.react-flow__controls-button {
+  background: transparent !important;
+  border-bottom: 1px solid var(--card-border) !important;
+  color: var(--ink-secondary) !important;
+  fill: var(--ink-secondary) !important;
+}
+
+.react-flow__controls-button:hover {
+  background: rgba(176, 137, 104, 0.15) !important;
+  color: var(--ink-primary) !important;
+  fill: var(--ink-primary) !important;
+}
+
+.react-flow__minimap {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--card-border) !important;
+  border-radius: 12px !important;
+  box-shadow: 2px 4px 10px rgba(44, 30, 22, 0.1) !important;
+}
+
+.react-flow__edge-path {
+  stroke-width: 2.2 !important;
+  stroke-linecap: round;
+}

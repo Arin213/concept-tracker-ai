@@ -1,0 +1,109 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile metadata",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["uid", "email"]
+    },
+    "Concept": {
+      "title": "Concept",
+      "description": "A technical macro-concept tracked in the knowledge graph",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "user_id": { "type": "string" },
+        "title": { "type": "string" },
+        "summary": { "type": "string" },
+        "raw_notes": { "type": "string" },
+        "mastery_score": { "type": "integer" },
+        "position_x": { "type": "number" },
+        "position_y": { "type": "number" },
+        "color_code": { "type": "string" },
+        "last_friction_point": { "type": "string" },
+        "suggested_next_step": { "type": "string" },
+        "next_review_at": { "type": "string" },
+        "created_at": { "type": "string" },
+        "updated_at": { "type": "string" },
+        "tags": { "type": "array" }
+      },
+      "required": ["id", "user_id", "title", "mastery_score"]
+    },
+    "ConceptRelationship": {
+      "title": "ConceptRelationship",
+      "description": "Directed relational edge between two concepts",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "user_id": { "type": "string" },
+        "source_concept_id": { "type": "string" },
+        "target_concept_id": { "type": "string" },
+        "relationship_type": { "type": "string" },
+        "label": { "type": "string" },
+        "created_at": { "type": "string" }
+      },
+      "required": ["id", "user_id", "source_concept_id", "target_concept_id", "relationship_type"]
+    },
+    "StudySession": {
+      "title": "StudySession",
+      "description": "Recorded active learning session or dump",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "user_id": { "type": "string" },
+        "session_type": { "type": "string" },
+        "raw_session_input": { "type": "string" },
+        "ai_summary": { "type": "string" },
+        "duration_minutes": { "type": "number" },
+        "started_at": { "type": "string" },
+        "ended_at": { "type": "string" }
+      },
+      "required": ["id", "user_id", "session_type", "ai_summary"]
+    },
+    "LearningState": {
+      "title": "LearningState",
+      "description": "Audit record of mastery score changes",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "concept_id": { "type": "string" },
+        "concept_title": { "type": "string" },
+        "previous_score": { "type": "number" },
+        "new_score": { "type": "number" },
+        "trigger_event": { "type": "string" },
+        "recorded_at": { "type": "string" },
+        "feedback_notes": { "type": "string" }
+      },
+      "required": ["id", "concept_id", "new_score", "trigger_event", "recorded_at"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Stores user profile data"
+    },
+    "/users/{userId}/concepts/{conceptId}": {
+      "schema": "Concept",
+      "description": "User's concepts"
+    },
+    "/users/{userId}/relationships/{relationshipId}": {
+      "schema": "ConceptRelationship",
+      "description": "User's concept relationships"
+    },
+    "/users/{userId}/study_sessions/{sessionId}": {
+      "schema": "StudySession",
+      "description": "User's study sessions"
+    },
+    "/users/{userId}/learning_states/{stateId}": {
+      "schema": "LearningState",
+      "description": "User's score audit history"
+    }
+  }
+}
