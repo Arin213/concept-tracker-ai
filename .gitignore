@@ -6,3 +6,21 @@ coverage/
 *.log
 .env*
 !.env.example
+# Environment & Secrets
+.env
+.env.local
+firebase-applet-config.json
+
+# Dependencies
+node_modules/
+
+# Build & Runtime Outputs
+dist/
+build/
+.output/
+
+# OS & Editor Specific
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
