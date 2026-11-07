@@ -72,15 +72,15 @@ export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
   }, []);
 
   return (
-    <header className="h-14 border-b border-[#2C3E50]/20 dark:border-[#2E3F59] bg-[#ECEFF1] dark:bg-[#0B0F19] px-4 flex items-center justify-between gap-4 z-30 shrink-0 select-none">
+    <header className="h-14 border-b border-[#2C3E50]/20 dark:border-[#2E3F59] bg-[#ECEFF1] dark:bg-[#0B0F19] px-2.5 sm:px-4 flex items-center justify-between gap-1.5 sm:gap-4 z-30 shrink-0 select-none">
       {/* Zone 1: Brand Wordmark */}
-      <div className="flex items-center gap-3 shrink-0">
-        <div className="w-8 h-8 rounded border border-[#2C3E50]/30 dark:border-[#2E3F59] bg-[#D5DBDB] dark:bg-[#161F30] flex items-center justify-center text-[#2E4053] dark:text-[#E2E8F0]">
-          <Coffee className="w-4 h-4 text-[#4A6572] dark:text-[#E2E8F0]" />
+      <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+        <div className="w-7 h-7 sm:w-8 h-8 rounded border border-[#2C3E50]/30 dark:border-[#2E3F59] bg-[#D5DBDB] dark:bg-[#161F30] flex items-center justify-center text-[#2E4053] dark:text-[#E2E8F0]">
+          <Coffee className="w-3.5 h-3.5 sm:w-4 h-4 text-[#4A6572] dark:text-[#E2E8F0]" />
         </div>
 
         <div className="flex items-baseline gap-2">
-          <span className="text-base font-bold tracking-tight text-[#2E4053] dark:text-[#E2E8F0] whitespace-nowrap">
+          <span className="text-sm sm:text-base font-bold tracking-tight text-[#2E4053] dark:text-[#E2E8F0] whitespace-nowrap">
             LoopTracker
           </span>
           <span className="text-xs text-[#546E7A] dark:text-[#94A3B8] hidden sm:inline whitespace-nowrap">
@@ -113,13 +113,13 @@ export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
       </div>
 
       {/* Zone 3: Organized Action Controls (Strict 1px Flat Borders, Zero Shadow) */}
-      <div className="flex items-center gap-2 shrink-0">
+      <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
         {/* Daily Feynman Warmup Button */}
         <button
           type="button"
           onClick={onOpenFeynmanModal}
           title="Daily Feynman active recall warmup"
-          className="h-8 px-2.5 sm:px-3 rounded border border-[#C0392B]/40 dark:border-[#EF4444]/40 bg-[#D5DBDB] dark:bg-[#161F30] hover:bg-[#C0392B]/10 text-[#C0392B] dark:text-[#EF4444] transition-colors flex items-center gap-1.5 text-xs font-medium cursor-pointer shrink-0"
+          className="h-8 px-2 sm:px-3 rounded border border-[#C0392B]/40 dark:border-[#EF4444]/40 bg-[#D5DBDB] dark:bg-[#161F30] hover:bg-[#C0392B]/10 text-[#C0392B] dark:text-[#EF4444] transition-colors flex items-center gap-1 text-xs font-medium cursor-pointer shrink-0"
         >
           <Flame className="w-3.5 h-3.5" />
           <span className="hidden sm:inline">Warm-Up</span>
@@ -135,7 +135,7 @@ export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
           type="button"
           onClick={onOpenLiveVoice}
           title="Live Voice Coach (Real-time 2-way audio)"
-          className="h-8 px-2.5 sm:px-3 rounded border border-[#2C3E50]/25 dark:border-[#2E3F59] bg-[#D5DBDB] dark:bg-[#161F30] hover:bg-[#4A6572]/15 text-[#2E4053] dark:text-[#E2E8F0] transition-colors flex items-center gap-1.5 text-xs font-medium cursor-pointer shrink-0"
+          className="h-8 px-2 sm:px-3 rounded border border-[#2C3E50]/25 dark:border-[#2E3F59] bg-[#D5DBDB] dark:bg-[#161F30] hover:bg-[#4A6572]/15 text-[#2E4053] dark:text-[#E2E8F0] transition-colors flex items-center gap-1 text-xs font-medium cursor-pointer shrink-0"
         >
           <Mic className="w-3.5 h-3.5 text-[#4A6572] dark:text-[#94A3B8]" />
           <span className="hidden sm:inline">Voice</span>
@@ -145,10 +145,11 @@ export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
         <button
           type="button"
           onClick={onOpenInputModal}
-          className="h-8 px-3 rounded border border-[#2C3E50] dark:border-[#415A77] bg-[#4A6572] dark:bg-[#2E3F59] hover:bg-[#3A4F59] dark:hover:bg-[#3E5478] text-[#FFFFFF] text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer shrink-0"
+          className="h-8 px-2 sm:px-3 rounded border border-[#2C3E50] dark:border-[#415A77] bg-[#4A6572] dark:bg-[#2E3F59] hover:bg-[#3A4F59] dark:hover:bg-[#3E5478] text-[#FFFFFF] text-xs font-medium flex items-center gap-1 transition-colors cursor-pointer shrink-0"
         >
           <Plus className="w-3.5 h-3.5" />
-          <span>Drop Notes</span>
+          <span className="hidden sm:inline">Drop Notes</span>
+          <span className="sm:hidden">Note</span>
         </button>
 
         {/* Theme Toggle Button */}
@@ -156,7 +157,7 @@ export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
           type="button"
           onClick={onToggleTheme}
           title={isDark ? 'Switch to Vintage Cold (Light Mode)' : 'Switch to Mystic Gothic (Dark Mode)'}
-          className="h-8 px-2.5 rounded border border-[#2C3E50]/25 dark:border-[#2E3F59] bg-[#D5DBDB] dark:bg-[#161F30] hover:bg-[#E2E7E9] dark:hover:bg-[#1E293B] text-[#2E4053] dark:text-[#E2E8F0] transition-colors flex items-center gap-1.5 text-xs font-medium cursor-pointer shrink-0"
+          className="h-8 w-8 sm:w-auto px-0 sm:px-2.5 rounded border border-[#2C3E50]/25 dark:border-[#2E3F59] bg-[#D5DBDB] dark:bg-[#161F30] hover:bg-[#E2E7E9] dark:hover:bg-[#1E293B] text-[#2E4053] dark:text-[#E2E8F0] transition-colors flex items-center justify-center gap-1.5 text-xs font-medium cursor-pointer shrink-0"
         >
           {isDark ? (
             <>

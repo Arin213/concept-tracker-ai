@@ -104,9 +104,17 @@ export const ConceptSlideOver: React.FC<ConceptSlideOverProps> = ({
   };
 
   return (
-    <div className="fixed inset-y-0 right-0 z-40 w-full max-w-lg bg-[#ECEFF1] dark:bg-[#0B0F19] border-l border-[#2C3E50]/25 dark:border-[#2E3F59] flex flex-col animate-in slide-in-from-right duration-200">
-      {/* Slide-over Header */}
-      <div className="p-4 sm:p-5 border-b border-[#2C3E50]/20 dark:border-[#2E3F59] bg-[#D5DBDB] dark:bg-[#161F30] flex items-start justify-between gap-3 shrink-0">
+    <>
+      {/* Mobile backdrop overlay so tapping outside dismisses on small screens */}
+      <div
+        onClick={onClose}
+        className="fixed inset-0 bg-black/40 backdrop-blur-xs z-30 sm:hidden"
+        aria-hidden="true"
+      />
+
+      <div className="fixed inset-y-0 right-0 z-40 w-full sm:max-w-md md:max-w-lg bg-[#ECEFF1] dark:bg-[#0B0F19] border-l border-[#2C3E50]/25 dark:border-[#2E3F59] flex flex-col animate-in slide-in-from-right duration-200">
+        {/* Slide-over Header */}
+        <div className="p-3.5 sm:p-5 border-b border-[#2C3E50]/20 dark:border-[#2E3F59] bg-[#D5DBDB] dark:bg-[#161F30] flex items-start justify-between gap-3 shrink-0">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
             <span
@@ -372,5 +380,6 @@ export const ConceptSlideOver: React.FC<ConceptSlideOverProps> = ({
         </div>
       </div>
     </div>
-  );
+  </>
+);
 };

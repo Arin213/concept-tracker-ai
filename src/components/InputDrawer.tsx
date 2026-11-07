@@ -100,17 +100,18 @@ export function InputDrawer({ userId = 'usr_current', onProcessed, onOpenFullMod
   };
 
   return (
-    <div className="fixed bottom-4 left-4 z-30 select-none">
+    <div className="fixed bottom-3 sm:bottom-4 left-3 sm:left-4 z-30 select-none max-w-[calc(100vw-24px)]">
       {!isExpanded ? (
         <button
           onClick={() => setIsExpanded(true)}
           className="flex items-center gap-2 px-3 py-2 rounded-md bg-[#D5DBDB] dark:bg-[#161F30] text-[#2E4053] dark:text-[#E2E8F0] border border-[#2C3E50]/30 dark:border-[#2E3F59] hover:border-[#4A6572] transition-colors text-xs font-mono cursor-pointer"
         >
           <PenTool className="w-3.5 h-3.5 text-[#4A6572] dark:text-[#94A3B8]" />
-          <span>Quick Note Drop</span>
+          <span className="hidden sm:inline">Quick Note Drop</span>
+          <span className="sm:hidden">Quick Note</span>
         </button>
       ) : (
-        <div className="bg-[#D5DBDB] dark:bg-[#161F30] border border-[#2C3E50]/40 dark:border-[#2E3F59] p-3 rounded-md w-80 sm:w-84 text-[#2E4053] dark:text-[#E2E8F0]">
+        <div className="bg-[#D5DBDB] dark:bg-[#161F30] border border-[#2C3E50]/40 dark:border-[#2E3F59] p-3 rounded-md w-[calc(100vw-24px)] sm:w-80 max-w-sm text-[#2E4053] dark:text-[#E2E8F0]">
           {/* Header */}
           <div className="flex items-center justify-between mb-2 pb-1.5 border-b border-[#2C3E50]/15 dark:border-[#2E3F59]">
             <span className="text-xs font-bold tracking-tight text-[#2E4053] dark:text-[#E2E8F0]">

@@ -302,8 +302,12 @@ export const LiveVoiceModal: React.FC<LiveVoiceModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-150">
+    <div
+      onClick={onClose}
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-150"
+    >
       <div 
+        onClick={(e) => e.stopPropagation()}
         className="w-full max-w-md max-h-[85vh] rounded-md border border-[#2C3E50]/40 dark:border-[#2E3F59] bg-[#D5DBDB] dark:bg-[#161F30] text-[#2E4053] dark:text-[#E2E8F0] relative flex flex-col overflow-hidden"
       >
         {/* Top Header (shrink-0) */}

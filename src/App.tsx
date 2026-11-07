@@ -323,14 +323,14 @@ export default function App() {
 
         {/* Floating Context-Resumption Cold Node Alert Toast (Strict 1px Flat Border, Zero Shadow) */}
         {!dismissWarmupToast && primaryColdNode && !isFeynmanModalOpen && (
-          <div className="absolute top-3 right-3 z-20 max-w-xs sm:max-w-sm bg-[#D5DBDB] dark:bg-[#161F30] border border-[#2C3E50]/30 dark:border-[#2E3F59] p-3 rounded-md animate-in fade-in duration-200 flex items-start gap-2.5">
-            <div className="w-8 h-8 rounded border border-[#C0392B]/40 bg-[#ECEFF1] dark:bg-[#0B0F19] flex items-center justify-center text-[#C0392B] dark:text-[#EF4444] shrink-0">
-              <Flame className="w-4 h-4" />
+          <div className="absolute bottom-4 right-14 sm:bottom-4 sm:right-16 z-20 max-w-[calc(100vw-5rem)] sm:max-w-xs md:max-w-sm bg-[#D5DBDB] dark:bg-[#161F30] border border-[#2C3E50]/30 dark:border-[#2E3F59] p-2.5 sm:p-3 rounded-md animate-in fade-in duration-200 flex items-start gap-2 sm:gap-2.5">
+            <div className="w-7 h-7 sm:w-8 h-8 rounded border border-[#C0392B]/40 bg-[#ECEFF1] dark:bg-[#0B0F19] flex items-center justify-center text-[#C0392B] dark:text-[#EF4444] shrink-0">
+              <Flame className="w-3.5 h-3.5 sm:w-4 h-4" />
             </div>
 
             <div className="space-y-1 flex-1 text-xs">
               <div className="flex items-center justify-between">
-                <span className="font-bold text-[#C0392B] dark:text-[#EF4444]">
+                <span className="font-bold text-[#C0392B] dark:text-[#EF4444] text-[11px] sm:text-xs">
                   Feynman Warm-Up Ready
                 </span>
                 <button
@@ -341,22 +341,22 @@ export default function App() {
                   <X className="w-3.5 h-3.5" />
                 </button>
               </div>
-              <p className="text-[#546E7A] dark:text-[#94A3B8] text-[11px] leading-relaxed">
-                <strong className="text-[#2E4053] dark:text-[#E2E8F0]">&ldquo;{primaryColdNode.title}&rdquo;</strong> is cold (Mastery {primaryColdNode.mastery_score}/5). Break the forgetting loop.
+              <p className="text-[#546E7A] dark:text-[#94A3B8] text-[10px] sm:text-[11px] leading-relaxed line-clamp-2">
+                <strong className="text-[#2E4053] dark:text-[#E2E8F0]">&ldquo;{primaryColdNode.title}&rdquo;</strong> is cold ({primaryColdNode.mastery_score}/5). Break the forgetting loop.
               </p>
-              <div className="pt-1 flex items-center gap-2 font-mono">
+              <div className="pt-0.5 sm:pt-1 flex items-center gap-1.5 sm:gap-2 font-mono">
                 <button
                   type="button"
                   onClick={() => handleStartFeynman(primaryColdNode)}
-                  className="px-2.5 py-1 rounded border border-[#C0392B] bg-[#C0392B] hover:bg-[#A93226] text-white text-[11px] flex items-center gap-1 transition-colors cursor-pointer"
+                  className="px-2 sm:px-2.5 py-0.5 sm:py-1 rounded border border-[#C0392B] bg-[#C0392B] hover:bg-[#A93226] text-white text-[10px] sm:text-[11px] flex items-center gap-1 transition-colors cursor-pointer"
                 >
                   <Sparkles className="w-3 h-3" />
-                  Drill Now
+                  Drill
                 </button>
                 <button
                   type="button"
                   onClick={() => setSelectedConcept(primaryColdNode)}
-                  className="px-2.5 py-1 rounded border border-[#2C3E50]/20 dark:border-[#2E3F59] bg-[#ECEFF1] dark:bg-[#0B0F19] text-[#2E4053] dark:text-[#E2E8F0] text-[11px] hover:border-[#4A6572] transition-colors cursor-pointer"
+                  className="px-2 sm:px-2.5 py-0.5 sm:py-1 rounded border border-[#2C3E50]/20 dark:border-[#2E3F59] bg-[#ECEFF1] dark:bg-[#0B0F19] text-[#2E4053] dark:text-[#E2E8F0] text-[10px] sm:text-[11px] hover:border-[#4A6572] transition-colors cursor-pointer"
                 >
                   Inspect
                 </button>

@@ -210,16 +210,16 @@ export const CanvasGraph: React.FC<CanvasGraphProps> = ({
   return (
     <div className="relative w-full h-full select-none overflow-hidden bg-[#ECEFF1] dark:bg-[#0B0F19]">
       {/* Floating Canvas Top Overlay Toolbar (1px Flat Border, Zero Shadow) */}
-      <div className="absolute top-3 left-3 z-20 flex flex-wrap items-center gap-2 bg-[#D5DBDB] dark:bg-[#161F30] border border-[#2C3E50]/25 dark:border-[#2E3F59] p-1.5 rounded-md">
+      <div className="absolute top-2 sm:top-3 left-2 sm:left-3 z-20 flex flex-wrap items-center gap-1.5 sm:gap-2 bg-[#D5DBDB] dark:bg-[#161F30] border border-[#2C3E50]/25 dark:border-[#2E3F59] p-1.5 rounded-md max-w-[calc(100vw-16px)] sm:max-w-[calc(100vw-24px)]">
         {/* Search */}
         <div className="relative flex items-center">
           <Search className="w-3.5 h-3.5 text-[#546E7A] dark:text-[#94A3B8] absolute left-2.5 pointer-events-none" />
           <input
             type="text"
-            placeholder="Search concepts..."
+            placeholder="Search..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-44 pl-8 pr-2.5 py-1 text-xs bg-[#ECEFF1] dark:bg-[#0B0F19] border border-[#2C3E50]/20 dark:border-[#2E3F59] rounded text-[#2E4053] dark:text-[#E2E8F0] placeholder-[#78909C] dark:placeholder-[#64748B] focus:outline-none focus:border-[#4A6572] transition-colors font-sans"
+            className="w-28 sm:w-44 pl-7 sm:pl-8 pr-2.5 py-1 text-[11px] sm:text-xs bg-[#ECEFF1] dark:bg-[#0B0F19] border border-[#2C3E50]/20 dark:border-[#2E3F59] rounded text-[#2E4053] dark:text-[#E2E8F0] placeholder-[#78909C] dark:placeholder-[#64748B] focus:outline-none focus:border-[#4A6572] transition-colors font-sans"
           />
           {searchQuery && (
             <button
@@ -234,10 +234,10 @@ export const CanvasGraph: React.FC<CanvasGraphProps> = ({
         <div className="h-4 w-px bg-[#2C3E50]/20 dark:bg-[#2E3F59] mx-0.5 hidden sm:block" />
 
         {/* Filter Segmented Buttons */}
-        <div className="flex items-center gap-1 text-xs font-mono">
+        <div className="flex items-center gap-1 text-[11px] sm:text-xs font-mono">
           <button
             onClick={() => setFilterMode('all')}
-            className={`px-2.5 py-1 rounded border transition-colors ${
+            className={`px-2 sm:px-2.5 py-0.5 sm:py-1 rounded border transition-colors ${
               filterMode === 'all'
                 ? 'border-[#2C3E50] dark:border-[#415A77] bg-[#4A6572] dark:bg-[#2E3F59] text-white'
                 : 'border-transparent bg-transparent text-[#546E7A] dark:text-[#94A3B8] hover:bg-[#E2E7E9] dark:hover:bg-[#1E293B]'
@@ -247,7 +247,7 @@ export const CanvasGraph: React.FC<CanvasGraphProps> = ({
           </button>
           <button
             onClick={() => setFilterMode('cold')}
-            className={`px-2.5 py-1 rounded border flex items-center gap-1 transition-colors ${
+            className={`px-2 sm:px-2.5 py-0.5 sm:py-1 rounded border flex items-center gap-1 transition-colors ${
               filterMode === 'cold'
                 ? 'border-[#C0392B] bg-[#C0392B] text-white'
                 : 'border-transparent bg-transparent text-[#C0392B] dark:text-[#EF4444] hover:bg-[#C0392B]/10'
@@ -258,7 +258,7 @@ export const CanvasGraph: React.FC<CanvasGraphProps> = ({
           </button>
           <button
             onClick={() => setFilterMode('mastered')}
-            className={`px-2.5 py-1 rounded border transition-colors ${
+            className={`px-2 sm:px-2.5 py-0.5 sm:py-1 rounded border transition-colors ${
               filterMode === 'mastered'
                 ? 'border-[#27AE60] bg-[#27AE60] text-white'
                 : 'border-transparent bg-transparent text-[#27AE60] dark:text-[#10B981] hover:bg-[#27AE60]/10'
@@ -292,9 +292,10 @@ export const CanvasGraph: React.FC<CanvasGraphProps> = ({
           size={1.2}
           color={isDark ? '#1E2A3E' : '#B0BEC5'}
         />
-        <Controls position="bottom-right" showInteractive={false} />
+        <Controls position="bottom-right" showInteractive={false} className="!m-2 sm:!m-4" />
         <MiniMap
           position="top-right"
+          className="hidden lg:block !m-3"
           nodeColor={(n) => {
             const c = (n.data as any)?.concept as Concept;
             if (!c) return isDark ? '#2E3F59' : '#B0BEC5';
