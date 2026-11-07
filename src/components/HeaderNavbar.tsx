@@ -1,19 +1,18 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   Flame,
   Plus,
   RotateCcw,
   History,
   HelpCircle,
-  Coffee,
   Sun,
   Moon,
-  Sparkles,
-  BookOpen,
   Mic,
   LogIn,
   LogOut,
-  User as UserIcon
+  User as UserIcon,
+  MoreHorizontal,
+  Compass
 } from 'lucide-react';
 import type { Concept } from '../types.js';
 import type { User } from 'firebase/auth';
@@ -49,6 +48,9 @@ export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
   onSignInGoogle,
   onSignOut,
 }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
   const totalConcepts = concepts.length;
   const coldCount = coldConcepts.length;
   const masteredCount = concepts.filter((c) => c.mastery_score >= 4).length;
@@ -58,202 +60,212 @@ export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
 
   const isDark = theme === 'dark';
 
+  // Close menu on click outside
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setIsMenuOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   return (
-    <header className="h-16 border-b border-[#C8B69F] dark:border-[#473527] bg-[#FAF5EE]/95 dark:bg-[#1C140F]/95 backdrop-blur-md px-4 sm:px-6 flex items-center justify-between gap-4 z-30 shrink-0 transition-colors duration-200">
-      {/* Brand Identity (Sketch Note Notebook Title) */}
-      <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-xl bg-[#EFE3D5] dark:bg-[#2C211A] border border-[#C8B69F] dark:border-[#473527] flex items-center justify-center text-[#7F5539] dark:text-[#E0A878] shadow-xs">
-          <Coffee className="w-5 h-5" />
+    <header className="h-14 border-b border-[#2C3E50]/20 dark:border-[#2E3F59] bg-[#ECEFF1] dark:bg-[#0B0F19] px-4 flex items-center justify-between gap-4 z-30 shrink-0 select-none">
+      {/* Zone 1: Brand Wordmark */}
+      <div className="flex items-center gap-3 shrink-0">
+        <div className="w-8 h-8 rounded border border-[#2C3E50]/30 dark:border-[#2E3F59] bg-[#D5DBDB] dark:bg-[#161F30] flex items-center justify-center text-[#2E4053] dark:text-[#E2E8F0]">
+          <Compass className="w-4 h-4 text-[#4A6572] dark:text-[#E2E8F0]" />
         </div>
 
-        <div>
-          <div className="flex items-center gap-2">
-            <h1 className="font-sketch text-2xl font-bold tracking-tight text-[#2C1E16] dark:text-[#F3E9DD] leading-none">
-              LoopTracker
-            </h1>
-            <span className="hidden sm:inline-block px-2 py-0.5 rounded text-[11px] font-sketch font-bold bg-[#EFE3D5] dark:bg-[#2C211A] text-[#7F5539] dark:text-[#E0A878] border border-[#D6C4B0] dark:border-[#473527]">
-              Sketch Note Canvas
+        <div className="flex items-baseline gap-2">
+          <span className="text-base font-bold tracking-tight text-[#2E4053] dark:text-[#E2E8F0] whitespace-nowrap">
+            LoopTracker
+          </span>
+          <span className="text-xs text-[#546E7A] dark:text-[#94A3B8] hidden sm:inline whitespace-nowrap">
+            · Visual Concept Engine
+          </span>
+        </div>
+      </div>
+
+      {/* Zone 2: Compact Metrics Ribbon (Tabular Numerals, Unboxed) */}
+      <div className="hidden md:flex items-center gap-3 text-xs text-[#546E7A] dark:text-[#94A3B8] font-mono tabular-nums px-3 py-1 rounded border border-[#2C3E50]/15 dark:border-[#2E3F59] bg-[#D5DBDB]/50 dark:bg-[#161F30]/60 shrink-0">
+        <div className="flex items-center gap-1.5">
+          <span>Notes</span>
+          <span className="font-bold text-[#2E4053] dark:text-[#E2E8F0]">{totalConcepts}</span>
+        </div>
+        <span className="text-[#2C3E50]/20 dark:text-[#2E3F59]">/</span>
+        <div className="flex items-center gap-1.5">
+          <span className="text-[#C0392B] dark:text-[#EF4444]">Cold</span>
+          <span className="font-bold text-[#C0392B] dark:text-[#EF4444]">{coldCount}</span>
+        </div>
+        <span className="text-[#2C3E50]/20 dark:text-[#2E3F59]">/</span>
+        <div className="flex items-center gap-1.5">
+          <span className="text-[#27AE60] dark:text-[#10B981]">Mastered</span>
+          <span className="font-bold text-[#27AE60] dark:text-[#10B981]">{masteredCount}</span>
+        </div>
+        <span className="text-[#2C3E50]/20 dark:text-[#2E3F59]">/</span>
+        <div className="flex items-center gap-1.5">
+          <span>Avg</span>
+          <span className="font-bold text-[#2E4053] dark:text-[#E2E8F0]">{avgMastery}/5</span>
+        </div>
+      </div>
+
+      {/* Zone 3: Organized Action Controls (Strict 1px Flat Borders, Zero Shadow) */}
+      <div className="flex items-center gap-2 shrink-0">
+        {/* Daily Feynman Warmup Button */}
+        <button
+          type="button"
+          onClick={onOpenFeynmanModal}
+          title="Daily Feynman active recall warmup"
+          className="h-8 px-2.5 sm:px-3 rounded border border-[#C0392B]/40 dark:border-[#EF4444]/40 bg-[#D5DBDB] dark:bg-[#161F30] hover:bg-[#C0392B]/10 text-[#C0392B] dark:text-[#EF4444] transition-colors flex items-center gap-1.5 text-xs font-medium cursor-pointer shrink-0"
+        >
+          <Flame className="w-3.5 h-3.5" />
+          <span className="hidden sm:inline">Warm-Up</span>
+          {coldCount > 0 && (
+            <span className="px-1.5 py-0.2 rounded text-[10px] font-mono font-bold bg-[#C0392B] text-white">
+              {coldCount}
             </span>
-          </div>
-          <p className="text-[11px] font-hand font-bold text-[#8C6D53] dark:text-[#CBB6A1] hidden md:block mt-0.5">
-            Active recall · Milk coffee study journal
-          </p>
-        </div>
-      </div>
-
-      {/* Metrics Ribbon */}
-      <div className="hidden lg:flex items-center gap-4 text-xs font-sketch text-[#5D4636] dark:text-[#D1BEAB]">
-        <div className="flex items-center gap-1.5">
-          <span className="text-[#8C6D53] dark:text-[#A7927F]">Notes:</span>
-          <span className="font-bold text-[#2C1E16] dark:text-[#F3E9DD] font-mono px-1.5 py-0.5 rounded bg-[#EFE3D5] dark:bg-[#2C211A]">
-            {totalConcepts}
-          </span>
-        </div>
-
-        <span className="text-[#C8B69F] dark:text-[#473527]">&middot;</span>
-
-        <div className="flex items-center gap-1.5">
-          <span className="text-[#C2410C] dark:text-[#FCA5A5] flex items-center gap-1">
-            <Flame className="w-3.5 h-3.5" /> Cold / Friction:
-          </span>
-          <span className="font-bold text-[#9A3412] dark:text-[#FDBA74] font-mono px-1.5 py-0.5 rounded bg-[#FFEDD5] dark:bg-[#431407]">
-            {coldCount}
-          </span>
-        </div>
-
-        <span className="text-[#C8B69F] dark:text-[#473527]">&middot;</span>
-
-        <div className="flex items-center gap-1.5">
-          <span className="text-[#166534] dark:text-[#86EFAC]">Mastered:</span>
-          <span className="font-bold text-[#15803D] dark:text-[#4ADE80] font-mono px-1.5 py-0.5 rounded bg-[#DCFCE7] dark:bg-[#052E16]">
-            {masteredCount}
-          </span>
-        </div>
-
-        <span className="text-[#C8B69F] dark:text-[#473527]">&middot;</span>
-
-        <div className="flex items-center gap-1.5">
-          <span className="text-[#7F5539] dark:text-[#E0A878]">Avg Mastery:</span>
-          <span className="font-bold font-mono px-1.5 py-0.5 rounded bg-[#EFE3D5] dark:bg-[#2C211A] text-[#2C1E16] dark:text-[#F3E9DD]">
-            {avgMastery}/5
-          </span>
-        </div>
-      </div>
-
-      {/* Action Buttons & Theme Switcher */}
-      <div className="flex items-center gap-2">
-        {/* Light / Dark Mode Toggle Button */}
-        <button
-          type="button"
-          onClick={onToggleTheme}
-          title={isDark ? 'Switch to Milk Coffee (Light Mode)' : 'Switch to Dark Roast (Dark Mode)'}
-          className="px-3 py-1.5 rounded-xl border border-[#C8B69F] dark:border-[#473527] bg-[#FAF5EE] dark:bg-[#221913] hover:bg-[#F3EAE0] dark:hover:bg-[#2C211A] text-[#2C1E16] dark:text-[#F3E9DD] transition-all flex items-center gap-1.5 text-xs font-sketch font-bold shadow-xs"
-        >
-          {isDark ? (
-            <>
-              <Moon className="w-3.5 h-3.5 text-[#E0A878]" />
-              <span className="hidden sm:inline">Dark Roast</span>
-            </>
-          ) : (
-            <>
-              <Sun className="w-3.5 h-3.5 text-[#CA8A04]" />
-              <span className="hidden sm:inline">Milk Coffee</span>
-            </>
           )}
-        </button>
-
-        {/* Reset Seed Demo */}
-        <button
-          type="button"
-          onClick={onResetSeed}
-          title="Reset Knowledge Graph to Sample Seed"
-          className="p-2 rounded-xl text-[#8C6D53] dark:text-[#CBB6A1] hover:text-[#2C1E16] dark:hover:text-white hover:bg-[#EFE3D5] dark:hover:bg-[#2C211A] transition-colors hidden sm:flex items-center gap-1.5 text-xs font-sketch"
-        >
-          <RotateCcw className="w-3.5 h-3.5" />
-          <span className="hidden xl:inline">Reset Graph</span>
-        </button>
-
-        {/* Audit Log */}
-        <button
-          type="button"
-          onClick={onOpenAuditModal}
-          title="View Learning States Audit Trail"
-          className="p-2 rounded-xl text-[#5D4636] dark:text-[#D1BEAB] hover:text-[#2C1E16] dark:hover:text-white bg-[#EFE3D5]/80 dark:bg-[#2C211A]/80 border border-[#D6C4B0] dark:border-[#473527] transition-all flex items-center gap-1.5 text-xs font-sketch font-bold"
-        >
-          <History className="w-3.5 h-3.5 text-[#7F5539] dark:text-[#E0A878]" />
-          <span className="hidden sm:inline">Audit Trail</span>
         </button>
 
         {/* Live Voice Coach Button (Gemini 3.8 Live API) */}
         <button
           type="button"
           onClick={onOpenLiveVoice}
-          title="Open Gemini 3.8 Live Voice Coach (Real-time 2-way audio)"
-          className="px-3 py-1.5 rounded-xl text-xs font-sketch font-bold bg-[#E0A878] dark:bg-[#7F5539] text-[#2C1E16] dark:text-[#F5ECE2] border border-[#C8B69F] dark:border-[#5C4033] shadow-xs flex items-center gap-1.5 transition-all hover:scale-[1.02] cursor-pointer"
+          title="Live Voice Coach (Real-time 2-way audio)"
+          className="h-8 px-2.5 sm:px-3 rounded border border-[#2C3E50]/25 dark:border-[#2E3F59] bg-[#D5DBDB] dark:bg-[#161F30] hover:bg-[#4A6572]/15 text-[#2E4053] dark:text-[#E2E8F0] transition-colors flex items-center gap-1.5 text-xs font-medium cursor-pointer shrink-0"
         >
-          <Mic className="w-3.5 h-3.5 text-[#C2410C] dark:text-[#E0A878] animate-pulse" />
-          <span className="hidden md:inline">Voice Coach</span>
-          <span className="px-1 py-0.2 rounded bg-black/10 dark:bg-white/10 text-[9px] uppercase tracking-wider font-sans">
-            Live
-          </span>
+          <Mic className="w-3.5 h-3.5 text-[#4A6572] dark:text-[#94A3B8]" />
+          <span className="hidden sm:inline">Voice</span>
         </button>
 
-        {/* Daily Feynman Warmup CTA (Terracotta warm sienna ink button) */}
-        <button
-          type="button"
-          onClick={onOpenFeynmanModal}
-          className="px-3.5 py-1.5 rounded-xl text-xs font-sketch font-bold bg-[#C2410C] hover:bg-[#9A3412] dark:bg-[#B91C1C] dark:hover:bg-[#991B1B] text-white shadow-xs flex items-center gap-1.5 transition-all cursor-pointer"
-        >
-          <Flame className="w-3.5 h-3.5" />
-          <span className="hidden sm:inline">Feynman Warm-Up</span>
-          <span className="sm:hidden">Warm-Up</span>
-          {coldCount > 0 && (
-            <span className="px-1.5 py-0.2 rounded bg-black/25 text-[10px] font-mono">
-              {coldCount}
-            </span>
-          )}
-        </button>
-
-        {/* Hybrid Ingestion CTA (Deep coffee brown button) */}
+        {/* Primary CTA: Drop Notes / Code */}
         <button
           type="button"
           onClick={onOpenInputModal}
-          className="px-3.5 py-1.5 rounded-xl text-xs font-sketch font-bold bg-[#7F5539] hover:bg-[#68442B] dark:bg-[#D49865] dark:hover:bg-[#C28555] text-white dark:text-[#16100C] shadow-xs flex items-center gap-1.5 transition-all cursor-pointer"
+          className="h-8 px-3 rounded border border-[#2C3E50] dark:border-[#415A77] bg-[#4A6572] dark:bg-[#2E3F59] hover:bg-[#3A4F59] dark:hover:bg-[#3E5478] text-[#FFFFFF] text-xs font-medium flex items-center gap-1.5 transition-colors cursor-pointer shrink-0"
         >
-          <Plus className="w-4 h-4" />
-          <span className="hidden sm:inline">Drop Notes / Voice</span>
-          <span className="sm:hidden">Drop</span>
+          <Plus className="w-3.5 h-3.5" />
+          <span>Drop Notes</span>
         </button>
 
-        {/* Firebase Google Auth Button */}
-        {user ? (
-          <div className="flex items-center gap-2 pl-1 border-l border-[#C8B69F] dark:border-[#473527]">
-            <div className="flex items-center gap-1.5" title={`Signed in as ${user.displayName || user.email}`}>
-              {user.photoURL ? (
-                <img
-                  src={user.photoURL}
-                  alt={user.displayName || 'User'}
-                  className="w-7 h-7 rounded-full border border-[#7F5539] dark:border-[#E0A878]"
-                />
-              ) : (
-                <div className="w-7 h-7 rounded-full bg-[#EFE3D5] dark:bg-[#2C211A] border border-[#C8B69F] flex items-center justify-center text-xs font-bold text-[#7F5539]">
-                  <UserIcon className="w-4 h-4" />
-                </div>
-              )}
-              <span className="hidden xl:inline text-xs font-sketch font-bold text-[#2C1E16] dark:text-[#F3E9DD] max-w-[100px] truncate">
-                {user.displayName?.split(' ')[0] || 'Logged In'}
-              </span>
-            </div>
-            <button
-              type="button"
-              onClick={onSignOut}
-              title="Sign Out"
-              className="p-1.5 rounded-lg text-[#8C6D53] hover:text-[#C2410C] dark:hover:text-[#FCA5A5] hover:bg-[#EFE3D5] dark:hover:bg-[#2C211A] transition-colors cursor-pointer"
-            >
-              <LogOut className="w-4 h-4" />
-            </button>
-          </div>
-        ) : (
-          <button
-            type="button"
-            onClick={onSignInGoogle}
-            title="Sign in with Google to sync notes to Firestore"
-            className="px-3 py-1.5 rounded-xl border border-[#C8B69F] dark:border-[#473527] bg-[#FAF5EE] dark:bg-[#221913] hover:bg-[#F3EAE0] dark:hover:bg-[#2C211A] text-[#2C1E16] dark:text-[#F3E9DD] transition-all flex items-center gap-1.5 text-xs font-sketch font-bold shadow-xs cursor-pointer"
-          >
-            <LogIn className="w-3.5 h-3.5 text-[#7F5539] dark:text-[#E0A878]" />
-            <span className="hidden sm:inline">Google Sign-In</span>
-          </button>
-        )}
-
-        {/* Info Modal trigger */}
+        {/* Theme Toggle Button */}
         <button
           type="button"
-          onClick={onOpenInfo}
-          className="p-2 rounded-xl text-[#8C6D53] dark:text-[#CBB6A1] hover:text-[#2C1E16] dark:hover:text-white hover:bg-[#EFE3D5] dark:hover:bg-[#2C211A] transition-colors cursor-pointer"
-          title="About LoopTracker"
+          onClick={onToggleTheme}
+          title={isDark ? 'Switch to Vintage Cold (Light Mode)' : 'Switch to Mystic Gothic (Dark Mode)'}
+          className="h-8 px-2.5 rounded border border-[#2C3E50]/25 dark:border-[#2E3F59] bg-[#D5DBDB] dark:bg-[#161F30] hover:bg-[#E2E7E9] dark:hover:bg-[#1E293B] text-[#2E4053] dark:text-[#E2E8F0] transition-colors flex items-center gap-1.5 text-xs font-medium cursor-pointer shrink-0"
         >
-          <HelpCircle className="w-4 h-4" />
+          {isDark ? (
+            <>
+              <Moon className="w-3.5 h-3.5 text-[#94A3B8]" />
+              <span className="hidden xl:inline">Gothic</span>
+            </>
+          ) : (
+            <>
+              <Sun className="w-3.5 h-3.5 text-[#4A6572]" />
+              <span className="hidden xl:inline">Vintage</span>
+            </>
+          )}
         </button>
+
+        {/* More Options / Utilities Dropdown */}
+        <div className="relative" ref={menuRef}>
+          <button
+            type="button"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="h-8 w-8 rounded border border-[#2C3E50]/25 dark:border-[#2E3F59] bg-[#D5DBDB] dark:bg-[#161F30] hover:bg-[#E2E7E9] dark:hover:bg-[#1E293B] text-[#2E4053] dark:text-[#E2E8F0] flex items-center justify-center transition-colors cursor-pointer shrink-0"
+            title="More Options & Utilities"
+          >
+            <MoreHorizontal className="w-4 h-4" />
+          </button>
+
+          {isMenuOpen && (
+            <div className="absolute right-0 mt-1 w-48 rounded border border-[#2C3E50]/30 dark:border-[#2E3F59] bg-[#ECEFF1] dark:bg-[#161F30] py-1 text-xs text-[#2E4053] dark:text-[#E2E8F0] z-50">
+              {/* Audit Log */}
+              <button
+                type="button"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  onOpenAuditModal();
+                }}
+                className="w-full px-3 py-2 text-left hover:bg-[#D5DBDB] dark:hover:bg-[#1E293B] flex items-center gap-2 cursor-pointer"
+              >
+                <History className="w-3.5 h-3.5 text-[#546E7A] dark:text-[#94A3B8]" />
+                <span>Audit Trail</span>
+              </button>
+
+              {/* Reset Graph */}
+              <button
+                type="button"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  onResetSeed();
+                }}
+                className="w-full px-3 py-2 text-left hover:bg-[#D5DBDB] dark:hover:bg-[#1E293B] flex items-center gap-2 cursor-pointer"
+              >
+                <RotateCcw className="w-3.5 h-3.5 text-[#546E7A] dark:text-[#94A3B8]" />
+                <span>Reset Seed Graph</span>
+              </button>
+
+              {/* About / Info */}
+              <button
+                type="button"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  onOpenInfo();
+                }}
+                className="w-full px-3 py-2 text-left hover:bg-[#D5DBDB] dark:hover:bg-[#1E293B] flex items-center gap-2 cursor-pointer border-b border-[#2C3E50]/15 dark:border-[#2E3F59]"
+              >
+                <HelpCircle className="w-3.5 h-3.5 text-[#546E7A] dark:text-[#94A3B8]" />
+                <span>About & Shortcuts</span>
+              </button>
+
+              {/* Auth state */}
+              {user ? (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    onSignOut();
+                  }}
+                  className="w-full px-3 py-2 text-left text-[#C0392B] dark:text-[#EF4444] hover:bg-[#D5DBDB] dark:hover:bg-[#1E293B] flex items-center gap-2 cursor-pointer"
+                >
+                  <LogOut className="w-3.5 h-3.5" />
+                  <span>Sign Out ({user.displayName?.split(' ')[0] || 'User'})</span>
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    onSignInGoogle();
+                  }}
+                  className="w-full px-3 py-2 text-left hover:bg-[#D5DBDB] dark:hover:bg-[#1E293B] flex items-center gap-2 cursor-pointer"
+                >
+                  <LogIn className="w-3.5 h-3.5 text-[#4A6572] dark:text-[#94A3B8]" />
+                  <span>Google Cloud Sync</span>
+                </button>
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* User profile avatar indicator if logged in */}
+        {user && (
+          <div
+            className="w-8 h-8 rounded border border-[#2C3E50]/30 dark:border-[#2E3F59] bg-[#D5DBDB] dark:bg-[#161F30] flex items-center justify-center overflow-hidden shrink-0"
+            title={`Logged in as ${user.displayName || user.email}`}
+          >
+            {user.photoURL ? (
+              <img src={user.photoURL} alt="User" className="w-full h-full object-cover" />
+            ) : (
+              <UserIcon className="w-4 h-4 text-[#546E7A] dark:text-[#94A3B8]" />
+            )}
+          </div>
+        )}
       </div>
     </header>
   );

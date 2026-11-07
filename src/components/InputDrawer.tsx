@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Mic, Square, Send, Loader2, Sparkles, ChevronUp, ChevronDown, PenTool } from 'lucide-react';
+import { Mic, Square, Send, Loader2, ChevronDown, PenTool } from 'lucide-react';
 
 interface InputDrawerProps {
   userId?: string;
@@ -29,7 +29,6 @@ export function InputDrawer({ userId = 'usr_current', onProcessed, onOpenFullMod
 
       recorder.onstop = async () => {
         const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
-        // Convert to base64 for API
         const reader = new FileReader();
         reader.onloadend = async () => {
           const base64Audio = (reader.result as string)?.split(',')[1];
@@ -102,50 +101,45 @@ export function InputDrawer({ userId = 'usr_current', onProcessed, onOpenFullMod
   };
 
   return (
-    <div className="fixed bottom-6 left-6 z-30 transition-all duration-300">
+    <div className="fixed bottom-4 left-4 z-30 select-none">
       {!isExpanded ? (
         <button
           onClick={() => setIsExpanded(true)}
-          className="flex items-center gap-2.5 px-4 py-2.5 rounded-2xl bg-[#FAF5EE]/95 dark:bg-[#1E1611]/95 text-[#2C1E16] dark:text-[#F3E9DD] border border-[#C8B69F] dark:border-[#473527] shadow-lg hover:shadow-xl hover:scale-105 transition-all text-xs font-sketch font-bold cursor-pointer backdrop-blur-md"
+          className="flex items-center gap-2 px-3 py-2 rounded-md bg-[#D5DBDB] dark:bg-[#161F30] text-[#2E4053] dark:text-[#E2E8F0] border border-[#2C3E50]/30 dark:border-[#2E3F59] hover:border-[#4A6572] transition-colors text-xs font-mono cursor-pointer"
         >
-          <PenTool className="w-4 h-4 text-[#7F5539] dark:text-[#E0A878]" />
-          <span>Quick Brain Dump</span>
-          <span className="w-2 h-2 rounded-full bg-[#C2410C] animate-pulse" />
+          <PenTool className="w-3.5 h-3.5 text-[#4A6572] dark:text-[#94A3B8]" />
+          <span>Quick Note Drop</span>
         </button>
       ) : (
-        <div className="bg-[#FAF5EE]/98 dark:bg-[#1E1611]/98 border border-[#C8B69F] dark:border-[#473527] p-4 rounded-2xl shadow-2xl w-88 sm:w-96 text-[#2C1E16] dark:text-[#F3E9DD] animate-in slide-in-from-bottom duration-200 backdrop-blur-md">
+        <div className="bg-[#D5DBDB] dark:bg-[#161F30] border border-[#2C3E50]/40 dark:border-[#2E3F59] p-3 rounded-md w-80 sm:w-84 text-[#2E4053] dark:text-[#E2E8F0]">
           {/* Header */}
-          <div className="flex items-center justify-between mb-2 pb-2 border-b border-[#E8DCCF] dark:border-[#33241A]">
-            <div className="flex items-center gap-2">
-              <span className="text-sm">🧠</span>
-              <h3 className="text-xs font-sketch font-bold tracking-tight text-[#2C1E16] dark:text-[#F3E9DD]">
-                Quick Brain Dump & Voice Memo
-              </h3>
-            </div>
-            <div className="flex items-center gap-1">
+          <div className="flex items-center justify-between mb-2 pb-1.5 border-b border-[#2C3E50]/15 dark:border-[#2E3F59]">
+            <span className="text-xs font-bold tracking-tight text-[#2E4053] dark:text-[#E2E8F0]">
+              Quick Brain Dump
+            </span>
+            <div className="flex items-center gap-1.5">
               <button
                 type="button"
                 onClick={onOpenFullModal}
-                className="text-[10px] text-[#7F5539] dark:text-[#E0A878] hover:underline font-sketch font-bold mr-1 cursor-pointer"
-                title="Open Advanced Ingestion Studio"
+                className="text-[10px] text-[#4A6572] dark:text-[#94A3B8] hover:underline font-mono cursor-pointer"
               >
-                Expand Studio
+                Studio
               </button>
               <button
                 type="button"
                 onClick={() => setIsExpanded(false)}
-                className="text-[#8C6D53] hover:text-[#2C1E16] dark:hover:text-white p-0.5 rounded cursor-pointer"
+                className="text-[#546E7A] hover:text-[#2E4053] dark:hover:text-white p-0.5 rounded cursor-pointer"
               >
-                <ChevronDown className="w-4 h-4" />
+                <ChevronDown className="w-3.5 h-3.5" />
               </button>
             </div>
           </div>
 
           {/* Text input area */}
           <textarea
-            className="w-full bg-[#F3EAE0] dark:bg-[#2A1E17] border border-[#D6C4B0] dark:border-[#473527] rounded-xl p-2.5 text-xs text-[#2C1E16] dark:text-[#F3E9DD] placeholder-[#8C6D53] dark:placeholder-[#9C826E] mb-3 focus:outline-none focus:ring-1 focus:ring-[#7F5539] font-mono resize-none"
+            className="w-full bg-[#ECEFF1] dark:bg-[#0B0F19] border border-[#2C3E50]/20 dark:border-[#2E3F59] rounded p-2 text-xs text-[#2E4053] dark:text-[#E2E8F0] placeholder-[#78909C] dark:placeholder-[#64748B] mb-2.5 focus:outline-none focus:border-[#4A6572] font-mono resize-none"
             rows={3}
-            placeholder="Paste code snippet, bug stack trace, or quick study note..."
+            placeholder="Paste raw notes, code snippet, or error log..."
             value={text}
             onChange={(e) => setText(e.target.value)}
           />
@@ -155,38 +149,38 @@ export function InputDrawer({ userId = 'usr_current', onProcessed, onOpenFullMod
             <button
               onClick={() => submitInput('text')}
               disabled={loading || !text.trim()}
-              className="px-3.5 py-1.5 rounded-xl bg-[#7F5539] hover:bg-[#68442B] dark:bg-[#E0A878] dark:hover:bg-[#D49865] text-white dark:text-[#16100C] text-xs font-sketch font-bold transition-all disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1.5 cursor-pointer shadow-xs"
+              className="px-2.5 py-1 rounded border border-[#2C3E50] dark:border-[#415A77] bg-[#4A6572] dark:bg-[#2E3F59] hover:bg-[#3A4F59] dark:hover:bg-[#3E5478] text-white text-xs font-mono transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1 cursor-pointer"
             >
               {loading ? (
                 <>
-                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                  <span>Processing...</span>
+                  <Loader2 className="w-3 h-3 animate-spin" />
+                  <span>Processing</span>
                 </>
               ) : (
                 <>
-                  <Send className="w-3.5 h-3.5" />
-                  <span>Submit Text</span>
+                  <Send className="w-3 h-3" />
+                  <span>Submit</span>
                 </>
               )}
             </button>
 
             <button
               onClick={isRecording ? stopRecording : startRecording}
-              className={`px-3 py-1.5 rounded-xl text-xs font-sketch font-bold transition-all flex items-center gap-1.5 cursor-pointer shadow-xs ${
+              className={`px-2.5 py-1 rounded text-xs font-mono transition-colors flex items-center gap-1 cursor-pointer border ${
                 isRecording
-                  ? 'bg-[#C2410C] text-white animate-pulse'
-                  : 'bg-[#EFE3D5] dark:bg-[#2C211A] text-[#7F5539] dark:text-[#E0A878] border border-[#D6C4B0] dark:border-[#473527] hover:bg-[#E5D7C7]'
+                  ? 'border-[#C0392B] bg-[#C0392B] text-white animate-pulse'
+                  : 'border-[#2C3E50]/25 dark:border-[#2E3F59] bg-[#ECEFF1] dark:bg-[#0B0F19] text-[#2E4053] dark:text-[#E2E8F0] hover:bg-[#DFE4E6] dark:hover:bg-[#1B263B]'
               }`}
             >
               {isRecording ? (
                 <>
-                  <Square className="w-3 h-3 fill-current" />
-                  <span>Stop & Process</span>
+                  <Square className="w-2.5 h-2.5 fill-current" />
+                  <span>Stop</span>
                 </>
               ) : (
                 <>
-                  <Mic className="w-3.5 h-3.5 text-[#C2410C]" />
-                  <span>Record Voice</span>
+                  <Mic className="w-3 h-3 text-[#C0392B] dark:text-[#EF4444]" />
+                  <span>Record</span>
                 </>
               )}
             </button>

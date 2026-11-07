@@ -4,131 +4,124 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --canvas-bg: #F5ECE2;
-  --canvas-dots: #D6C4B0;
-  --card-bg: #FAF5ED;
-  --card-border: #C8B69F;
-  --ink-primary: #2C1E16;
-  --ink-secondary: #6F5543;
-  --ink-muted: #9E8572;
+  /* Flat Vintage-Cold (Light Mode) Tokens */
+  --canvas-bg: #ECEFF1;
+  --canvas-dots: #B0BEC5;
+  --card-bg: #D5DBDB;
+  --card-bg-subtle: #E2E7E9;
+  --card-border: rgba(44, 62, 80, 0.25);
+  --card-border-strong: #2C3E50;
+  --ink-primary: #2E4053;
+  --ink-secondary: #546E7A;
+  --ink-muted: #78909C;
+  --accent-core: #4A6572;
+  --accent-hover: #3A4F59;
+  --accent-contrast: #FFFFFF;
+  --status-cold: #C0392B;
+  --status-warm: #D35400;
+  --status-ready: #27AE60;
+
   font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 }
 
 .dark {
-  --canvas-bg: #16100C;
-  --canvas-dots: #2E2218;
-  --card-bg: #221913;
-  --card-border: #473527;
-  --ink-primary: #F3E9DD;
-  --ink-secondary: #CBB6A1;
-  --ink-muted: #8E7A68;
+  /* Flat Mystic Gothic (Dark Mode) Tokens */
+  --canvas-bg: #0B0F19;
+  --canvas-dots: #1B263B;
+  --card-bg: #161F30;
+  --card-bg-subtle: #1B263B;
+  --card-border: #2E3F59;
+  --card-border-strong: #415A77;
+  --ink-primary: #E2E8F0;
+  --ink-secondary: #94A3B8;
+  --ink-muted: #64748B;
+  --accent-core: #2E3F59;
+  --accent-hover: #3E5478;
+  --accent-contrast: #F8FAFC;
+  --status-cold: #EF4444;
+  --status-warm: #F97316;
+  --status-ready: #10B981;
 }
 
+/* Typography styles */
 .font-sketch {
-  font-family: 'Kalam', cursive, sans-serif;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  letter-spacing: -0.01em;
 }
 
 .font-hand {
-  font-family: 'Caveat', cursive, sans-serif;
+  font-family: 'JetBrains Mono', monospace;
 }
 
 code, pre, .font-mono {
   font-family: 'JetBrains Mono', monospace;
 }
 
-/* Notebook grid / sketch lines texture */
-.paper-texture-light {
-  background-color: #F5ECE2;
-  background-image: 
-    radial-gradient(#D8C7B5 1.2px, transparent 1.2px),
-    linear-gradient(to right, rgba(200, 182, 159, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(200, 182, 159, 0.08) 1px, transparent 1px);
-  background-size: 24px 24px, 24px 24px, 24px 24px;
+/* Strict Zero-Shadow & 1px Flat Border rule across all cards */
+.flat-card {
+  border: 1px solid var(--card-border);
+  background-color: var(--card-bg);
+  box-shadow: none !important;
+  border-radius: 6px;
 }
 
-.paper-texture-dark {
-  background-color: #16100C;
-  background-image: 
-    radial-gradient(#2E2218 1.2px, transparent 1.2px),
-    linear-gradient(to right, rgba(60, 44, 32, 0.25) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(60, 44, 32, 0.25) 1px, transparent 1px);
-  background-size: 24px 24px, 24px 24px, 24px 24px;
+.dark .flat-card {
+  border: 1px solid var(--card-border);
+  background-color: var(--card-bg);
+  box-shadow: none !important;
 }
 
-/* Sketch note card imperfect borders & tape effect */
-.sketch-card {
-  box-shadow: 2px 3px 0px 0px rgba(71, 53, 39, 0.12), 4px 8px 16px -2px rgba(44, 30, 22, 0.08);
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+/* Global shadow extermination: enforce flat substrates */
+*, *::before, *::after {
+  box-shadow: none !important;
 }
 
-.dark .sketch-card {
-  box-shadow: 2px 3px 0px 0px rgba(0, 0, 0, 0.4), 4px 8px 20px -2px rgba(0, 0, 0, 0.6);
+/* Focus outline for accessibility without blurred shadows */
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--accent-core) !important;
+  outline-offset: 1px;
 }
 
-.sketch-card:hover {
-  transform: translateY(-2px) rotate(-0.3deg);
-  box-shadow: 4px 6px 0px 0px rgba(71, 53, 39, 0.16), 6px 12px 24px -2px rgba(44, 30, 22, 0.12);
+/* Viewport Root Containment - Prevent outer scrollbars */
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  max-width: 100vw;
+  max-height: 100vh;
+  overflow: hidden;
 }
 
-.dark .sketch-card:hover {
-  box-shadow: 4px 6px 0px 0px rgba(0, 0, 0, 0.6), 6px 12px 24px -2px rgba(0, 0, 0, 0.8);
-}
-
-/* Washi tape aesthetic strips */
-.washi-tape-amber {
-  background: rgba(224, 187, 142, 0.55);
-  box-shadow: 0 1px 2px rgba(71, 53, 39, 0.1);
-  transform: rotate(-1.5deg);
-}
-
-.dark .washi-tape-amber {
-  background: rgba(140, 105, 70, 0.45);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-}
-
-/* Custom coffee scrollbar */
+/* Crisp 1px flat custom scrollbars */
 ::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #EFE4D6;
-}
-
-.dark ::-webkit-scrollbar-track {
-  background: #1B130E;
+  background: var(--canvas-bg);
+  border-left: 1px solid var(--card-border);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #C4AF99;
-  border-radius: 6px;
-}
-
-.dark ::-webkit-scrollbar-thumb {
-  background: #473527;
-  border-radius: 6px;
+  background: var(--card-border);
+  border-radius: 0px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #A99077;
+  background: var(--accent-core);
 }
 
-.dark ::-webkit-scrollbar-thumb:hover {
-  background: #6B513D;
-}
-
-/* React Flow Canvas in Milk Coffee theme */
+/* React Flow Canvas - Zero Shadow, Flat 1px Outlines */
 .react-flow__background {
   background-color: var(--canvas-bg) !important;
 }
 
 .react-flow__controls {
-  border-radius: 12px !important;
-  overflow: hidden;
+  border-radius: 4px !important;
+  overflow: hidden !important;
   border: 1px solid var(--card-border) !important;
   background: var(--card-bg) !important;
-  box-shadow: 2px 4px 10px rgba(44, 30, 22, 0.1) !important;
+  box-shadow: none !important;
 }
 
 .react-flow__controls-button {
@@ -139,7 +132,7 @@ code, pre, .font-mono {
 }
 
 .react-flow__controls-button:hover {
-  background: rgba(176, 137, 104, 0.15) !important;
+  background: var(--card-bg-subtle) !important;
   color: var(--ink-primary) !important;
   fill: var(--ink-primary) !important;
 }
@@ -147,11 +140,11 @@ code, pre, .font-mono {
 .react-flow__minimap {
   background: var(--card-bg) !important;
   border: 1px solid var(--card-border) !important;
-  border-radius: 12px !important;
-  box-shadow: 2px 4px 10px rgba(44, 30, 22, 0.1) !important;
+  border-radius: 4px !important;
+  box-shadow: none !important;
 }
 
 .react-flow__edge-path {
-  stroke-width: 2.2 !important;
-  stroke-linecap: round;
+  stroke: var(--card-border-strong) !important;
+  stroke-width: 1.5 !important;
 }
