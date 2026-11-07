@@ -18,50 +18,50 @@ export const LearningAuditModal: React.FC<LearningAuditModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#1C140F]/60 dark:bg-black/75 backdrop-blur-xs animate-in fade-in duration-200">
-      <div className="relative w-full max-w-3xl bg-[#FAF5EE] dark:bg-[#1E1611] border border-[#C8B69F] dark:border-[#473527] rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-150">
+      <div className="relative w-full max-w-3xl bg-[#D5DBDB] dark:bg-[#161F30] border border-[#2C3E50]/40 dark:border-[#2E3F59] rounded-md overflow-hidden flex flex-col max-h-[85vh]">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[#C8B69F] dark:border-[#473527] bg-[#F4ECE1]/80 dark:bg-[#18110D]/80">
+        <div className="flex items-center justify-between px-5 py-3 border-b border-[#2C3E50]/20 dark:border-[#2E3F59] bg-[#ECEFF1] dark:bg-[#0B0F19] shrink-0">
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-[#EFE3D5] dark:bg-[#2C211A] border border-[#C8B69F] dark:border-[#473527] flex items-center justify-center text-[#7F5539] dark:text-[#E0A878]">
-              <History className="w-5 h-5" />
+            <div className="w-8 h-8 rounded border border-[#2C3E50]/25 dark:border-[#2E3F59] bg-[#D5DBDB] dark:bg-[#161F30] flex items-center justify-center text-[#4A6572] dark:text-[#E2E8F0]">
+              <History className="w-4 h-4 text-[#4A6572] dark:text-[#E2E8F0]" />
             </div>
             <div>
-              <h2 className="font-sketch text-xl font-bold text-[#2C1E16] dark:text-[#F3E9DD]">
+              <h2 className="text-sm font-bold tracking-tight text-[#2E4053] dark:text-[#E2E8F0]">
                 Learning Loop Audit Trail
               </h2>
-              <p className="text-xs text-[#5D4636] dark:text-[#C5B3A1]">
+              <p className="text-[11px] text-[#546E7A] dark:text-[#94A3B8]">
                 Verifiable record of concept mastery transitions, active recall tests, and study sessions.
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-[#8C6D53] dark:text-[#CBB6A1] hover:text-[#2C1E16] dark:hover:text-white hover:bg-[#EFE3D5] dark:hover:bg-[#2C211A] transition-colors"
+            className="p-1 rounded text-[#546E7A] dark:text-[#94A3B8] hover:text-[#2E4053] dark:hover:text-white transition-colors cursor-pointer"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4" />
           </button>
         </div>
 
-        {/* Content */}
-        <div className="p-6 overflow-y-auto space-y-6 flex-1 text-xs">
+        {/* Content (scrollable) */}
+        <div className="p-5 overflow-y-auto space-y-4 flex-1 text-xs min-h-0">
           {/* Summary stats */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 font-sketch">
-            <div className="p-4 rounded-xl bg-[#F4ECE1] dark:bg-[#18110D] border border-[#D6C4B0] dark:border-[#473527]">
-              <span className="text-[#8C6D53] dark:text-[#A7927F] block mb-0.5">Total Audit Events</span>
-              <div className="text-2xl font-bold font-mono text-[#7F5539] dark:text-[#E0A878]">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 font-mono">
+            <div className="p-3 rounded border border-[#2C3E50]/20 dark:border-[#2E3F59] bg-[#ECEFF1] dark:bg-[#0B0F19]">
+              <span className="text-[#546E7A] dark:text-[#94A3B8] text-[11px] block mb-0.5">Total Audit Events</span>
+              <div className="text-xl font-bold tabular-nums text-[#2E4053] dark:text-[#E2E8F0]">
                 {learningStates.length}
               </div>
             </div>
-            <div className="p-4 rounded-xl bg-[#F4ECE1] dark:bg-[#18110D] border border-[#D6C4B0] dark:border-[#473527]">
-              <span className="text-[#8C6D53] dark:text-[#A7927F] block mb-0.5">Study Sessions Logged</span>
-              <div className="text-2xl font-bold font-mono text-[#15803D] dark:text-[#4ADE80]">
+            <div className="p-3 rounded border border-[#2C3E50]/20 dark:border-[#2E3F59] bg-[#ECEFF1] dark:bg-[#0B0F19]">
+              <span className="text-[#546E7A] dark:text-[#94A3B8] text-[11px] block mb-0.5">Study Sessions Logged</span>
+              <div className="text-xl font-bold tabular-nums text-[#27AE60] dark:text-[#10B981]">
                 {sessions.length}
               </div>
             </div>
-            <div className="p-4 rounded-xl bg-[#F4ECE1] dark:bg-[#18110D] border border-[#D6C4B0] dark:border-[#473527]">
-              <span className="text-[#8C6D53] dark:text-[#A7927F] block mb-0.5">Active Feynman Tests</span>
-              <div className="text-2xl font-bold font-mono text-[#C2410C] dark:text-[#FCA5A5]">
+            <div className="p-3 rounded border border-[#2C3E50]/20 dark:border-[#2E3F59] bg-[#ECEFF1] dark:bg-[#0B0F19]">
+              <span className="text-[#546E7A] dark:text-[#94A3B8] text-[11px] block mb-0.5">Active Feynman Tests</span>
+              <div className="text-xl font-bold tabular-nums text-[#C0392B] dark:text-[#EF4444]">
                 {learningStates.filter((s) => s.trigger_event === 'feynman_test').length}
               </div>
             </div>
@@ -69,14 +69,14 @@ export const LearningAuditModal: React.FC<LearningAuditModalProps> = ({
 
           {/* Audit Log Timeline */}
           <div>
-            <h3 className="font-sketch text-base font-bold text-[#2C1E16] dark:text-[#F3E9DD] mb-3 flex items-center gap-2">
-              <TrendingUp className="w-4 h-4 text-[#7F5539] dark:text-[#E0A878]" />
+            <h3 className="text-xs font-mono font-bold text-[#2E4053] dark:text-[#E2E8F0] mb-2 flex items-center gap-1.5">
+              <TrendingUp className="w-3.5 h-3.5 text-[#4A6572] dark:text-[#94A3B8]" />
               Mastery Score Audit Log (`learning_states`)
             </h3>
 
-            <div className="space-y-2">
+            <div className="space-y-1.5">
               {learningStates.length === 0 ? (
-                <div className="p-6 rounded-xl bg-[#F4ECE1] dark:bg-[#18110D] border border-[#D6C4B0] dark:border-[#473527] text-center text-[#8C6D53] dark:text-[#A7927F] font-sketch">
+                <div className="p-4 rounded border border-[#2C3E50]/20 dark:border-[#2E3F59] bg-[#ECEFF1] dark:bg-[#0B0F19] text-center text-[#546E7A] dark:text-[#94A3B8] font-mono">
                   No audit log entries recorded yet. Complete a Feynman drill or drop a study session!
                 </div>
               ) : (
@@ -85,20 +85,20 @@ export const LearningAuditModal: React.FC<LearningAuditModalProps> = ({
                   return (
                     <div
                       key={st.id}
-                      className="p-3.5 rounded-xl bg-[#F4ECE1] dark:bg-[#18110D] border border-[#D6C4B0] dark:border-[#3E2D20] flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-2xs"
+                      className="p-2.5 rounded border border-[#2C3E50]/15 dark:border-[#2E3F59] bg-[#ECEFF1] dark:bg-[#0B0F19] flex flex-col sm:flex-row sm:items-center justify-between gap-2"
                     >
-                      <div className="space-y-1">
+                      <div className="space-y-0.5">
                         <div className="flex items-center gap-2">
-                          <span className="font-sketch text-sm font-bold text-[#2C1E16] dark:text-[#F3E9DD]">
+                          <span className="text-xs font-bold text-[#2E4053] dark:text-[#E2E8F0]">
                             {st.concept_title || `Concept #${st.concept_id.slice(-6)}`}
                           </span>
                           <span
-                            className={`px-2 py-0.5 rounded text-[10px] font-sketch font-bold border ${
+                            className={`px-1.5 py-0.2 rounded text-[10px] font-mono font-bold border ${
                               st.trigger_event === 'feynman_test'
-                                ? 'bg-[#FFEDD5] text-[#9A3412] border-[#FDBA74] dark:bg-[#431407] dark:text-[#FCA5A5]'
+                                ? 'bg-[#C0392B]/15 text-[#C0392B] border-[#C0392B]/30 dark:text-[#EF4444]'
                                 : st.trigger_event === 'session_dump'
-                                ? 'bg-[#EFE3D5] text-[#7F5539] border-[#D6C4B0] dark:bg-[#2C211A] dark:text-[#E0A878]'
-                                : 'bg-[#FAF5EE] text-[#745B47] border-[#C8B69F] dark:bg-[#1E1611] dark:text-[#CBB6A1]'
+                                ? 'bg-[#4A6572]/15 text-[#4A6572] border-[#4A6572]/30 dark:text-[#94A3B8]'
+                                : 'bg-[#D5DBDB] text-[#546E7A] border-[#2C3E50]/20 dark:bg-[#161F30] dark:text-[#94A3B8]'
                             }`}
                           >
                             {st.trigger_event.replace('_', ' ')}
@@ -106,30 +106,30 @@ export const LearningAuditModal: React.FC<LearningAuditModalProps> = ({
                         </div>
 
                         {st.feedback_notes && (
-                          <p className="text-[#5D4636] dark:text-[#C5B3A1] text-[11px] leading-relaxed line-clamp-2">
+                          <p className="text-[#546E7A] dark:text-[#94A3B8] text-[11px] leading-relaxed line-clamp-2">
                             {st.feedback_notes}
                           </p>
                         )}
                       </div>
 
-                      <div className="flex items-center gap-3 shrink-0">
-                        <div className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#FAF5EE] dark:bg-[#261C15] border border-[#D6C4B0] dark:border-[#473527] font-mono text-xs font-bold">
-                          <span className="text-[#8C6D53] dark:text-[#A7927F]">{st.previous_score}/5</span>
-                          <ArrowRight className="w-3 h-3 text-[#7F5539] dark:text-[#E0A878]" />
+                      <div className="flex items-center gap-2.5 shrink-0">
+                        <div className="flex items-center gap-1 px-2 py-0.5 rounded border border-[#2C3E50]/15 dark:border-[#2E3F59] bg-[#D5DBDB] dark:bg-[#161F30] font-mono text-xs font-bold">
+                          <span className="text-[#546E7A] dark:text-[#94A3B8]">{st.previous_score}/5</span>
+                          <ArrowRight className="w-3 h-3 text-[#546E7A] dark:text-[#94A3B8]" />
                           <span
                             className={
                               isImproved
-                                ? 'text-[#16A34A] dark:text-[#4ADE80]'
+                                ? 'text-[#27AE60] dark:text-[#10B981]'
                                 : st.new_score <= 2
-                                ? 'text-[#C2410C] dark:text-[#FCA5A5]'
-                                : 'text-[#2C1E16] dark:text-[#F3E9DD]'
+                                ? 'text-[#C0392B] dark:text-[#EF4444]'
+                                : 'text-[#2E4053] dark:text-[#E2E8F0]'
                             }
                           >
                             {st.new_score}/5
                           </span>
                         </div>
 
-                        <span className="text-[11px] font-mono text-[#8C6D53] dark:text-[#A7927F]">
+                        <span className="text-[10px] font-mono text-[#546E7A] dark:text-[#94A3B8]">
                           {new Date(st.recorded_at).toLocaleDateString([], {
                             month: 'short',
                             day: 'numeric',
@@ -145,26 +145,26 @@ export const LearningAuditModal: React.FC<LearningAuditModalProps> = ({
 
           {/* Recent Study Sessions */}
           <div>
-            <h3 className="font-sketch text-base font-bold text-[#2C1E16] dark:text-[#F3E9DD] mb-3 flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-[#15803D] dark:text-[#4ADE80]" />
+            <h3 className="text-xs font-mono font-bold text-[#2E4053] dark:text-[#E2E8F0] mb-2 flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-[#27AE60] dark:text-[#10B981]" />
               Recorded Study Sessions (`study_sessions`)
             </h3>
 
-            <div className="space-y-2">
+            <div className="space-y-1.5">
               {sessions.map((sess) => (
                 <div
                   key={sess.id}
-                  className="p-3.5 rounded-xl bg-[#F4ECE1] dark:bg-[#18110D] border border-[#D6C4B0] dark:border-[#3E2D20] space-y-1"
+                  className="p-2.5 rounded border border-[#2C3E50]/15 dark:border-[#2E3F59] bg-[#ECEFF1] dark:bg-[#0B0F19] space-y-0.5"
                 >
-                  <div className="flex items-center justify-between text-[11px] font-sketch">
-                    <span className="font-bold text-[#15803D] dark:text-[#4ADE80] capitalize">
+                  <div className="flex items-center justify-between text-[11px] font-mono">
+                    <span className="font-bold text-[#27AE60] dark:text-[#10B981] capitalize">
                       {sess.session_type.replace('_', ' ')} Session ({sess.duration_minutes}m)
                     </span>
-                    <span className="text-[#8C6D53] dark:text-[#A7927F] font-mono">
+                    <span className="text-[#546E7A] dark:text-[#94A3B8]">
                       {new Date(sess.started_at).toLocaleDateString()}
                     </span>
                   </div>
-                  <p className="text-[#3E2C1E] dark:text-[#D1BEAB] text-xs leading-relaxed">
+                  <p className="text-[#2E4053] dark:text-[#E2E8F0] text-xs leading-relaxed">
                     {sess.ai_summary}
                   </p>
                 </div>

@@ -3,7 +3,7 @@
     {
       "id": "usr_jobseeker_demo",
       "email": "candidate@looptracker.dev",
-      "created_at": "2026-10-07T15:59:32.419Z"
+      "created_at": "2026-10-08T08:21:54.764Z"
     }
   ],
   "concepts": [
@@ -12,16 +12,16 @@
       "user_id": "usr_jobseeker_demo",
       "title": "Raft Consensus Algorithm",
       "summary": "Leader election, log replication, and safety invariants in distributed replicated state machines. Relies on randomized election timers to avoid split votes.",
-      "raw_notes": "Notes from tutorial:\n- Heartbeats prevent follower timeouts\n- Candidate increments currentTerm and votes for self\n- Stumbled when reading section 5.2: what happens when leader gets disconnected during log entry commit? Need to understand how follower truncates uncommitted entries upon rejoin.\n\n--- [Session Update 11/6/2026] ---\nNotes on Raft Consensus Algorithm:\nWe encountered an issue where split-votes caused leader election timeouts.\nMitigated by adding randomized election timers between 150ms and 300ms.\n\n--- [Session Update 11/6/2026] ---\nNotes on Raft Consensus Algorithm:\nWe encountered an issue where split-votes caused leader election timeouts.\nMitigated by adding randomized election timers between 150ms and 300ms.\n\n--- [Session Update 11/6/2026] ---\nNotes on Raft Consensus Algorithm:\nWe encountered an issue where split-votes caused leader election timeouts.\nMitigated by adding randomized election timers between 150ms and 300ms.",
-      "mastery_score": 5,
-      "position_x": 386,
-      "position_y": 195,
+      "raw_notes": "Notes from tutorial:\n- Heartbeats prevent follower timeouts\n- Candidate increments currentTerm and votes for self\n- Stumbled when reading section 5.2: what happens when leader gets disconnected during log entry commit? Need to understand how follower truncates uncommitted entries upon rejoin.\n\n--- [Session Update 11/7/2026] ---\nNotes on Raft Consensus Algorithm:\nWe encountered an issue where split-votes caused leader election timeouts.\nMitigated by adding randomized election timers between 150ms and 300ms.",
+      "mastery_score": 3,
+      "position_x": 358,
+      "position_y": 107,
       "color_code": "#eab308",
-      "last_friction_point": "Synthesizing edge case behaviors under failure conditions.",
-      "suggested_next_step": "Conduct a quick Feynman warm-up explanation.",
-      "next_review_at": "2026-11-09T16:14:35.590Z",
-      "created_at": "2026-10-27T15:59:32.419Z",
-      "updated_at": "2026-11-06T16:21:47.182Z",
+      "last_friction_point": "Need sharper clarity on failure recovery phases.",
+      "suggested_next_step": "Diagram the flow on paper without checking documentation.",
+      "next_review_at": "2026-11-10T08:21:57.089Z",
+      "created_at": "2026-10-28T08:21:54.764Z",
+      "updated_at": "2026-11-07T08:21:57.089Z",
       "tags": [
         "distributed-systems",
         "consensus",
@@ -40,9 +40,9 @@
       "color_code": "#22c55e",
       "last_friction_point": "Reconciling concurrent timestamp clocks (Lamport vs Vector clocks) under sloppy quorums.",
       "suggested_next_step": "Review Dynamo paper section on hinted handoff and anti-entropy with Merkle trees.",
-      "next_review_at": "2026-11-11T15:59:32.419Z",
-      "created_at": "2026-10-23T15:59:32.419Z",
-      "updated_at": "2026-11-01T15:59:32.419Z",
+      "next_review_at": "2026-11-12T08:21:54.764Z",
+      "created_at": "2026-10-24T08:21:54.764Z",
+      "updated_at": "2026-11-02T08:21:54.764Z",
       "tags": [
         "distributed-systems",
         "databases"
@@ -54,15 +54,15 @@
       "title": "React Fiber Architecture & Work Loop",
       "summary": "React 18+ reconciler breaking synchronous recursive tree traversal into cooperative units of work using requestIdleCallback / MessageChannel scheduler.",
       "raw_notes": "Two phases:\n1. Render Phase (reconciliation): pure, no side effects, interruptible by higher-priority events\n2. Commit Phase: mutations to real DOM, runs synchronously\nFriction: Mixed up lane priorities and why useEffect runs asynchronously after layout.",
-      "mastery_score": 3,
+      "mastery_score": 2,
       "position_x": 620,
       "position_y": 130,
-      "color_code": "#eab308",
-      "last_friction_point": "Need sharper clarity on failure recovery phases.",
-      "suggested_next_step": "Diagram the flow on paper without checking documentation.",
-      "next_review_at": "2026-11-09T16:16:28.619Z",
-      "created_at": "2026-10-28T15:59:32.419Z",
-      "updated_at": "2026-11-06T16:16:28.619Z",
+      "color_code": "#f97316",
+      "last_friction_point": "Confusing how priority lanes preempt in-progress render work without leaking partial DOM state.",
+      "suggested_next_step": "Explain the difference between alternate fiber pointers (workInProgress vs current) using the double-buffering canvas analogy.",
+      "next_review_at": "2026-10-30T08:21:54.764Z",
+      "created_at": "2026-10-29T08:21:54.764Z",
+      "updated_at": "2026-10-30T08:21:54.764Z",
       "tags": [
         "frontend",
         "react",
@@ -81,9 +81,9 @@
       "color_code": "#eab308",
       "last_friction_point": "Quantifying write amplification factor during leveled compaction vs size-tiered compaction.",
       "suggested_next_step": "Calculate write amplification for a 10MB write in a 4-level LSM tree.",
-      "next_review_at": "2026-11-05T15:59:32.419Z",
-      "created_at": "2026-10-25T15:59:32.419Z",
-      "updated_at": "2026-11-05T15:59:32.419Z",
+      "next_review_at": "2026-11-06T08:21:54.764Z",
+      "created_at": "2026-10-26T08:21:54.764Z",
+      "updated_at": "2026-11-06T08:21:54.764Z",
       "tags": [
         "databases",
         "internals",
@@ -102,9 +102,9 @@
       "color_code": "#10b981",
       "last_friction_point": "Composite index prefix matching rules on range queries.",
       "suggested_next_step": "Explain to a junior engineer how covering indexes eliminate table heap lookups.",
-      "next_review_at": "2026-11-20T15:59:32.419Z",
-      "created_at": "2026-10-17T15:59:32.419Z",
-      "updated_at": "2026-10-31T15:59:32.419Z",
+      "next_review_at": "2026-11-21T08:21:54.764Z",
+      "created_at": "2026-10-18T08:21:54.764Z",
+      "updated_at": "2026-11-01T08:21:54.764Z",
       "tags": [
         "databases",
         "sql",
@@ -117,15 +117,15 @@
       "title": "Kubernetes Pod Lifecycle & Eviction",
       "summary": "Pod phase transitions (Pending -> Running -> Succeeded/Failed), termination grace period (preStop hook -> SIGTERM -> SIGKILL), and kubelet eviction thresholds.",
       "raw_notes": "Debugged a production 502 error during rolling update. Service endpoint controller removes pod IP asynchronously, so traffic was still sent while container was shutting down!",
-      "mastery_score": 3,
+      "mastery_score": 2,
       "position_x": 1120,
       "position_y": 150,
-      "color_code": "#eab308",
-      "last_friction_point": "Need sharper clarity on failure recovery phases.",
-      "suggested_next_step": "Diagram the flow on paper without checking documentation.",
-      "next_review_at": "2026-11-09T16:16:39.181Z",
-      "created_at": "2026-10-30T15:59:32.419Z",
-      "updated_at": "2026-11-06T16:16:39.181Z",
+      "color_code": "#f97316",
+      "last_friction_point": "Race condition between EndpointSlice propagation and container SIGTERM during rolling updates.",
+      "suggested_next_step": "Implement a preStop sleep 5s hook in Deployment YAML and test zero-downtime curl loop.",
+      "next_review_at": "2026-11-03T08:21:54.764Z",
+      "created_at": "2026-10-31T08:21:54.764Z",
+      "updated_at": "2026-11-03T08:21:54.764Z",
       "tags": [
         "devops",
         "kubernetes",
@@ -144,9 +144,9 @@
       "color_code": "#22c55e",
       "last_friction_point": "Understanding cgroups v1 vs v2 unified hierarchy implications on Java 8 heap sizing.",
       "suggested_next_step": "Write a 20-line bash script creating a mini chroot container with isolated PID namespace.",
-      "next_review_at": "2026-11-14T15:59:32.419Z",
-      "created_at": "2026-10-19T15:59:32.419Z",
-      "updated_at": "2026-11-04T15:59:32.419Z",
+      "next_review_at": "2026-11-15T08:21:54.764Z",
+      "created_at": "2026-10-20T08:21:54.764Z",
+      "updated_at": "2026-11-05T08:21:54.764Z",
       "tags": [
         "linux",
         "containers",
@@ -165,9 +165,9 @@
       "color_code": "#eab308",
       "last_friction_point": "Proper token storage security tradeoffs in browser (HttpOnly cookies vs in-memory with refresh token rotation).",
       "suggested_next_step": "Draft an architectural diagram of Token Refresh rotation with replay detection.",
-      "next_review_at": "2026-11-04T15:59:32.419Z",
-      "created_at": "2026-10-26T15:59:32.419Z",
-      "updated_at": "2026-11-04T15:59:32.419Z",
+      "next_review_at": "2026-11-05T08:21:54.764Z",
+      "created_at": "2026-10-27T08:21:54.764Z",
+      "updated_at": "2026-11-05T08:21:54.764Z",
       "tags": [
         "security",
         "auth",
@@ -178,61 +178,41 @@
       "user_id": "usr_jobseeker_demo",
       "title": "Database Sharding Patterns When horizo",
       "summary": "System overview and operational principles of Database Sharding Patterns When horizo. Addresses design tradeoffs, concurrency, and reliability invariants.",
-      "raw_notes": "# Database Sharding Patterns\nWhen horizontal scaling reaches limits, sharding partitions data across multiple database instances.\nKey components:\n- Hash-based sharding vs Range-based sharding\n- Re-sharding bottlenecks\n\n```sql\n-- Hash modulo routing key\nSELECT shard_id FROM shard_map WHERE hash(user_id) % 16 = current_shard;\n```\n\n--- [Session Update 11/6/2026] ---\n# Database Sharding Patterns\nWhen horizontal scaling reaches limits, sharding partitions data across multiple database instances.\nKey components:\n- Hash-based sharding vs Range-based sharding\n- Re-sharding bottlenecks\n\n```sql\n-- Hash modulo routing key\nSELECT shard_id FROM shard_map WHERE hash(user_id) % 16 = current_shard;\n```\n\n--- [Session Update 11/6/2026] ---\n# Database Sharding Patterns\nWhen horizontal scaling reaches limits, sharding partitions data across multiple database instances.\nKey components:\n- Hash-based sharding vs Range-based sharding\n- Re-sharding bottlenecks\n\n```sql\n-- Hash modulo routing key\nSELECT shard_id FROM shard_map WHERE hash(user_id) % 16 = current_shard;\n```\n\n--- [Session Update 11/6/2026] ---\n# Database Sharding Patterns\nWhen horizontal scaling reaches limits, sharding partitions data across multiple database instances.\nKey components:\n- Hash-based sharding vs Range-based sharding\n- Re-sharding bottlenecks\n\n```sql\n-- Hash modulo routing key\nSELECT shard_id FROM shard_map WHERE hash(user_id) % 16 = current_shard;\n```",
-      "mastery_score": 5,
-      "position_x": 100.32334183110487,
-      "position_y": 749.2153345025076,
+      "raw_notes": "# Database Sharding Patterns\nWhen horizontal scaling reaches limits, sharding partitions data across multiple database instances.\nKey components:\n- Hash-based sharding vs Range-based sharding\n- Re-sharding bottlenecks\n\n```sql\n-- Hash modulo routing key\nSELECT shard_id FROM shard_map WHERE hash(user_id) % 16 = current_shard;\n```",
+      "mastery_score": 2,
+      "position_x": 91.93853416945522,
+      "position_y": 738.6301969742167,
       "color_code": "#f97316",
-      "last_friction_point": "Synthesizing edge case behaviors under failure conditions.",
-      "suggested_next_step": "Conduct a quick Feynman warm-up explanation.",
-      "next_review_at": "2026-11-08T16:14:34.531Z",
+      "last_friction_point": "Synthesizing edge case behaviors and boundary conditions under failure.",
+      "suggested_next_step": "Conduct a quick Feynman warm-up explanation and diagram component lifecycle.",
+      "next_review_at": "2026-11-09T08:21:55.350Z",
       "tags": [
         "engineering",
         "systems-design"
       ],
-      "id": "c-1793981674531-hptf",
-      "created_at": "2026-11-06T16:14:34.531Z",
-      "updated_at": "2026-11-06T16:21:31.939Z"
-    },
-    {
-      "user_id": "usr_jobseeker_demo",
-      "title": "Notes on Raft Consensus  We encountered",
-      "summary": "System overview and operational principles of Notes on Raft Consensus  We encountered. Addresses design tradeoffs, concurrency, and reliability invariants.",
-      "raw_notes": "Notes on Raft Consensus:\nWe encountered an issue where split-votes caused leader election timeouts.\nMitigated by adding randomized election timers between 150ms and 300ms.",
-      "mastery_score": 3,
-      "position_x": 560.4727569975158,
-      "position_y": 741.93141775194,
-      "color_code": "#eab308",
-      "last_friction_point": "Need sharper clarity on failure recovery phases.",
-      "suggested_next_step": "Diagram the flow on paper without checking documentation.",
-      "next_review_at": "2026-11-09T16:21:47.818Z",
-      "tags": [
-        "engineering",
-        "systems-design"
-      ],
-      "id": "c-1793981674800-zvnx",
-      "created_at": "2026-11-06T16:14:34.800Z",
-      "updated_at": "2026-11-06T16:21:47.818Z"
+      "id": "c-1794039715350-iq8b",
+      "created_at": "2026-11-07T08:21:55.350Z",
+      "updated_at": "2026-11-07T08:21:55.350Z"
     },
     {
       "user_id": "usr_jobseeker_demo",
       "title": "SQL optimization guide  SELECT users id",
       "summary": "System overview and operational principles of SQL optimization guide  SELECT users id. Addresses design tradeoffs, concurrency, and reliability invariants.",
-      "raw_notes": "SQL optimization guide:\nSELECT users.id, orders.total FROM users\nINNER JOIN orders ON users.id = orders.user_id\nWHERE orders.status = 'completed' AND orders.created_at > NOW() - INTERVAL '30 days'\nGROUP BY users.id, orders.total\nHAVING COUNT(orders.id) > 2\nORDER BY orders.total DESC LIMIT 50;\nIndexes used: B-Tree on user_id, Composite Index on (status, created_at).\n\n--- [Session Update 11/6/2026] ---\nSQL optimization guide:\nSELECT users.id, orders.total FROM users\nINNER JOIN orders ON users.id = orders.user_id\nWHERE orders.status = 'completed' AND orders.created_at > NOW() - INTERVAL '30 days'\nGROUP BY users.id, orders.total\nHAVING COUNT(orders.id) > 2\nORDER BY orders.total DESC LIMIT 50;\nIndexes used: B-Tree on user_id, Composite Index on (status, created_at).\n\n--- [Session Update 11/6/2026] ---\nSQL optimization guide:\nSELECT users.id, orders.total FROM users\nINNER JOIN orders ON users.id = orders.user_id\nWHERE orders.status = 'completed' AND orders.created_at > NOW() - INTERVAL '30 days'\nGROUP BY users.id, orders.total\nHAVING COUNT(orders.id) > 2\nORDER BY orders.total DESC LIMIT 50;\nIndexes used: B-Tree on user_id, Composite Index on (status, created_at).\n\n--- [Session Update 11/6/2026] ---\nSQL optimization guide:\nSELECT users.id, orders.total FROM users\nINNER JOIN orders ON users.id = orders.user_id\nWHERE orders.status = 'completed' AND orders.created_at > NOW() - INTERVAL '30 days'\nGROUP BY users.id, orders.total\nHAVING COUNT(orders.id) > 2\nORDER BY orders.total DESC LIMIT 50;\nIndexes used: B-Tree on user_id, Composite Index on (status, created_at).",
-      "mastery_score": 5,
-      "position_x": 1050.8399330112247,
-      "position_y": 752.000521086817,
+      "raw_notes": "SQL optimization guide:\nSELECT users.id, orders.total FROM users\nINNER JOIN orders ON users.id = orders.user_id\nWHERE orders.status = 'completed' AND orders.created_at > NOW() - INTERVAL '30 days'\nGROUP BY users.id, orders.total\nHAVING COUNT(orders.id) > 2\nORDER BY orders.total DESC LIMIT 50;\nIndexes used: B-Tree on user_id, Composite Index on (status, created_at).",
+      "mastery_score": 2,
+      "position_x": 563.5261806706345,
+      "position_y": 738.8267292880242,
       "color_code": "#f97316",
-      "last_friction_point": "Synthesizing edge case behaviors under failure conditions.",
-      "suggested_next_step": "Conduct a quick Feynman warm-up explanation.",
-      "next_review_at": "2026-11-08T16:14:35.012Z",
+      "last_friction_point": "Synthesizing edge case behaviors and boundary conditions under failure.",
+      "suggested_next_step": "Conduct a quick Feynman warm-up explanation and diagram component lifecycle.",
+      "next_review_at": "2026-11-09T08:21:56.095Z",
       "tags": [
         "engineering",
         "systems-design"
       ],
-      "id": "c-1793981675012-p2k3",
-      "created_at": "2026-11-06T16:14:35.012Z",
-      "updated_at": "2026-11-06T16:21:47.167Z"
+      "id": "c-1794039716095-zntz",
+      "created_at": "2026-11-07T08:21:56.095Z",
+      "updated_at": "2026-11-07T08:21:56.095Z"
     }
   ],
   "concept_relationships": [
@@ -243,7 +223,7 @@
       "target_concept_id": "c-raft-consensus",
       "relationship_type": "prerequisite_of",
       "label": "Majority quorum is prerequisite for Raft leader elections",
-      "created_at": "2026-10-27T15:59:32.419Z"
+      "created_at": "2026-10-28T08:21:54.764Z"
     },
     {
       "id": "r-btree-lsm",
@@ -252,7 +232,7 @@
       "target_concept_id": "c-btree-storage",
       "relationship_type": "prerequisite_of",
       "label": "B+ Tree index mechanics form foundation for storage comparison",
-      "created_at": "2026-10-25T15:59:32.419Z"
+      "created_at": "2026-10-26T08:21:54.764Z"
     },
     {
       "id": "r-cgroups-k8s",
@@ -261,7 +241,7 @@
       "target_concept_id": "c-k8s-lifecycle",
       "relationship_type": "prerequisite_of",
       "label": "Kernel cgroups define container resource limits enforced by Kubelet",
-      "created_at": "2026-10-30T15:59:32.419Z"
+      "created_at": "2026-10-31T08:21:54.764Z"
     },
     {
       "id": "r-raft-k8s",
@@ -270,7 +250,7 @@
       "target_concept_id": "c-k8s-lifecycle",
       "relationship_type": "related_to",
       "label": "etcd backing Kubernetes control plane relies directly on Raft",
-      "created_at": "2026-11-01T15:59:32.419Z"
+      "created_at": "2026-11-02T08:21:54.764Z"
     },
     {
       "id": "r-fiber-btree",
@@ -279,166 +259,37 @@
       "target_concept_id": "c-react-fiber",
       "relationship_type": "related_to",
       "label": "Both balance tree traversal latency vs batched commits",
-      "created_at": "2026-11-02T15:59:32.419Z"
+      "created_at": "2026-11-03T08:21:54.764Z"
     },
     {
       "user_id": "usr_jobseeker_demo",
       "source_concept_id": "c-raft-consensus",
-      "target_concept_id": "c-1793981674531-hptf",
+      "target_concept_id": "c-1794039715350-iq8b",
       "relationship_type": "related_to",
       "label": "Relates conceptually to Raft Consensus Algorithm",
-      "id": "r-1793981674533-fuc3",
-      "created_at": "2026-11-06T16:14:34.533Z"
+      "id": "r-1794039715351-apz2",
+      "created_at": "2026-11-07T08:21:55.351Z"
     },
     {
       "user_id": "usr_jobseeker_demo",
       "source_concept_id": "c-raft-consensus",
-      "target_concept_id": "c-1793981674800-zvnx",
+      "target_concept_id": "c-1794039716095-zntz",
       "relationship_type": "related_to",
       "label": "Relates conceptually to Raft Consensus Algorithm",
-      "id": "r-1793981674801-us7p",
-      "created_at": "2026-11-06T16:14:34.801Z"
-    },
-    {
-      "user_id": "usr_jobseeker_demo",
-      "source_concept_id": "c-raft-consensus",
-      "target_concept_id": "c-1793981675012-p2k3",
-      "relationship_type": "related_to",
-      "label": "Relates conceptually to Raft Consensus Algorithm",
-      "id": "r-1793981675014-y7vf",
-      "created_at": "2026-11-06T16:14:35.014Z"
+      "id": "r-1794039716096-ilwz",
+      "created_at": "2026-11-07T08:21:56.096Z"
     }
   ],
   "study_sessions": [
     {
       "user_id": "usr_jobseeker_demo",
       "session_type": "feynman_test",
-      "raw_session_input": "Q: How would you explain the fundamental mechanics of \"Notes on Raft Consensus  We encountered\" to a bright junior engineer without relying on buzzwords?\n\nExplanation:\nIn simple words, it guarantees that even if a server crashes, surviving nodes elect a new leader and keep data ordered by incrementing terms.",
-      "ai_summary": "Feynman Test for \"Notes on Raft Consensus  We encountered\": Score 2 -> 3. Your explanation articulates the core intuition with good clarity (24 words provided). You focused directly on how compo",
-      "duration_minutes": 10,
-      "started_at": "2026-11-06T16:11:47.820Z",
-      "ended_at": "2026-11-06T16:21:47.820Z",
-      "id": "sess-1793982107820-lyuu"
-    },
-    {
-      "user_id": "usr_jobseeker_demo",
-      "session_type": "dump",
-      "raw_session_input": "SQL optimization guide:\nSELECT users.id, orders.total FROM users\nINNER JOIN orders ON users.id = orders.user_id\nWHERE orders.status = 'completed' AND orders.created_at > NOW() - INTERVAL '30 days'\nGROUP BY users.id, orders.total\nHAVING COUNT(orders.id) > 2\nORDER BY orders.total DESC LIMIT 50;\nIndexes used: B-Tree on user_id, Composite Index on (status, created_at).",
-      "ai_summary": "Synthesized continuous study update on \"SQL optimization guide  SELECT users id\". Auto-merged notes and updated friction point.",
-      "duration_minutes": 15,
-      "started_at": "2026-11-06T16:06:47.169Z",
-      "ended_at": "2026-11-06T16:21:47.169Z",
-      "id": "sess-1793982107169-glbg"
-    },
-    {
-      "user_id": "usr_jobseeker_demo",
-      "session_type": "dump",
-      "raw_session_input": "Notes on Raft Consensus Algorithm:\nWe encountered an issue where split-votes caused leader election timeouts.\nMitigated by adding randomized election timers between 150ms and 300ms.",
-      "ai_summary": "Synthesized continuous study update on \"Raft Consensus Algorithm\". Auto-merged notes and updated friction point.",
-      "duration_minutes": 15,
-      "started_at": "2026-11-06T16:06:32.149Z",
-      "ended_at": "2026-11-06T16:21:32.149Z",
-      "id": "sess-1793982092149-ymoa"
-    },
-    {
-      "user_id": "usr_jobseeker_demo",
-      "session_type": "dump",
-      "raw_session_input": "# Database Sharding Patterns\nWhen horizontal scaling reaches limits, sharding partitions data across multiple database instances.\nKey components:\n- Hash-based sharding vs Range-based sharding\n- Re-sharding bottlenecks\n\n```sql\n-- Hash modulo routing key\nSELECT shard_id FROM shard_map WHERE hash(user_id) % 16 = current_shard;\n```",
-      "ai_summary": "Synthesized continuous study update on \"Database Sharding Patterns When horizo\". Auto-merged notes and updated friction point.",
-      "duration_minutes": 15,
-      "started_at": "2026-11-06T16:06:31.940Z",
-      "ended_at": "2026-11-06T16:21:31.940Z",
-      "id": "sess-1793982091940-umpo"
-    },
-    {
-      "user_id": "usr_jobseeker_demo",
-      "session_type": "feynman_test",
-      "raw_session_input": "Q: How would you explain the fundamental mechanics of \"Kubernetes Pod Lifecycle & Eviction\" to a bright junior engineer without relying on buzzwords?\n\nExplanation:\nIn simple words, it guarantees that even if a server crashes, surviving nodes elect a new leader and keep data ordered by incrementing terms.",
-      "ai_summary": "Feynman Test for \"Kubernetes Pod Lifecycle & Eviction\": Score 2 -> 3. Your explanation articulates the core intuition with good clarity (24 words provided). You focused directly on how compo",
-      "duration_minutes": 10,
-      "started_at": "2026-11-06T16:06:39.184Z",
-      "ended_at": "2026-11-06T16:16:39.184Z",
-      "id": "sess-1793981799184-4oji"
-    },
-    {
-      "user_id": "usr_jobseeker_demo",
-      "session_type": "dump",
-      "raw_session_input": "SQL optimization guide:\nSELECT users.id, orders.total FROM users\nINNER JOIN orders ON users.id = orders.user_id\nWHERE orders.status = 'completed' AND orders.created_at > NOW() - INTERVAL '30 days'\nGROUP BY users.id, orders.total\nHAVING COUNT(orders.id) > 2\nORDER BY orders.total DESC LIMIT 50;\nIndexes used: B-Tree on user_id, Composite Index on (status, created_at).",
-      "ai_summary": "Synthesized continuous study update on \"SQL optimization guide  SELECT users id\". Auto-merged notes and updated friction point.",
-      "duration_minutes": 15,
-      "started_at": "2026-11-06T16:01:38.560Z",
-      "ended_at": "2026-11-06T16:16:38.561Z",
-      "id": "sess-1793981798561-hz2i"
-    },
-    {
-      "user_id": "usr_jobseeker_demo",
-      "session_type": "dump",
-      "raw_session_input": "Notes on Raft Consensus Algorithm:\nWe encountered an issue where split-votes caused leader election timeouts.\nMitigated by adding randomized election timers between 150ms and 300ms.",
-      "ai_summary": "Synthesized continuous study update on \"Raft Consensus Algorithm\". Auto-merged notes and updated friction point.",
-      "duration_minutes": 15,
-      "started_at": "2026-11-06T16:01:38.310Z",
-      "ended_at": "2026-11-06T16:16:38.310Z",
-      "id": "sess-1793981798310-bwdf"
-    },
-    {
-      "user_id": "usr_jobseeker_demo",
-      "session_type": "dump",
-      "raw_session_input": "# Database Sharding Patterns\nWhen horizontal scaling reaches limits, sharding partitions data across multiple database instances.\nKey components:\n- Hash-based sharding vs Range-based sharding\n- Re-sharding bottlenecks\n\n```sql\n-- Hash modulo routing key\nSELECT shard_id FROM shard_map WHERE hash(user_id) % 16 = current_shard;\n```",
-      "ai_summary": "Synthesized continuous study update on \"Database Sharding Patterns When horizo\". Auto-merged notes and updated friction point.",
-      "duration_minutes": 15,
-      "started_at": "2026-11-06T16:01:38.112Z",
-      "ended_at": "2026-11-06T16:16:38.112Z",
-      "id": "sess-1793981798112-xzg7"
-    },
-    {
-      "user_id": "usr_jobseeker_demo",
-      "session_type": "feynman_test",
-      "raw_session_input": "Q: How would you explain the fundamental mechanics of \"React Fiber Architecture & Work Loop\" to a bright junior engineer without relying on buzzwords?\n\nExplanation:\nIn simple words, it guarantees that even if a server crashes, surviving nodes elect a new leader and keep data ordered by incrementing terms.",
-      "ai_summary": "Feynman Test for \"React Fiber Architecture & Work Loop\": Score 2 -> 3. Your explanation articulates the core intuition with good clarity (24 words provided). You focused directly on how compo",
-      "duration_minutes": 10,
-      "started_at": "2026-11-06T16:06:28.621Z",
-      "ended_at": "2026-11-06T16:16:28.621Z",
-      "id": "sess-1793981788621-beiv"
-    },
-    {
-      "user_id": "usr_jobseeker_demo",
-      "session_type": "dump",
-      "raw_session_input": "SQL optimization guide:\nSELECT users.id, orders.total FROM users\nINNER JOIN orders ON users.id = orders.user_id\nWHERE orders.status = 'completed' AND orders.created_at > NOW() - INTERVAL '30 days'\nGROUP BY users.id, orders.total\nHAVING COUNT(orders.id) > 2\nORDER BY orders.total DESC LIMIT 50;\nIndexes used: B-Tree on user_id, Composite Index on (status, created_at).",
-      "ai_summary": "Synthesized continuous study update on \"SQL optimization guide  SELECT users id\". Auto-merged notes and updated friction point.",
-      "duration_minutes": 15,
-      "started_at": "2026-11-06T16:01:28.011Z",
-      "ended_at": "2026-11-06T16:16:28.011Z",
-      "id": "sess-1793981788011-md0e"
-    },
-    {
-      "user_id": "usr_jobseeker_demo",
-      "session_type": "dump",
-      "raw_session_input": "Notes on Raft Consensus Algorithm:\nWe encountered an issue where split-votes caused leader election timeouts.\nMitigated by adding randomized election timers between 150ms and 300ms.",
-      "ai_summary": "Synthesized continuous study update on \"Raft Consensus Algorithm\". Auto-merged notes and updated friction point.",
-      "duration_minutes": 15,
-      "started_at": "2026-11-06T16:01:27.749Z",
-      "ended_at": "2026-11-06T16:16:27.749Z",
-      "id": "sess-1793981787749-um3i"
-    },
-    {
-      "user_id": "usr_jobseeker_demo",
-      "session_type": "dump",
-      "raw_session_input": "# Database Sharding Patterns\nWhen horizontal scaling reaches limits, sharding partitions data across multiple database instances.\nKey components:\n- Hash-based sharding vs Range-based sharding\n- Re-sharding bottlenecks\n\n```sql\n-- Hash modulo routing key\nSELECT shard_id FROM shard_map WHERE hash(user_id) % 16 = current_shard;\n```",
-      "ai_summary": "Synthesized continuous study update on \"Database Sharding Patterns When horizo\". Auto-merged notes and updated friction point.",
-      "duration_minutes": 15,
-      "started_at": "2026-11-06T16:01:27.472Z",
-      "ended_at": "2026-11-06T16:16:27.472Z",
-      "id": "sess-1793981787472-7qwv"
-    },
-    {
-      "user_id": "usr_jobseeker_demo",
-      "session_type": "feynman_test",
       "raw_session_input": "Q: How would you explain the fundamental mechanics of \"Raft Consensus Algorithm\" to a bright junior engineer without relying on buzzwords?\n\nExplanation:\nIn simple words, it guarantees that even if a server crashes, surviving nodes elect a new leader and keep data ordered by incrementing terms.",
       "ai_summary": "Feynman Test for \"Raft Consensus Algorithm\": Score 2 -> 3. Your explanation articulates the core intuition with good clarity (24 words provided). You focused directly on how compo",
       "duration_minutes": 10,
-      "started_at": "2026-11-06T16:04:35.590Z",
-      "ended_at": "2026-11-06T16:14:35.590Z",
-      "id": "sess-1793981675590-v370"
+      "started_at": "2026-11-07T08:11:57.089Z",
+      "ended_at": "2026-11-07T08:21:57.089Z",
+      "id": "sess-1794039717089-eoth"
     },
     {
       "user_id": "usr_jobseeker_demo",
@@ -446,19 +297,19 @@
       "raw_session_input": "SQL optimization guide:\nSELECT users.id, orders.total FROM users\nINNER JOIN orders ON users.id = orders.user_id\nWHERE orders.status = 'completed' AND orders.created_at > NOW() - INTERVAL '30 days'\nGROUP BY users.id, orders.total\nHAVING COUNT(orders.id) > 2\nORDER BY orders.total DESC LIMIT 50;\nIndexes used: B-Tree on user_id, Composite Index on (status, created_at).",
       "ai_summary": "Processed study notes on \"SQL optimization guide  SELECT users id\". Extracted macro-architecture principles and learning targets.",
       "duration_minutes": 15,
-      "started_at": "2026-11-06T15:59:35.015Z",
-      "ended_at": "2026-11-06T16:14:35.015Z",
-      "id": "sess-1793981675015-87e2"
+      "started_at": "2026-11-07T08:06:56.096Z",
+      "ended_at": "2026-11-07T08:21:56.096Z",
+      "id": "sess-1794039716096-s7cg"
     },
     {
       "user_id": "usr_jobseeker_demo",
       "session_type": "dump",
-      "raw_session_input": "Notes on Raft Consensus:\nWe encountered an issue where split-votes caused leader election timeouts.\nMitigated by adding randomized election timers between 150ms and 300ms.",
-      "ai_summary": "Processed study notes on \"Notes on Raft Consensus  We encountered\". Extracted macro-architecture principles and learning targets.",
+      "raw_session_input": "Notes on Raft Consensus Algorithm:\nWe encountered an issue where split-votes caused leader election timeouts.\nMitigated by adding randomized election timers between 150ms and 300ms.",
+      "ai_summary": "Synthesized continuous study update on \"Raft Consensus Algorithm\". Auto-merged notes and updated friction point.",
       "duration_minutes": 15,
-      "started_at": "2026-11-06T15:59:34.801Z",
-      "ended_at": "2026-11-06T16:14:34.801Z",
-      "id": "sess-1793981674801-5koy"
+      "started_at": "2026-11-07T08:06:55.914Z",
+      "ended_at": "2026-11-07T08:21:55.914Z",
+      "id": "sess-1794039715914-4vdg"
     },
     {
       "user_id": "usr_jobseeker_demo",
@@ -466,19 +317,9 @@
       "raw_session_input": "# Database Sharding Patterns\nWhen horizontal scaling reaches limits, sharding partitions data across multiple database instances.\nKey components:\n- Hash-based sharding vs Range-based sharding\n- Re-sharding bottlenecks\n\n```sql\n-- Hash modulo routing key\nSELECT shard_id FROM shard_map WHERE hash(user_id) % 16 = current_shard;\n```",
       "ai_summary": "Processed study notes on \"Database Sharding Patterns When horizo\". Extracted macro-architecture principles and learning targets.",
       "duration_minutes": 15,
-      "started_at": "2026-11-06T15:59:34.533Z",
-      "ended_at": "2026-11-06T16:14:34.533Z",
-      "id": "sess-1793981674533-5kow"
-    },
-    {
-      "user_id": "usr_jobseeker_demo",
-      "session_type": "feynman_test",
-      "raw_session_input": "Q: How would you explain the fundamental mechanics of \"Raft Consensus Algorithm\" to a bright junior engineer without relying on buzzwords?\n\nExplanation:\nThis works like a distributed log where nodes commit in sequence using majority consensus so no single failure breaks consistency.",
-      "ai_summary": "Feynman Test for \"Raft Consensus Algorithm\": Score 1 -> 2. Your explanation articulates the core intuition with good clarity (20 words provided). You focused directly on how compo",
-      "duration_minutes": 10,
-      "started_at": "2026-11-06T16:01:33.546Z",
-      "ended_at": "2026-11-06T16:11:33.546Z",
-      "id": "sess-1793981493546-brap"
+      "started_at": "2026-11-07T08:06:55.351Z",
+      "ended_at": "2026-11-07T08:21:55.351Z",
+      "id": "sess-1794039715351-ilbi"
     },
     {
       "id": "sess-01",
@@ -487,8 +328,8 @@
       "raw_session_input": "Read through Raft paper section 5. Stuck on term conflicts when leader drops.",
       "ai_summary": "Analyzed Raft leader election edge cases and uncommitted log handling during network partitions.",
       "duration_minutes": 35,
-      "started_at": "2026-11-03T15:59:32.419Z",
-      "ended_at": "2026-11-03T15:59:32.419Z"
+      "started_at": "2026-11-04T08:21:54.764Z",
+      "ended_at": "2026-11-04T08:21:54.764Z"
     },
     {
       "id": "sess-02",
@@ -497,8 +338,8 @@
       "raw_session_input": "Feynman test on Database Indexing B+ trees vs Binary Search trees.",
       "ai_summary": "Mastered B+ Tree fan-out and sequential leaf node scan efficiency.",
       "duration_minutes": 20,
-      "started_at": "2026-10-31T15:59:32.419Z",
-      "ended_at": "2026-10-31T15:59:32.419Z"
+      "started_at": "2026-11-01T08:21:54.764Z",
+      "ended_at": "2026-11-01T08:21:54.764Z"
     }
   ],
   "session_concepts": [
@@ -513,301 +354,76 @@
       "notes_added": "Passed Feynman test with 5/5"
     },
     {
-      "session_id": "sess-1793981493546-brap",
-      "concept_id": "c-raft-consensus",
-      "notes_added": "Feynman Test for \"Raft Consensus Algorithm\": Score 1 -> 2. Your explanation articulates the core int"
-    },
-    {
-      "session_id": "sess-1793981674533-5kow",
-      "concept_id": "c-1793981674531-hptf",
+      "session_id": "sess-1794039715351-ilbi",
+      "concept_id": "c-1794039715350-iq8b",
       "notes_added": "Processed study notes on \"Database Sharding Patterns When horizo\". Extracted macro-architecture prin"
     },
     {
-      "session_id": "sess-1793981674801-5koy",
-      "concept_id": "c-1793981674800-zvnx",
-      "notes_added": "Processed study notes on \"Notes on Raft Consensus  We encountered\". Extracted macro-architecture pri"
+      "session_id": "sess-1794039715914-4vdg",
+      "concept_id": "c-raft-consensus",
+      "notes_added": "Synthesized continuous study update on \"Raft Consensus Algorithm\". Auto-merged notes and updated fri"
     },
     {
-      "session_id": "sess-1793981675015-87e2",
-      "concept_id": "c-1793981675012-p2k3",
+      "session_id": "sess-1794039716096-s7cg",
+      "concept_id": "c-1794039716095-zntz",
       "notes_added": "Processed study notes on \"SQL optimization guide  SELECT users id\". Extracted macro-architecture pri"
     },
     {
-      "session_id": "sess-1793981675590-v370",
+      "session_id": "sess-1794039717089-eoth",
       "concept_id": "c-raft-consensus",
       "notes_added": "Feynman Test for \"Raft Consensus Algorithm\": Score 2 -> 3. Your explanation articulates the core int"
-    },
-    {
-      "session_id": "sess-1793981787472-7qwv",
-      "concept_id": "c-1793981674531-hptf",
-      "notes_added": "Synthesized continuous study update on \"Database Sharding Patterns When horizo\". Auto-merged notes a"
-    },
-    {
-      "session_id": "sess-1793981787749-um3i",
-      "concept_id": "c-raft-consensus",
-      "notes_added": "Synthesized continuous study update on \"Raft Consensus Algorithm\". Auto-merged notes and updated fri"
-    },
-    {
-      "session_id": "sess-1793981788011-md0e",
-      "concept_id": "c-1793981675012-p2k3",
-      "notes_added": "Synthesized continuous study update on \"SQL optimization guide  SELECT users id\". Auto-merged notes "
-    },
-    {
-      "session_id": "sess-1793981788621-beiv",
-      "concept_id": "c-react-fiber",
-      "notes_added": "Feynman Test for \"React Fiber Architecture & Work Loop\": Score 2 -> 3. Your explanation articulates "
-    },
-    {
-      "session_id": "sess-1793981798112-xzg7",
-      "concept_id": "c-1793981674531-hptf",
-      "notes_added": "Synthesized continuous study update on \"Database Sharding Patterns When horizo\". Auto-merged notes a"
-    },
-    {
-      "session_id": "sess-1793981798310-bwdf",
-      "concept_id": "c-raft-consensus",
-      "notes_added": "Synthesized continuous study update on \"Raft Consensus Algorithm\". Auto-merged notes and updated fri"
-    },
-    {
-      "session_id": "sess-1793981798561-hz2i",
-      "concept_id": "c-1793981675012-p2k3",
-      "notes_added": "Synthesized continuous study update on \"SQL optimization guide  SELECT users id\". Auto-merged notes "
-    },
-    {
-      "session_id": "sess-1793981799184-4oji",
-      "concept_id": "c-k8s-lifecycle",
-      "notes_added": "Feynman Test for \"Kubernetes Pod Lifecycle & Eviction\": Score 2 -> 3. Your explanation articulates t"
-    },
-    {
-      "session_id": "sess-1793982091940-umpo",
-      "concept_id": "c-1793981674531-hptf",
-      "notes_added": "Synthesized continuous study update on \"Database Sharding Patterns When horizo\". Auto-merged notes a"
-    },
-    {
-      "session_id": "sess-1793982092149-ymoa",
-      "concept_id": "c-raft-consensus",
-      "notes_added": "Synthesized continuous study update on \"Raft Consensus Algorithm\". Auto-merged notes and updated fri"
-    },
-    {
-      "session_id": "sess-1793982107169-glbg",
-      "concept_id": "c-1793981675012-p2k3",
-      "notes_added": "Synthesized continuous study update on \"SQL optimization guide  SELECT users id\". Auto-merged notes "
-    },
-    {
-      "session_id": "sess-1793982107820-lyuu",
-      "concept_id": "c-1793981674800-zvnx",
-      "notes_added": "Feynman Test for \"Notes on Raft Consensus  We encountered\": Score 2 -> 3. Your explanation articulat"
     }
   ],
   "learning_states": [
     {
-      "id": "ls-1793982107820-nz1l",
-      "concept_id": "c-1793981674800-zvnx",
-      "concept_title": "Notes on Raft Consensus  We encountered",
-      "previous_score": 2,
-      "new_score": 3,
-      "trigger_event": "feynman_test",
-      "recorded_at": "2026-11-06T16:21:47.820Z",
-      "feedback_notes": "Your explanation articulates the core intuition with good clarity (24 words provided). You focused directly on how components interact under normal and edge conditions."
-    },
-    {
-      "id": "ls-1793982107818-5xng",
-      "concept_id": "c-1793981674800-zvnx",
-      "concept_title": "Notes on Raft Consensus  We encountered",
-      "previous_score": 2,
-      "new_score": 3,
-      "trigger_event": "manual_adjustment",
-      "recorded_at": "2026-11-06T16:21:47.818Z",
-      "feedback_notes": "Mastery score changed manually in concept inspector"
-    },
-    {
-      "id": "ls-1793982107167-qh28",
-      "concept_id": "c-1793981675012-p2k3",
-      "concept_title": "SQL optimization guide  SELECT users id",
-      "previous_score": 4,
-      "new_score": 5,
-      "trigger_event": "manual_adjustment",
-      "recorded_at": "2026-11-06T16:21:47.167Z",
-      "feedback_notes": "Mastery score changed manually in concept inspector"
-    },
-    {
-      "id": "ls-1793982091939-3r0u",
-      "concept_id": "c-1793981674531-hptf",
-      "concept_title": "Database Sharding Patterns When horizo",
-      "previous_score": 4,
-      "new_score": 5,
-      "trigger_event": "manual_adjustment",
-      "recorded_at": "2026-11-06T16:21:31.939Z",
-      "feedback_notes": "Mastery score changed manually in concept inspector"
-    },
-    {
-      "id": "ls-1793981799184-4qqq",
-      "concept_id": "c-k8s-lifecycle",
-      "concept_title": "Kubernetes Pod Lifecycle & Eviction",
-      "previous_score": 2,
-      "new_score": 3,
-      "trigger_event": "feynman_test",
-      "recorded_at": "2026-11-06T16:16:39.184Z",
-      "feedback_notes": "Your explanation articulates the core intuition with good clarity (24 words provided). You focused directly on how components interact under normal and edge conditions."
-    },
-    {
-      "id": "ls-1793981799181-u4e9",
-      "concept_id": "c-k8s-lifecycle",
-      "concept_title": "Kubernetes Pod Lifecycle & Eviction",
-      "previous_score": 2,
-      "new_score": 3,
-      "trigger_event": "manual_adjustment",
-      "recorded_at": "2026-11-06T16:16:39.181Z",
-      "feedback_notes": "Mastery score changed manually in concept inspector"
-    },
-    {
-      "id": "ls-1793981798560-d7pp",
-      "concept_id": "c-1793981675012-p2k3",
-      "concept_title": "SQL optimization guide  SELECT users id",
-      "previous_score": 3,
-      "new_score": 4,
-      "trigger_event": "manual_adjustment",
-      "recorded_at": "2026-11-06T16:16:38.560Z",
-      "feedback_notes": "Mastery score changed manually in concept inspector"
-    },
-    {
-      "id": "ls-1793981798309-83qs",
-      "concept_id": "c-raft-consensus",
-      "concept_title": "Raft Consensus Algorithm",
-      "previous_score": 4,
-      "new_score": 5,
-      "trigger_event": "manual_adjustment",
-      "recorded_at": "2026-11-06T16:16:38.309Z",
-      "feedback_notes": "Mastery score changed manually in concept inspector"
-    },
-    {
-      "id": "ls-1793981798112-raej",
-      "concept_id": "c-1793981674531-hptf",
-      "concept_title": "Database Sharding Patterns When horizo",
-      "previous_score": 3,
-      "new_score": 4,
-      "trigger_event": "manual_adjustment",
-      "recorded_at": "2026-11-06T16:16:38.112Z",
-      "feedback_notes": "Mastery score changed manually in concept inspector"
-    },
-    {
-      "id": "ls-1793981788621-db3n",
-      "concept_id": "c-react-fiber",
-      "concept_title": "React Fiber Architecture & Work Loop",
-      "previous_score": 2,
-      "new_score": 3,
-      "trigger_event": "feynman_test",
-      "recorded_at": "2026-11-06T16:16:28.621Z",
-      "feedback_notes": "Your explanation articulates the core intuition with good clarity (24 words provided). You focused directly on how components interact under normal and edge conditions."
-    },
-    {
-      "id": "ls-1793981788619-z9ab",
-      "concept_id": "c-react-fiber",
-      "concept_title": "React Fiber Architecture & Work Loop",
-      "previous_score": 2,
-      "new_score": 3,
-      "trigger_event": "manual_adjustment",
-      "recorded_at": "2026-11-06T16:16:28.619Z",
-      "feedback_notes": "Mastery score changed manually in concept inspector"
-    },
-    {
-      "id": "ls-1793981788010-ygns",
-      "concept_id": "c-1793981675012-p2k3",
-      "concept_title": "SQL optimization guide  SELECT users id",
-      "previous_score": 2,
-      "new_score": 3,
-      "trigger_event": "manual_adjustment",
-      "recorded_at": "2026-11-06T16:16:28.010Z",
-      "feedback_notes": "Mastery score changed manually in concept inspector"
-    },
-    {
-      "id": "ls-1793981787748-cjr5",
-      "concept_id": "c-raft-consensus",
-      "concept_title": "Raft Consensus Algorithm",
-      "previous_score": 3,
-      "new_score": 4,
-      "trigger_event": "manual_adjustment",
-      "recorded_at": "2026-11-06T16:16:27.748Z",
-      "feedback_notes": "Mastery score changed manually in concept inspector"
-    },
-    {
-      "id": "ls-1793981787471-tl8k",
-      "concept_id": "c-1793981674531-hptf",
-      "concept_title": "Database Sharding Patterns When horizo",
-      "previous_score": 2,
-      "new_score": 3,
-      "trigger_event": "manual_adjustment",
-      "recorded_at": "2026-11-06T16:16:27.471Z",
-      "feedback_notes": "Mastery score changed manually in concept inspector"
-    },
-    {
-      "id": "ls-1793981675590-whlr",
+      "id": "ls-1794039717089-tcc2",
       "concept_id": "c-raft-consensus",
       "concept_title": "Raft Consensus Algorithm",
       "previous_score": 2,
       "new_score": 3,
       "trigger_event": "feynman_test",
-      "recorded_at": "2026-11-06T16:14:35.590Z",
+      "recorded_at": "2026-11-07T08:21:57.089Z",
       "feedback_notes": "Your explanation articulates the core intuition with good clarity (24 words provided). You focused directly on how components interact under normal and edge conditions."
     },
     {
-      "id": "ls-1793981675590-3oyi",
+      "id": "ls-1794039717089-7qeq",
       "concept_id": "c-raft-consensus",
       "concept_title": "Raft Consensus Algorithm",
       "previous_score": 2,
       "new_score": 3,
       "trigger_event": "manual_adjustment",
-      "recorded_at": "2026-11-06T16:14:35.590Z",
+      "recorded_at": "2026-11-07T08:21:57.089Z",
       "feedback_notes": "Mastery score changed manually in concept inspector"
     },
     {
-      "id": "ls-1793981675013-8oju",
-      "concept_id": "c-1793981675012-p2k3",
+      "id": "ls-1794039716096-sq6c",
+      "concept_id": "c-1794039716095-zntz",
       "concept_title": "SQL optimization guide  SELECT users id",
       "previous_score": 0,
       "new_score": 2,
       "trigger_event": "session_dump",
-      "recorded_at": "2026-11-06T16:14:35.013Z",
+      "recorded_at": "2026-11-07T08:21:56.096Z",
       "feedback_notes": "Initial concept registered from study dump"
     },
     {
-      "id": "ls-1793981674801-hg67",
-      "concept_id": "c-1793981674800-zvnx",
-      "concept_title": "Notes on Raft Consensus  We encountered",
-      "previous_score": 0,
-      "new_score": 2,
-      "trigger_event": "session_dump",
-      "recorded_at": "2026-11-06T16:14:34.801Z",
-      "feedback_notes": "Initial concept registered from study dump"
-    },
-    {
-      "id": "ls-1793981674532-01o9",
-      "concept_id": "c-1793981674531-hptf",
-      "concept_title": "Database Sharding Patterns When horizo",
-      "previous_score": 0,
-      "new_score": 2,
-      "trigger_event": "session_dump",
-      "recorded_at": "2026-11-06T16:14:34.532Z",
-      "feedback_notes": "Initial concept registered from study dump"
-    },
-    {
-      "id": "ls-1793981493546-50wn",
-      "concept_id": "c-raft-consensus",
-      "concept_title": "Raft Consensus Algorithm",
-      "previous_score": 1,
-      "new_score": 2,
-      "trigger_event": "feynman_test",
-      "recorded_at": "2026-11-06T16:11:33.546Z",
-      "feedback_notes": "Your explanation articulates the core intuition with good clarity (20 words provided). You focused directly on how components interact under normal and edge conditions."
-    },
-    {
-      "id": "ls-1793981493544-5i83",
+      "id": "ls-1794039715914-lv0n",
       "concept_id": "c-raft-consensus",
       "concept_title": "Raft Consensus Algorithm",
       "previous_score": 1,
       "new_score": 2,
       "trigger_event": "manual_adjustment",
-      "recorded_at": "2026-11-06T16:11:33.544Z",
+      "recorded_at": "2026-11-07T08:21:55.914Z",
       "feedback_notes": "Mastery score changed manually in concept inspector"
+    },
+    {
+      "id": "ls-1794039715351-zkq8",
+      "concept_id": "c-1794039715350-iq8b",
+      "concept_title": "Database Sharding Patterns When horizo",
+      "previous_score": 0,
+      "new_score": 2,
+      "trigger_event": "session_dump",
+      "recorded_at": "2026-11-07T08:21:55.351Z",
+      "feedback_notes": "Initial concept registered from study dump"
     },
     {
       "id": "ls-01",
@@ -816,7 +432,7 @@
       "previous_score": 3,
       "new_score": 5,
       "trigger_event": "feynman_test",
-      "recorded_at": "2026-10-31T15:59:32.419Z",
+      "recorded_at": "2026-11-01T08:21:54.764Z",
       "feedback_notes": "Flawlessly explained high fan-out, block size matching, and avoiding heap scans with covering indexes without buzzwords."
     },
     {
@@ -826,7 +442,7 @@
       "previous_score": 2,
       "new_score": 1,
       "trigger_event": "session_dump",
-      "recorded_at": "2026-11-03T15:59:32.419Z",
+      "recorded_at": "2026-11-04T08:21:54.764Z",
       "feedback_notes": "Reported confusion over split-vote deadlocks and uncommitted log entry drops."
     },
     {
@@ -836,7 +452,7 @@
       "previous_score": 1,
       "new_score": 2,
       "trigger_event": "review",
-      "recorded_at": "2026-10-29T15:59:32.419Z",
+      "recorded_at": "2026-10-30T08:21:54.764Z",
       "feedback_notes": "Understood render phase vs commit phase distinction, but still uncertain about preemption lanes."
     }
   ]

@@ -44,8 +44,7 @@ export function InputDrawer({ userId = 'usr_current', onProcessed, onOpenFullMod
       mediaRecorderRef.current = recorder;
       setIsRecording(true);
     } catch (err) {
-      console.error('Failed to start recording:', err);
-      alert('Microphone access denied or unsupported in this browser.');
+      console.warn('Microphone access denied or unsupported in this browser:', err);
     }
   };
 

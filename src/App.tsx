@@ -116,8 +116,7 @@ export default function App() {
     try {
       await signInWithGoogle();
     } catch (err: any) {
-      console.error('Google Sign-In failed:', err);
-      alert('Sign-In notice: ' + (err?.message || 'Authentication closed'));
+      console.warn('Google Sign-In notice:', err?.message || err);
     }
   };
 
@@ -255,37 +254,31 @@ export default function App() {
 
   // Reset to seed data
   const handleResetSeed = async () => {
-    if (
-      confirm(
-        'Reset knowledge graph to sample distributed systems & engineering sketch notes?'
-      )
-    ) {
-      try {
-        setIsLoading(true);
-        const res = await fetch('/api/reset-seed', { method: 'POST' });
-        if (res.ok) {
-          const data = await res.json();
-          setConcepts(data.data.concepts);
-          setRelationships(data.data.concept_relationships);
-          setColdConcepts(
-            data.data.concepts.filter((c: Concept) => c.mastery_score <= 2)
-          );
-          setLearningStates(data.data.learning_states);
-          setSessions(data.data.study_sessions);
-          setSelectedConcept(null);
-        }
-      } catch (err) {
-        console.error('Failed to reset seed:', err);
-      } finally {
-        setIsLoading(false);
+    try {
+      setIsLoading(true);
+      const res = await fetch('/api/reset-seed', { method: 'POST' });
+      if (res.ok) {
+        const data = await res.json();
+        setConcepts(data.data.concepts);
+        setRelationships(data.data.concept_relationships);
+        setColdConcepts(
+          data.data.concepts.filter((c: Concept) => c.mastery_score <= 2)
+        );
+        setLearningStates(data.data.learning_states);
+        setSessions(data.data.study_sessions);
+        setSelectedConcept(null);
       }
+    } catch (err) {
+      console.error('Failed to reset seed:', err);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const primaryColdNode = coldConcepts[0];
 
   return (
-    <div className="relative w-screen h-screen flex flex-col bg-[#F5ECE2] dark:bg-[#16100C] text-[#2C1E16] dark:text-[#EFE5D9] overflow-hidden font-sans transition-colors duration-200">
+    <div className="relative w-screen h-screen flex flex-col bg-[#ECEFF1] dark:bg-[#0B0F19] text-[#2E4053] dark:text-[#E2E8F0] overflow-hidden font-sans transition-colors duration-200">
       {/* Top Navigation Bar with Theme Switcher */}
       <HeaderNavbar
         concepts={concepts}
@@ -309,10 +302,10 @@ export default function App() {
       {/* Main Canvas Area */}
       <main className="relative flex-1 w-full h-full overflow-hidden">
         {isLoading ? (
-          <div className="w-full h-full flex flex-col items-center justify-center space-y-3 bg-[#F5ECE2] dark:bg-[#16100C]">
-            <Loader2 className="w-8 h-8 text-[#7F5539] dark:text-[#E0A878] animate-spin" />
-            <p className="text-xs font-sketch text-[#8C6D53] dark:text-[#CBB6A1]">
-              Opening sketch note journal...
+          <div className="w-full h-full flex flex-col items-center justify-center space-y-3 bg-[#ECEFF1] dark:bg-[#0B0F19]">
+            <Loader2 className="w-7 h-7 text-[#4A6572] dark:text-[#94A3B8] animate-spin" />
+            <p className="text-xs font-mono text-[#546E7A] dark:text-[#94A3B8]">
+              Loading concept graph...
             </p>
           </div>
         ) : (
@@ -328,34 +321,34 @@ export default function App() {
           />
         )}
 
-        {/* Floating Context-Resumption Cold Node Alert Toast (Sketch Card style) */}
+        {/* Floating Context-Resumption Cold Node Alert Toast (Strict 1px Flat Border, Zero Shadow) */}
         {!dismissWarmupToast && primaryColdNode && !isFeynmanModalOpen && (
-          <div className="absolute bottom-6 right-6 z-20 max-w-sm bg-[#FAF5EE]/95 dark:bg-[#1E1611]/95 backdrop-blur-md border border-[#C8B69F] dark:border-[#473527] p-4 rounded-xl shadow-xl animate-in slide-in-from-bottom duration-300 flex items-start gap-3">
-            <div className="w-9 h-9 rounded-xl bg-[#FFEDD5] dark:bg-[#431407] border border-[#FDBA74] dark:border-[#991B1B] flex items-center justify-center text-[#C2410C] shrink-0">
-              <Flame className="w-5 h-5" />
+          <div className="absolute top-3 right-3 z-20 max-w-xs sm:max-w-sm bg-[#D5DBDB] dark:bg-[#161F30] border border-[#2C3E50]/30 dark:border-[#2E3F59] p-3 rounded-md animate-in fade-in duration-200 flex items-start gap-2.5">
+            <div className="w-8 h-8 rounded border border-[#C0392B]/40 bg-[#ECEFF1] dark:bg-[#0B0F19] flex items-center justify-center text-[#C0392B] dark:text-[#EF4444] shrink-0">
+              <Flame className="w-4 h-4" />
             </div>
 
             <div className="space-y-1 flex-1 text-xs">
               <div className="flex items-center justify-between">
-                <span className="font-sketch font-bold text-[#9A3412] dark:text-[#FCA5A5]">
+                <span className="font-bold text-[#C0392B] dark:text-[#EF4444]">
                   Feynman Warm-Up Ready
                 </span>
                 <button
                   type="button"
                   onClick={() => setDismissWarmupToast(true)}
-                  className="text-[#8C6D53] dark:text-[#A7927F] hover:text-[#2C1E16] dark:hover:text-white"
+                  className="text-[#546E7A] dark:text-[#94A3B8] hover:text-[#2E4053] dark:hover:text-white p-0.5"
                 >
                   <X className="w-3.5 h-3.5" />
                 </button>
               </div>
-              <p className="text-[#5D4636] dark:text-[#C5B3A1] text-[11px] leading-relaxed">
-                <strong className="font-sketch text-[#2C1E16] dark:text-[#F3E9DD]">&ldquo;{primaryColdNode.title}&rdquo;</strong> is cold (Mastery {primaryColdNode.mastery_score}/5). Break the forgetting loop before resuming.
+              <p className="text-[#546E7A] dark:text-[#94A3B8] text-[11px] leading-relaxed">
+                <strong className="text-[#2E4053] dark:text-[#E2E8F0]">&ldquo;{primaryColdNode.title}&rdquo;</strong> is cold (Mastery {primaryColdNode.mastery_score}/5). Break the forgetting loop.
               </p>
-              <div className="pt-1.5 flex items-center gap-2 font-sketch font-bold">
+              <div className="pt-1 flex items-center gap-2 font-mono">
                 <button
                   type="button"
                   onClick={() => handleStartFeynman(primaryColdNode)}
-                  className="px-3 py-1 rounded-lg bg-[#C2410C] hover:bg-[#9A3412] text-white text-[11px] shadow-xs flex items-center gap-1 transition-all"
+                  className="px-2.5 py-1 rounded border border-[#C0392B] bg-[#C0392B] hover:bg-[#A93226] text-white text-[11px] flex items-center gap-1 transition-colors cursor-pointer"
                 >
                   <Sparkles className="w-3 h-3" />
                   Drill Now
@@ -363,7 +356,7 @@ export default function App() {
                 <button
                   type="button"
                   onClick={() => setSelectedConcept(primaryColdNode)}
-                  className="px-2.5 py-1 rounded-lg bg-[#EFE3D5] dark:bg-[#2C211A] text-[#5D4636] dark:text-[#D1BEAB] text-[11px] hover:text-[#2C1E16] transition-all"
+                  className="px-2.5 py-1 rounded border border-[#2C3E50]/20 dark:border-[#2E3F59] bg-[#ECEFF1] dark:bg-[#0B0F19] text-[#2E4053] dark:text-[#E2E8F0] text-[11px] hover:border-[#4A6572] transition-colors cursor-pointer"
                 >
                   Inspect
                 </button>

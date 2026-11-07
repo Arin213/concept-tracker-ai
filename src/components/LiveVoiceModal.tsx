@@ -302,179 +302,172 @@ export const LiveVoiceModal: React.FC<LiveVoiceModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-150">
       <div 
-        className="w-full max-w-lg rounded-2xl sketch-border sketch-shadow p-6 bg-paper text-ink relative flex flex-col gap-5 overflow-hidden"
-        style={{
-          boxShadow: '8px 8px 0px rgba(74, 55, 40, 0.25)'
-        }}
+        className="w-full max-w-md max-h-[85vh] rounded-md border border-[#2C3E50]/40 dark:border-[#2E3F59] bg-[#D5DBDB] dark:bg-[#161F30] text-[#2E4053] dark:text-[#E2E8F0] relative flex flex-col overflow-hidden"
       >
-        {/* Top Header */}
-        <div className="flex items-center justify-between border-b-2 border-border-sketch pb-3">
-          <div className="flex items-center gap-2.5">
-            <div className="w-10 h-10 rounded-full flex items-center justify-center bg-latte text-roast border border-border-sketch">
-              <Sparkles className="w-5 h-5 text-caramel animate-pulse" />
+        {/* Top Header (shrink-0) */}
+        <div className="flex items-center justify-between px-4 py-3 border-b border-[#2C3E50]/20 dark:border-[#2E3F59] bg-[#ECEFF1] dark:bg-[#0B0F19] shrink-0">
+          <div className="flex items-center gap-2">
+            <div className="w-7 h-7 rounded border border-[#2C3E50]/25 dark:border-[#2E3F59] bg-[#D5DBDB] dark:bg-[#161F30] flex items-center justify-center text-[#4A6572] dark:text-[#E2E8F0]">
+              <Sparkles className="w-4 h-4 text-[#4A6572] dark:text-[#E2E8F0]" />
             </div>
             <div>
-              <div className="flex items-center gap-2">
-                <h3 className="font-hand text-2xl font-bold tracking-tight text-ink">
-                  Gemini Live Voice Coach
+              <div className="flex items-center gap-1.5">
+                <h3 className="text-xs font-bold tracking-tight text-[#2E4053] dark:text-[#E2E8F0]">
+                  Live Voice Coach
                 </h3>
-                <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-foam text-ink border border-border-sketch">
-                  Gemini 3.8 Live
+                <span className="text-[9px] uppercase font-mono font-semibold px-1.5 py-0.2 rounded border border-[#2C3E50]/20 dark:border-[#2E3F59] bg-[#ECEFF1] dark:bg-[#1B263B] text-[#546E7A] dark:text-[#94A3B8]">
+                  Gemini 3.8
                 </span>
               </div>
-              <p className="text-xs text-muted font-sans">
-                Real-time, two-way conversational tutor with ultra-low latency audio
+              <p className="text-[10px] text-[#546E7A] dark:text-[#94A3B8] font-sans">
+                Real-time 2-way low latency audio
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg border border-transparent hover:border-border-sketch hover:bg-latte transition-colors text-muted hover:text-ink cursor-pointer"
+            className="p-1 rounded text-[#546E7A] dark:text-[#94A3B8] hover:text-[#2E4053] dark:hover:text-white transition-colors cursor-pointer"
             title="Close voice session"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4" />
           </button>
         </div>
 
-        {/* Active Context Banner */}
-        {activeConceptTitle && (
-          <div className="px-3.5 py-2 rounded-xl bg-latte/60 border border-border-sketch flex items-center justify-between text-xs font-sans">
-            <span className="text-muted">Focused Concept:</span>
-            <span className="font-bold text-ink underline decoration-wavy decoration-caramel">
-              {activeConceptTitle}
-            </span>
-          </div>
-        )}
+        {/* Scrollable Body Content (max-h constrained, never overflows window) */}
+        <div className="flex-1 overflow-y-auto px-4 py-3 space-y-3 min-h-0">
+          {/* Active Context Banner */}
+          {activeConceptTitle && (
+            <div className="px-2.5 py-1.5 rounded border border-[#2C3E50]/20 dark:border-[#2E3F59] bg-[#ECEFF1] dark:bg-[#0B0F19] flex items-center justify-between text-[11px] font-mono">
+              <span className="text-[#546E7A] dark:text-[#94A3B8]">Focus:</span>
+              <span className="font-bold text-[#2E4053] dark:text-[#E2E8F0] truncate max-w-[220px]">
+                {activeConceptTitle}
+              </span>
+            </div>
+          )}
 
-        {/* Visualizer & Animated Wave Circle */}
-        <div className="relative py-8 flex flex-col items-center justify-center bg-latte/30 rounded-2xl border-2 border-dashed border-border-sketch overflow-hidden">
-          {/* Animated pulsing rings */}
-          <div className="relative flex items-center justify-center">
-            {isCoachSpeaking && (
-              <>
-                <div className="absolute w-36 h-36 rounded-full bg-caramel/20 animate-ping" />
-                <div className="absolute w-48 h-48 rounded-full bg-foam/30 animate-pulse" />
-              </>
-            )}
-
-            {isRecording && !isCoachSpeaking && (
-              <div 
-                className="absolute rounded-full bg-crema/40 transition-all duration-75"
-                style={{
-                  width: `${80 + volumeLevel * 1.2}px`,
-                  height: `${80 + volumeLevel * 1.2}px`
-                }}
-              />
-            )}
-
-            {/* Central Icon Button */}
-            <div 
-              className={`w-24 h-24 rounded-full flex flex-col items-center justify-center border-3 transition-all duration-300 z-10 ${
-                isCoachSpeaking
-                  ? 'bg-caramel text-white border-roast shadow-lg scale-105'
-                  : isRecording
-                  ? 'bg-foam text-ink border-border-sketch shadow-md'
-                  : 'bg-paper text-muted border-dashed border-border-sketch'
-              }`}
-            >
-              {isCoachSpeaking ? (
-                <>
-                  <Volume2 className="w-8 h-8 animate-bounce" />
-                  <span className="text-[10px] font-bold uppercase mt-1 tracking-wider">Speaking</span>
-                </>
-              ) : isRecording ? (
-                <>
-                  <Mic className="w-8 h-8 text-roast animate-pulse" />
-                  <span className="text-[10px] font-bold uppercase mt-1 tracking-wider">Listening</span>
-                </>
-              ) : (
-                <>
-                  <MicOff className="w-8 h-8" />
-                  <span className="text-[10px] font-bold uppercase mt-1 tracking-wider">Offline</span>
-                </>
+          {/* Compact Voice Visualizer Circle */}
+          <div className="relative py-4 flex flex-col items-center justify-center bg-[#ECEFF1] dark:bg-[#0B0F19] rounded border border-[#2C3E50]/20 dark:border-[#2E3F59] overflow-hidden">
+            <div className="relative flex items-center justify-center">
+              {/* Dynamic volume ring */}
+              {isRecording && !isCoachSpeaking && (
+                <div 
+                  className="absolute rounded-full border border-[#4A6572]/40 transition-all duration-75 pointer-events-none"
+                  style={{
+                    width: `${56 + volumeLevel * 0.7}px`,
+                    height: `${56 + volumeLevel * 0.7}px`
+                  }}
+                />
               )}
-            </div>
-          </div>
 
-          {/* Status Label */}
-          <div className="mt-5 text-center px-4">
-            <p className="font-hand text-lg font-bold text-ink">
-              {statusText}
-            </p>
-            <p className="text-xs text-muted font-sans mt-0.5">
-              {isCoachSpeaking 
-                ? 'Coach is answering with Zephyr neural voice (interruption supported)' 
-                : isRecording 
-                ? 'Speak naturally at any time — coach listens and responds in real time' 
-                : 'Session paused'}
-            </p>
-          </div>
-        </div>
-
-        {/* Error Notification */}
-        {errorMessage && (
-          <div className="p-3 rounded-xl bg-red-100 dark:bg-red-950/60 border border-red-300 dark:border-red-800 text-red-800 dark:text-red-200 text-xs flex items-start gap-2.5">
-            <AlertCircle className="w-4 h-4 shrink-0 mt-0.5 text-red-600" />
-            <div className="flex-1">
-              <span className="font-bold">Audio Connection Error:</span> {errorMessage}
-            </div>
-            <button
-              onClick={startLiveSession}
-              className="px-2 py-1 rounded bg-red-200 dark:bg-red-900 font-bold hover:bg-red-300 transition-colors flex items-center gap-1 cursor-pointer"
-            >
-              <RefreshCw className="w-3 h-3" /> Retry
-            </button>
-          </div>
-        )}
-
-        {/* Quick Suggestion Chips */}
-        <div>
-          <div className="flex items-center gap-1.5 text-xs font-bold text-muted mb-2 font-hand">
-            <MessageSquare className="w-3.5 h-3.5" />
-            <span>Quick Prompt Seeds (click to send or speak aloud):</span>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {[
-              "Explain like I'm 10 years old",
-              "Quiz me on real-world interview pitfalls",
-              "How does this relate to database transactions?",
-              "What is the biggest common misconception?"
-            ].map((seed, idx) => (
-              <button
-                key={idx}
-                onClick={() => handleSendPrompt(seed)}
-                className="px-3 py-1.5 rounded-lg bg-latte/70 hover:bg-foam border border-border-sketch text-xs text-ink transition-colors cursor-pointer text-left hover:scale-[1.02] active:scale-[0.98]"
+              {/* Central Mic/Speaker Circle */}
+              <div 
+                className={`w-14 h-14 rounded-full flex flex-col items-center justify-center border transition-all duration-150 z-10 ${
+                  isCoachSpeaking
+                    ? 'bg-[#4A6572] text-white border-[#2C3E50]'
+                    : isRecording
+                    ? 'bg-[#D5DBDB] dark:bg-[#161F30] text-[#2E4053] dark:text-[#E2E8F0] border-[#4A6572]'
+                    : 'bg-[#ECEFF1] dark:bg-[#0B0F19] text-[#78909C] border-[#2C3E50]/25 dark:border-[#2E3F59]'
+                }`}
               >
-                "{seed}"
+                {isCoachSpeaking ? (
+                  <>
+                    <Volume2 className="w-5 h-5 animate-pulse" />
+                    <span className="text-[8px] font-mono font-bold uppercase mt-0.5">Speaking</span>
+                  </>
+                ) : isRecording ? (
+                  <>
+                    <Mic className="w-5 h-5 text-[#4A6572] dark:text-[#94A3B8] animate-pulse" />
+                    <span className="text-[8px] font-mono font-bold uppercase mt-0.5">Active</span>
+                  </>
+                ) : (
+                  <>
+                    <MicOff className="w-5 h-5" />
+                    <span className="text-[8px] font-mono uppercase mt-0.5">Paused</span>
+                  </>
+                )}
+              </div>
+            </div>
+
+            {/* Status Label */}
+            <div className="mt-3 text-center px-3">
+              <p className="text-xs font-mono font-semibold text-[#2E4053] dark:text-[#E2E8F0]">
+                {statusText}
+              </p>
+              <p className="text-[10px] text-[#546E7A] dark:text-[#94A3B8] font-sans mt-0.5">
+                {isCoachSpeaking 
+                  ? 'Coach responding via Zephyr (interruption supported)' 
+                  : isRecording 
+                  ? 'Speak naturally — coach listens and responds in real time' 
+                  : 'Session standby'}
+              </p>
+            </div>
+          </div>
+
+          {/* Error Notification */}
+          {errorMessage && (
+            <div className="p-2.5 rounded border border-[#C0392B]/40 bg-[#C0392B]/10 text-[#C0392B] dark:text-[#EF4444] text-xs flex items-start gap-2">
+              <AlertCircle className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+              <div className="flex-1 text-[11px]">
+                <span className="font-bold">Error:</span> {errorMessage}
+              </div>
+              <button
+                onClick={startLiveSession}
+                className="px-2 py-0.5 rounded border border-[#C0392B]/40 text-[10px] font-mono hover:bg-[#C0392B]/20 flex items-center gap-1 cursor-pointer"
+              >
+                <RefreshCw className="w-3 h-3" /> Retry
               </button>
-            ))}
+            </div>
+          )}
+
+          {/* Quick Suggestion Chips */}
+          <div>
+            <div className="flex items-center gap-1.5 text-[11px] font-mono text-[#546E7A] dark:text-[#94A3B8] mb-1.5">
+              <MessageSquare className="w-3 h-3" />
+              <span>Prompt suggestions:</span>
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+              {[
+                "Explain like I'm 10 years old",
+                "Quiz me on edge-case interview pitfalls",
+                "How does this relate to database indexes?",
+                "What is the biggest common misconception?"
+              ].map((seed, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => handleSendPrompt(seed)}
+                  className="px-2.5 py-1 rounded border border-[#2C3E50]/20 dark:border-[#2E3F59] bg-[#ECEFF1] dark:bg-[#0B0F19] text-[#2E4053] dark:text-[#E2E8F0] hover:border-[#4A6572] text-[11px] transition-colors cursor-pointer text-left font-sans"
+                >
+                  "{seed}"
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Bottom Actions */}
-        <div className="flex items-center justify-between border-t-2 border-border-sketch pt-4 mt-1">
-          <div className="flex items-center gap-2 text-xs text-muted font-sans">
-            <span className={`w-2.5 h-2.5 rounded-full ${isConnected ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500'}`} />
-            <span>{isConnected ? 'Live WebSocket Active (24kHz Audio)' : 'Disconnected'}</span>
+        {/* Bottom Actions Footer (shrink-0) */}
+        <div className="px-4 py-2.5 border-t border-[#2C3E50]/20 dark:border-[#2E3F59] bg-[#ECEFF1] dark:bg-[#0B0F19] flex items-center justify-between shrink-0">
+          <div className="flex items-center gap-1.5 text-[10px] font-mono text-[#546E7A] dark:text-[#94A3B8]">
+            <span className={`w-2 h-2 rounded-full ${isConnected ? 'bg-[#27AE60] animate-pulse' : 'bg-[#D35400]'}`} />
+            <span>{isConnected ? '24kHz Live' : 'Disconnected'}</span>
           </div>
 
           <div className="flex items-center gap-2">
             {errorMessage ? (
               <button
                 onClick={startLiveSession}
-                className="px-4 py-2 rounded-xl bg-latte hover:bg-foam border border-border-sketch font-bold text-xs text-ink transition-colors cursor-pointer flex items-center gap-1.5"
+                className="px-2.5 py-1 rounded border border-[#2C3E50]/20 dark:border-[#2E3F59] bg-[#D5DBDB] dark:bg-[#161F30] font-mono text-xs text-[#2E4053] dark:text-[#E2E8F0] cursor-pointer flex items-center gap-1"
               >
-                <RefreshCw className="w-3.5 h-3.5" /> Reconnect
+                <RefreshCw className="w-3 h-3" /> Reconnect
               </button>
             ) : null}
 
             <button
               onClick={onClose}
-              className="px-4 py-2 rounded-xl bg-roast text-paper hover:opacity-90 font-hand font-bold text-sm tracking-wide transition-all cursor-pointer shadow-xs"
+              className="px-3 py-1 rounded border border-[#2C3E50] dark:border-[#415A77] bg-[#4A6572] dark:bg-[#2E3F59] hover:bg-[#3A4F59] dark:hover:bg-[#3E5478] text-white font-mono text-xs transition-colors cursor-pointer"
             >
-              Done / Close
+              Close
             </button>
           </div>
         </div>

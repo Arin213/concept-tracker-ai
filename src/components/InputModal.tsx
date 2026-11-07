@@ -221,82 +221,82 @@ export const InputModal: React.FC<InputModalProps> = ({ isOpen, onClose, onSucce
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#1C140F]/60 dark:bg-black/75 backdrop-blur-xs animate-in fade-in duration-200">
-      <div className="relative w-full max-w-2xl bg-[#FAF5EE] dark:bg-[#1E1611] border border-[#C8B69F] dark:border-[#473527] rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-150">
+      <div className="relative w-full max-w-2xl bg-[#D5DBDB] dark:bg-[#161F30] border border-[#2C3E50]/40 dark:border-[#2E3F59] rounded-md overflow-hidden flex flex-col max-h-[85vh]">
         {/* Modal Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[#C8B69F] dark:border-[#473527] bg-[#F4ECE1]/80 dark:bg-[#18110D]/80">
+        <div className="flex items-center justify-between px-5 py-3 border-b border-[#2C3E50]/20 dark:border-[#2E3F59] bg-[#ECEFF1] dark:bg-[#0B0F19] shrink-0">
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-[#EFE3D5] dark:bg-[#2C211A] border border-[#C8B69F] dark:border-[#473527] flex items-center justify-center text-[#7F5539] dark:text-[#E0A878]">
-              <Sparkles className="w-5 h-5" />
+            <div className="w-8 h-8 rounded border border-[#2C3E50]/25 dark:border-[#2E3F59] bg-[#D5DBDB] dark:bg-[#161F30] flex items-center justify-center text-[#4A6572] dark:text-[#E2E8F0]">
+              <Sparkles className="w-4 h-4 text-[#4A6572] dark:text-[#E2E8F0]" />
             </div>
             <div>
-              <h2 className="font-sketch text-xl font-bold text-[#2C1E16] dark:text-[#F3E9DD]">
+              <h2 className="text-sm font-bold tracking-tight text-[#2E4053] dark:text-[#E2E8F0]">
                 Ingest Study Notes &amp; Voice Memo
               </h2>
-              <p className="text-xs text-[#5D4636] dark:text-[#C5B3A1]">
+              <p className="text-[11px] text-[#546E7A] dark:text-[#94A3B8]">
                 Drop raw notes, stack traces, or spoken audio. Auto-merges into continuous graph nodes.
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-[#8C6D53] dark:text-[#CBB6A1] hover:text-[#2C1E16] dark:hover:text-white hover:bg-[#EFE3D5] dark:hover:bg-[#2C211A] transition-colors"
+            className="p-1 rounded text-[#546E7A] dark:text-[#94A3B8] hover:text-[#2E4053] dark:hover:text-white transition-colors cursor-pointer"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4" />
           </button>
         </div>
 
         {/* Tab Selector */}
-        <div className="flex border-b border-[#C8B69F] dark:border-[#473527] bg-[#F4ECE1] dark:bg-[#18110D] px-6 pt-2.5 gap-2 font-sketch font-bold">
+        <div className="flex border-b border-[#2C3E50]/20 dark:border-[#2E3F59] bg-[#ECEFF1] dark:bg-[#0B0F19] px-5 pt-2 gap-2 text-xs font-mono shrink-0">
           <button
             onClick={() => setActiveTab('text')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-t-lg text-xs transition-all border-b-2 ${
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-t border-t border-l border-r text-xs transition-colors cursor-pointer ${
               activeTab === 'text'
-                ? 'border-[#7F5539] dark:border-[#E0A878] text-[#7F5539] dark:text-[#E0A878] bg-[#FAF5EE] dark:bg-[#1E1611]'
-                : 'border-transparent text-[#8C6D53] dark:text-[#A7927F] hover:text-[#2C1E16] dark:hover:text-white'
+                ? 'border-[#2C3E50]/30 dark:border-[#2E3F59] text-[#2E4053] dark:text-[#E2E8F0] bg-[#D5DBDB] dark:bg-[#161F30] font-bold'
+                : 'border-transparent text-[#546E7A] dark:text-[#94A3B8] hover:text-[#2E4053] dark:hover:text-white'
             }`}
           >
-            <FileCode className="w-4 h-4" />
+            <FileCode className="w-3.5 h-3.5" />
             Text &amp; Code Excerpt
           </button>
           <button
             onClick={() => setActiveTab('voice')}
-            className={`flex items-center gap-2 px-4 py-2 rounded-t-lg text-xs transition-all border-b-2 ${
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-t border-t border-l border-r text-xs transition-colors cursor-pointer ${
               activeTab === 'voice'
-                ? 'border-[#7F5539] dark:border-[#E0A878] text-[#7F5539] dark:text-[#E0A878] bg-[#FAF5EE] dark:bg-[#1E1611]'
-                : 'border-transparent text-[#8C6D53] dark:text-[#A7927F] hover:text-[#2C1E16] dark:hover:text-white'
+                ? 'border-[#2C3E50]/30 dark:border-[#2E3F59] text-[#2E4053] dark:text-[#E2E8F0] bg-[#D5DBDB] dark:bg-[#161F30] font-bold'
+                : 'border-transparent text-[#546E7A] dark:text-[#94A3B8] hover:text-[#2E4053] dark:hover:text-white'
             }`}
           >
-            <Mic className="w-4 h-4" />
+            <Mic className="w-3.5 h-3.5" />
             Voice Memo
             {audioBlob && (
-              <span className="w-2 h-2 rounded-full bg-[#16A34A]" />
+              <span className="w-2 h-2 rounded-full bg-[#27AE60]" />
             )}
           </button>
         </div>
 
-        {/* Tab Body */}
-        <div className="p-6 overflow-y-auto space-y-4 flex-1">
+        {/* Tab Body (scrollable) */}
+        <div className="p-5 overflow-y-auto space-y-4 flex-1 min-h-0">
           {error && (
-            <div className="p-3 rounded-lg bg-[#FFEDD5] border border-[#FDBA74] text-[#9A3412] dark:bg-[#431407] dark:border-[#991B1B] dark:text-[#FCA5A5] text-xs flex items-start gap-2.5 font-sketch">
-              <AlertCircle className="w-4 h-4 shrink-0 text-[#EA580C] mt-0.5" />
+            <div className="p-2.5 rounded border border-[#C0392B]/40 bg-[#C0392B]/10 text-[#C0392B] dark:text-[#EF4444] text-xs flex items-start gap-2">
+              <AlertCircle className="w-3.5 h-3.5 shrink-0 mt-0.5" />
               <div>{error}</div>
             </div>
           )}
 
           {resultSummary ? (
-            <div className="space-y-4 animate-in fade-in duration-300">
-              <div className="p-4 rounded-xl bg-[#DCFCE7] dark:bg-[#052E16] border border-[#86EFAC] dark:border-[#15803D] text-[#166534] dark:text-[#86EFAC]">
-                <div className="flex items-center gap-2 font-sketch font-bold text-sm mb-1">
-                  <CheckCircle2 className="w-5 h-5 text-[#16A34A]" />
-                  Knowledge Graph Updated Successfully!
+            <div className="space-y-4 animate-in fade-in duration-200">
+              <div className="p-3.5 rounded border border-[#27AE60]/40 bg-[#27AE60]/10 text-[#27AE60] dark:text-[#10B981]">
+                <div className="flex items-center gap-2 font-mono font-bold text-xs mb-1">
+                  <CheckCircle2 className="w-4 h-4 text-[#27AE60] dark:text-[#10B981]" />
+                  Knowledge Graph Updated Successfully
                 </div>
-                <p className="text-xs text-[#14532D] dark:text-[#BBF7D0] leading-relaxed">
+                <p className="text-xs text-[#2E4053] dark:text-[#E2E8F0] leading-relaxed">
                   {resultSummary.ai_notes}
                 </p>
                 {resultSummary.transcription && (
-                  <div className="mt-2.5 p-2.5 rounded-lg bg-[#FAF5EE] dark:bg-[#1E1611] border border-[#C8B69F] dark:border-[#473527] text-[11px] text-[#2C1E16] dark:text-[#F3E9DD] font-mono">
-                    <span className="font-bold block mb-0.5 text-[#7F5539] dark:text-[#E0A878]">
+                  <div className="mt-2 p-2 rounded border border-[#2C3E50]/20 dark:border-[#2E3F59] bg-[#ECEFF1] dark:bg-[#0B0F19] text-[11px] text-[#2E4053] dark:text-[#E2E8F0] font-mono">
+                    <span className="font-bold block mb-0.5 text-[#4A6572] dark:text-[#94A3B8]">
                       Transcribed Audio:
                     </span>
                     &ldquo;{resultSummary.transcription}&rdquo;
@@ -306,12 +306,12 @@ export const InputModal: React.FC<InputModalProps> = ({ isOpen, onClose, onSucce
 
               {/* Created vs Merged breakdown */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                <div className="p-3 rounded-xl bg-[#F4ECE1] dark:bg-[#18110D] border border-[#D6C4B0] dark:border-[#473527]">
-                  <span className="font-sketch font-bold text-[#7F5539] dark:text-[#E0A878] block mb-1">
+                <div className="p-3 rounded border border-[#2C3E50]/20 dark:border-[#2E3F59] bg-[#ECEFF1] dark:bg-[#0B0F19]">
+                  <span className="font-mono font-bold text-[#4A6572] dark:text-[#94A3B8] block mb-1">
                     Auto-Merged Concepts ({resultSummary.updated_concepts.length})
                   </span>
                   {resultSummary.updated_concepts.length > 0 ? (
-                    <ul className="list-disc list-inside text-[#3E2C1E] dark:text-[#D1BEAB] space-y-0.5">
+                    <ul className="list-disc list-inside text-[#2E4053] dark:text-[#E2E8F0] space-y-0.5">
                       {resultSummary.updated_concepts.map((c) => (
                         <li key={c.id} className="truncate">
                           {c.title} (Mastery: {c.mastery_score}/5)
@@ -319,18 +319,18 @@ export const InputModal: React.FC<InputModalProps> = ({ isOpen, onClose, onSucce
                       ))}
                     </ul>
                   ) : (
-                    <span className="text-[#8C6D53] dark:text-[#A7927F] text-[11px]">
+                    <span className="text-[#546E7A] dark:text-[#94A3B8] text-[11px]">
                       No existing concepts updated.
                     </span>
                   )}
                 </div>
 
-                <div className="p-3 rounded-xl bg-[#F4ECE1] dark:bg-[#18110D] border border-[#D6C4B0] dark:border-[#473527]">
-                  <span className="font-sketch font-bold text-[#15803D] dark:text-[#4ADE80] block mb-1">
+                <div className="p-3 rounded border border-[#2C3E50]/20 dark:border-[#2E3F59] bg-[#ECEFF1] dark:bg-[#0B0F19]">
+                  <span className="font-mono font-bold text-[#27AE60] dark:text-[#10B981] block mb-1">
                     New Macro-Nodes Created ({resultSummary.new_concepts.length})
                   </span>
                   {resultSummary.new_concepts.length > 0 ? (
-                    <ul className="list-disc list-inside text-[#3E2C1E] dark:text-[#D1BEAB] space-y-0.5">
+                    <ul className="list-disc list-inside text-[#2E4053] dark:text-[#E2E8F0] space-y-0.5">
                       {resultSummary.new_concepts.map((c) => (
                         <li key={c.id} className="truncate">
                           {c.title}
@@ -338,18 +338,18 @@ export const InputModal: React.FC<InputModalProps> = ({ isOpen, onClose, onSucce
                       ))}
                     </ul>
                   ) : (
-                    <span className="text-[#8C6D53] dark:text-[#A7927F] text-[11px]">
+                    <span className="text-[#546E7A] dark:text-[#94A3B8] text-[11px]">
                       Anti-explosion: merged into existing nodes.
                     </span>
                   )}
                 </div>
               </div>
 
-              <div className="flex justify-end pt-2">
+              <div className="flex justify-end pt-1">
                 <button
                   type="button"
                   onClick={onClose}
-                  className="px-5 py-2 rounded-xl text-xs font-sketch font-bold bg-[#7F5539] hover:bg-[#68442B] dark:bg-[#E0A878] dark:hover:bg-[#D49865] text-white dark:text-[#16100C] transition-all shadow-xs"
+                  className="px-4 py-1.5 rounded border border-[#2C3E50] dark:border-[#415A77] bg-[#4A6572] hover:bg-[#3A4F59] dark:bg-[#2E3F59] dark:hover:bg-[#3E5478] text-white text-xs font-mono transition-colors cursor-pointer"
                 >
                   View on Canvas
                 </button>
@@ -360,7 +360,7 @@ export const InputModal: React.FC<InputModalProps> = ({ isOpen, onClose, onSucce
               {activeTab === 'text' && (
                 <div className="space-y-3">
                   <div className="flex items-center gap-1.5 overflow-x-auto pb-1">
-                    <span className="text-[11px] font-sketch font-bold text-[#8C6D53] dark:text-[#A7927F] shrink-0">
+                    <span className="text-[11px] font-mono font-semibold text-[#546E7A] dark:text-[#94A3B8] shrink-0">
                       Sample Dumps:
                     </span>
                     {TEMPLATES.map((tmpl, idx) => (
@@ -368,7 +368,7 @@ export const InputModal: React.FC<InputModalProps> = ({ isOpen, onClose, onSucce
                         key={idx}
                         type="button"
                         onClick={() => setRawText(tmpl.content)}
-                        className="px-2.5 py-1 rounded-md text-[11px] font-sketch bg-[#EFE3D5] dark:bg-[#2C211A] hover:bg-[#E6D7C5] dark:hover:bg-[#382B20] text-[#5D4636] dark:text-[#D1BEAB] transition-colors whitespace-nowrap"
+                        className="px-2 py-0.5 rounded border border-[#2C3E50]/20 dark:border-[#2E3F59] bg-[#ECEFF1] dark:bg-[#0B0F19] hover:border-[#4A6572] text-[11px] font-mono text-[#2E4053] dark:text-[#E2E8F0] transition-colors whitespace-nowrap cursor-pointer"
                       >
                         {tmpl.title}
                       </button>
@@ -376,16 +376,15 @@ export const InputModal: React.FC<InputModalProps> = ({ isOpen, onClose, onSucce
                   </div>
 
                   <textarea
-                    rows={8}
-                    placeholder="Paste notes, stack traces, code snippets, or book excerpts here...
-E.g., 'Spent 2 hours debugging PostgreSQL connection pooling. Found max_connections reached because workers held idle TCP connections...'"
+                    rows={7}
+                    placeholder="Paste notes, stack traces, code snippets, or book excerpts here..."
                     value={rawText}
                     onChange={(e) => setRawText(e.target.value)}
-                    className="w-full p-3.5 text-xs font-mono bg-[#F4ECE1] dark:bg-[#16100C] border border-[#C8B69F] dark:border-[#473527] rounded-xl text-[#2C1E16] dark:text-[#F3E9DD] placeholder-[#8E7662] dark:placeholder-[#8C7664] focus:outline-none focus:border-[#7F5539] dark:focus:border-[#E0A878] transition-all leading-relaxed"
+                    className="w-full p-3 text-xs font-mono bg-[#ECEFF1] dark:bg-[#0B0F19] border border-[#2C3E50]/25 dark:border-[#2E3F59] rounded text-[#2E4053] dark:text-[#E2E8F0] placeholder-[#78909C] dark:placeholder-[#64748B] focus:outline-none focus:border-[#4A6572] transition-colors leading-relaxed resize-none"
                   />
 
-                  <div className="flex items-center gap-2 text-[11px] text-[#8C6D53] dark:text-[#A7927F]">
-                    <HelpCircle className="w-3.5 h-3.5 text-[#7F5539] dark:text-[#E0A878] shrink-0" />
+                  <div className="flex items-center gap-2 text-[11px] text-[#546E7A] dark:text-[#94A3B8]">
+                    <HelpCircle className="w-3.5 h-3.5 text-[#4A6572] dark:text-[#94A3B8] shrink-0" />
                     <span>
                       <strong>Anti-Explosion Rule:</strong> The AI extracts macro-concepts and updates existing graph nodes rather than duplicating them.
                     </span>
@@ -394,53 +393,50 @@ E.g., 'Spent 2 hours debugging PostgreSQL connection pooling. Found max_connecti
               )}
 
               {activeTab === 'voice' && (
-                <div className="space-y-4">
+                <div className="space-y-3">
                   {micPermissionError && (
-                    <div className="p-3 rounded-lg bg-[#FEF3C7] border border-[#FDE68A] text-[#854D0E] dark:bg-[#451A03] dark:border-[#92400E] dark:text-[#FDE047] text-xs font-sketch">
+                    <div className="p-2.5 rounded border border-[#D35400]/40 bg-[#D35400]/10 text-[#D35400] text-xs font-mono">
                       {micPermissionError}
                     </div>
                   )}
 
-                  <div className="p-8 rounded-xl bg-[#F4ECE1] dark:bg-[#18110D] border border-[#D6C4B0] dark:border-[#3E2D20] flex flex-col items-center justify-center text-center">
+                  <div className="p-6 rounded border border-[#2C3E50]/20 dark:border-[#2E3F59] bg-[#ECEFF1] dark:bg-[#0B0F19] flex flex-col items-center justify-center text-center">
                     {isRecording ? (
-                      <div className="space-y-4">
-                        <div className="relative flex items-center justify-center">
-                          <span className="absolute w-24 h-24 rounded-full bg-[#EA580C]/20 animate-ping" />
-                          <div className="w-20 h-20 rounded-full bg-[#C2410C] flex items-center justify-center text-white shadow-md">
-                            <Mic className="w-8 h-8 animate-pulse" />
-                          </div>
+                      <div className="space-y-3">
+                        <div className="w-16 h-16 rounded-full border border-[#C0392B] bg-[#C0392B] flex items-center justify-center text-white animate-pulse mx-auto">
+                          <Mic className="w-6 h-6" />
                         </div>
 
-                        <div className="text-xl font-mono font-bold text-[#C2410C] dark:text-[#FCA5A5]">
+                        <div className="text-lg font-mono font-bold text-[#C0392B] dark:text-[#EF4444]">
                           {Math.floor(recordingDuration / 60)}:
                           {(recordingDuration % 60).toString().padStart(2, '0')}
                         </div>
 
-                        <p className="text-xs text-[#5D4636] dark:text-[#C5B3A1] max-w-sm font-hand text-base">
-                          Speaking your study notes... Describe what you learned and where you hit friction.
+                        <p className="text-xs text-[#546E7A] dark:text-[#94A3B8]">
+                          Recording study notes... Describe what you learned and where you hit friction.
                         </p>
 
                         <button
                           type="button"
                           onClick={stopRecording}
-                          className="px-6 py-2.5 rounded-xl bg-[#FAF5EE] dark:bg-[#2C211A] border border-[#C8B69F] dark:border-[#473527] text-[#2C1E16] dark:text-[#F3E9DD] font-sketch font-bold text-xs flex items-center gap-2 transition-all mx-auto"
+                          className="px-4 py-1.5 rounded border border-[#C0392B] bg-[#D5DBDB] dark:bg-[#161F30] text-[#C0392B] dark:text-[#EF4444] font-mono text-xs flex items-center gap-1.5 transition-colors mx-auto cursor-pointer"
                         >
-                          <Square className="w-4 h-4 text-[#C2410C] fill-current" />
+                          <Square className="w-3.5 h-3.5 fill-current" />
                           Stop Recording
                         </button>
                       </div>
                     ) : audioBlob ? (
-                      <div className="space-y-4 w-full max-w-md">
-                        <div className="w-14 h-14 rounded-full bg-[#DCFCE7] dark:bg-[#052E16] border border-[#86EFAC] dark:border-[#15803D] flex items-center justify-center text-[#16A34A] mx-auto">
-                          <Volume2 className="w-7 h-7" />
+                      <div className="space-y-3 w-full max-w-sm">
+                        <div className="w-12 h-12 rounded-full border border-[#27AE60]/40 bg-[#27AE60]/15 flex items-center justify-center text-[#27AE60] dark:text-[#10B981] mx-auto">
+                          <Volume2 className="w-6 h-6" />
                         </div>
 
                         <div>
-                          <div className="text-sm font-sketch font-bold text-[#2C1E16] dark:text-[#F3E9DD]">
+                          <div className="text-xs font-mono font-bold text-[#2E4053] dark:text-[#E2E8F0]">
                             Voice Memo Recorded ({recordingDuration}s)
                           </div>
-                          <p className="text-xs text-[#8C6D53] dark:text-[#A7927F] mt-0.5">
-                            Ready to transcribe &amp; merge into your sketch graph.
+                          <p className="text-[11px] text-[#546E7A] dark:text-[#94A3B8] mt-0.5">
+                            Ready to transcribe &amp; merge into your concept graph.
                           </p>
                         </div>
 
@@ -449,7 +445,7 @@ E.g., 'Spent 2 hours debugging PostgreSQL connection pooling. Found max_connecti
                             ref={audioPlayerRef}
                             src={audioUrl}
                             controls
-                            className="w-full h-10 rounded-lg filter sepia"
+                            className="w-full h-8 rounded"
                           />
                         )}
 
@@ -457,29 +453,29 @@ E.g., 'Spent 2 hours debugging PostgreSQL connection pooling. Found max_connecti
                           <button
                             type="button"
                             onClick={resetAudio}
-                            className="px-4 py-2 rounded-xl bg-[#EFE3D5] dark:bg-[#2C211A] text-[#5D4636] dark:text-[#D1BEAB] text-xs font-sketch font-bold flex items-center gap-1.5 transition-all"
+                            className="px-3 py-1 rounded border border-[#2C3E50]/20 dark:border-[#2E3F59] bg-[#D5DBDB] dark:bg-[#161F30] text-[#2E4053] dark:text-[#E2E8F0] text-xs font-mono flex items-center gap-1.5 transition-colors cursor-pointer"
                           >
-                            <RotateCcw className="w-3.5 h-3.5" />
+                            <RotateCcw className="w-3 h-3" />
                             Record Again
                           </button>
                         </div>
                       </div>
                     ) : (
-                      <div className="space-y-4">
+                      <div className="space-y-3">
                         <button
                           type="button"
                           onClick={startRecording}
-                          className="w-20 h-20 rounded-full bg-[#7F5539] hover:bg-[#68442B] dark:bg-[#E0A878] dark:hover:bg-[#D49865] flex items-center justify-center text-white dark:text-[#16100C] shadow-md transition-transform hover:scale-105 mx-auto"
+                          className="w-14 h-14 rounded-full border border-[#2C3E50] dark:border-[#415A77] bg-[#4A6572] hover:bg-[#3A4F59] dark:bg-[#2E3F59] dark:hover:bg-[#3E5478] flex items-center justify-center text-white transition-colors mx-auto cursor-pointer"
                         >
-                          <Mic className="w-8 h-8" />
+                          <Mic className="w-6 h-6" />
                         </button>
 
                         <div>
-                          <h4 className="text-sm font-sketch font-bold text-[#2C1E16] dark:text-[#F3E9DD]">
-                            Tap to Record Voice Memo
+                          <h4 className="text-xs font-mono font-bold text-[#2E4053] dark:text-[#E2E8F0]">
+                            Record Voice Memo
                           </h4>
-                          <p className="text-xs text-[#8C6D53] dark:text-[#A7927F] mt-1 max-w-sm">
-                            Speak freely about what you just built or read. Great for quick study recaps.
+                          <p className="text-[11px] text-[#546E7A] dark:text-[#94A3B8] mt-0.5 max-w-sm">
+                            Speak freely about what you just built or read.
                           </p>
                         </div>
 
@@ -491,9 +487,9 @@ E.g., 'Spent 2 hours debugging PostgreSQL connection pooling. Found max_connecti
                             );
                             setActiveTab('text');
                           }}
-                          className="text-[11px] font-sketch font-bold text-[#7F5539] dark:text-[#E0A878] hover:underline block mx-auto"
+                          className="text-[11px] font-mono text-[#4A6572] dark:text-[#94A3B8] hover:underline block mx-auto cursor-pointer"
                         >
-                          Or simulate voice memo with prefilled text
+                          Prefill sample audio transcription
                         </button>
                       </div>
                     )}
@@ -504,26 +500,26 @@ E.g., 'Spent 2 hours debugging PostgreSQL connection pooling. Found max_connecti
           )}
         </div>
 
-        {/* Modal Footer */}
+        {/* Modal Footer (shrink-0) */}
         {!resultSummary && (
-          <div className="flex items-center justify-between px-6 py-4 border-t border-[#C8B69F] dark:border-[#473527] bg-[#F4ECE1]/80 dark:bg-[#18110D]/80">
-            <div className="text-xs text-[#8C6D53] dark:text-[#A7927F] font-sketch">
+          <div className="flex items-center justify-between px-5 py-3 border-t border-[#2C3E50]/20 dark:border-[#2E3F59] bg-[#ECEFF1] dark:bg-[#0B0F19] shrink-0">
+            <div className="text-[11px] text-[#546E7A] dark:text-[#94A3B8] font-mono">
               {isSubmitting ? (
-                <span className="flex items-center gap-2 text-[#7F5539] dark:text-[#E0A878] font-bold">
-                  <Loader2 className="w-4 h-4 animate-spin" />
+                <span className="flex items-center gap-2 text-[#4A6572] dark:text-[#94A3B8] font-bold">
+                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
                   {statusMessage}
                 </span>
               ) : (
-                <span>Extracts macro-concepts &amp; preserves study history.</span>
+                <span>Auto-resolves macro concepts &amp; prevents node explosion.</span>
               )}
             </div>
 
-            <div className="flex items-center gap-2 font-sketch font-bold">
+            <div className="flex items-center gap-2 font-mono">
               <button
                 type="button"
                 onClick={onClose}
                 disabled={isSubmitting}
-                className="px-4 py-2 rounded-xl text-xs text-[#8C6D53] dark:text-[#A7927F] hover:text-[#2C1E16] dark:hover:text-white transition-colors"
+                className="px-3 py-1 rounded text-xs text-[#546E7A] dark:text-[#94A3B8] hover:text-[#2E4053] dark:hover:text-white transition-colors cursor-pointer"
               >
                 Cancel
               </button>
@@ -531,16 +527,16 @@ E.g., 'Spent 2 hours debugging PostgreSQL connection pooling. Found max_connecti
                 type="button"
                 onClick={handleSubmit}
                 disabled={isSubmitting || (!rawText.trim() && !audioBlob)}
-                className="px-5 py-2 rounded-xl text-xs bg-[#7F5539] hover:bg-[#68442B] dark:bg-[#E0A878] dark:hover:bg-[#D49865] disabled:opacity-50 text-white dark:text-[#16100C] transition-all shadow-xs flex items-center gap-2"
+                className="px-4 py-1.5 rounded border border-[#2C3E50] dark:border-[#415A77] bg-[#4A6572] hover:bg-[#3A4F59] dark:bg-[#2E3F59] dark:hover:bg-[#3E5478] disabled:opacity-40 text-white text-xs transition-colors flex items-center gap-1.5 cursor-pointer"
               >
                 {isSubmitting ? (
                   <>
-                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
                     Processing...
                   </>
                 ) : (
                   <>
-                    <Sparkles className="w-4 h-4" />
+                    <Sparkles className="w-3.5 h-3.5" />
                     Synthesize &amp; Merge
                   </>
                 )}

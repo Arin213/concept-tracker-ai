@@ -12,7 +12,7 @@ import {
   LogOut,
   User as UserIcon,
   MoreHorizontal,
-  Compass
+  Coffee
 } from 'lucide-react';
 import type { Concept } from '../types.js';
 import type { User } from 'firebase/auth';
@@ -76,7 +76,7 @@ export const HeaderNavbar: React.FC<HeaderNavbarProps> = ({
       {/* Zone 1: Brand Wordmark */}
       <div className="flex items-center gap-3 shrink-0">
         <div className="w-8 h-8 rounded border border-[#2C3E50]/30 dark:border-[#2E3F59] bg-[#D5DBDB] dark:bg-[#161F30] flex items-center justify-center text-[#2E4053] dark:text-[#E2E8F0]">
-          <Compass className="w-4 h-4 text-[#4A6572] dark:text-[#E2E8F0]" />
+          <Coffee className="w-4 h-4 text-[#4A6572] dark:text-[#E2E8F0]" />
         </div>
 
         <div className="flex items-baseline gap-2">

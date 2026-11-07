@@ -23,6 +23,9 @@ async function runTestSuite() {
     }
   }
 
+  // Reset to known clean seed data before running test suite
+  await fetch(`${BASE_URL}/api/reset-seed`, { method: 'POST' });
+
   // -------------------------------------------------------------
   // MODULE 1: Hybrid Input & Audio Pipeline Testing
   // -------------------------------------------------------------
