@@ -277,6 +277,7 @@ export const CanvasGraph: React.FC<CanvasGraphProps> = ({
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
+        isValidConnection={(connection) => connection.source !== connection.target}
         onNodeDragStop={onNodeDragStop}
         fitView
         fitViewOptions={{ padding: 0.25 }}

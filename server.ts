@@ -233,10 +233,12 @@ app.post('/api/process-input', async (req: Request, res: Response) => {
 
     if (audioBase64) {
       transcription = await transcribeAudio(audioBase64, mimeType);
-      if (combinedText) {
-        combinedText = `[Voice Memo Transcription]:\n${transcription}\n\n[Pasted Notes & Code]:\n${combinedText}`;
-      } else {
-        combinedText = transcription;
+      if (transcription) {
+        if (combinedText) {
+          combinedText = `${transcription}\n\n${combinedText}`.trim();
+        } else {
+          combinedText = transcription.trim();
+        }
       }
     }
 
@@ -409,10 +411,36 @@ app.get('/api/feynman/cold-nodes', (req: Request, res: Response) => {
   res.json(coldNodes);
 });
 
+// Per-concept angle rotation state pool for non-repeating angles
+const conceptAnglesMap = new Map<string, string[]>();
+const sessionQuestionsCache = new Map<string, string[]>();
+
+const ANGLE_TEMPLATES = [
+  'Explain [concept] in simple words as if to a beginner',
+  'What happens under the hood when [concept] runs?',
+  'Predict the outcome: [scenario from the note]',
+  'Find the bug: [buggy scenario from the note]',
+  'Compare [concept] vs [related concept] — when to use which?',
+  'What breaks if we remove/change [part of the concept]?',
+  'Real-world scenario: how would you apply [concept]?'
+];
+
+function getNextRandomAngleForConcept(conceptId: string, conceptTitle: string): string {
+  let pool = conceptAnglesMap.get(conceptId);
+  if (!pool || pool.length === 0) {
+    pool = [...ANGLE_TEMPLATES];
+  }
+  const randomIndex = Math.floor(Math.random() * pool.length);
+  const chosenTemplate = pool.splice(randomIndex, 1)[0];
+  conceptAnglesMap.set(conceptId, pool);
+
+  return chosenTemplate.replace(/\[concept\]/g, conceptTitle);
+}
+
 // Generate Feynman Question for a concept
 app.post('/api/feynman/question', async (req: Request, res: Response) => {
   try {
-    const { concept_id } = req.body;
+    const { concept_id, previous_questions } = req.body;
     let concept = concept_id ? db.getConceptById(concept_id) : undefined;
 
     if (!concept) {
@@ -426,12 +454,36 @@ app.post('/api/feynman/question', async (req: Request, res: Response) => {
       return;
     }
 
-    const questionData = await generateFeynmanQuestion(concept);
+    // 5. Empty / Short Note Handling (< 20 characters)
+    const combinedNote = `${concept.title || ''} ${concept.summary || ''} ${concept.raw_notes || ''} ${concept.last_friction_point || ''}`.trim();
+    if (combinedNote.length < 20) {
+      res.status(400).json({ error: 'Note too short to generate a meaningful question. Add more detail.' });
+      return;
+    }
+
+    // Pick non-repeating random angle strictly per concept
+    const chosenAngle = getNextRandomAngleForConcept(concept.id, concept.title);
+
+    // Track last 5 questions for semantic deduplication
+    const cachedQuestions = sessionQuestionsCache.get(concept.id) || [];
+    const clientPrevious: string[] = Array.isArray(previous_questions) ? previous_questions : [];
+    const combinedHistory = Array.from(new Set([...cachedQuestions, ...clientPrevious])).slice(-5);
+
+    const questionData = await generateFeynmanQuestion(concept, chosenAngle, combinedHistory);
+
+    // Save generated question to history
+    if (questionData?.question) {
+      const updatedHistory = [...combinedHistory, questionData.question].slice(-5);
+      sessionQuestionsCache.set(concept.id, updatedHistory);
+    }
+
     res.json({
       concept_id: concept.id,
       concept_title: concept.title,
       current_mastery: concept.mastery_score,
       last_friction_point: concept.last_friction_point,
+      angle_used: chosenAngle,
+      history_count: combinedHistory.length,
       ...questionData
     });
   } catch (err) {

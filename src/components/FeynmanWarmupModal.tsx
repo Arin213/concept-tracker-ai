@@ -32,6 +32,7 @@ export const FeynmanWarmupModal: React.FC<FeynmanWarmupModalProps> = ({
 }) => {
   const [selectedConcept, setSelectedConcept] = useState<Concept | null>(null);
   const [questionData, setQuestionData] = useState<FeynmanQuestion | null>(null);
+  const [questionHistory, setQuestionHistory] = useState<string[]>([]);
   const [isLoadingQuestion, setIsLoadingQuestion] = useState(false);
   const [userExplanation, setUserExplanation] = useState('');
   const [isGrading, setIsGrading] = useState(false);
@@ -56,6 +57,7 @@ export const FeynmanWarmupModal: React.FC<FeynmanWarmupModalProps> = ({
   }, [isOpen, targetConcept, coldConcepts]);
 
   const fetchQuestion = async (conceptId: string) => {
+    if (isLoadingQuestion) return; // Prevent double-clicks
     setIsLoadingQuestion(true);
     setError(null);
     setGradeResult(null);
@@ -65,20 +67,27 @@ export const FeynmanWarmupModal: React.FC<FeynmanWarmupModalProps> = ({
       const res = await fetch('/api/feynman/question', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ concept_id: conceptId }),
+        body: JSON.stringify({
+          concept_id: conceptId,
+          previous_questions: questionHistory
+        }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Failed to generate question');
       setQuestionData(data);
-    } catch (err) {
+      if (data.question) {
+        setQuestionHistory((prev) => [...prev.slice(-4), data.question]);
+      }
+    } catch (err: any) {
       console.error(err);
-      setError('Could not generate Feynman question. Please try again.');
+      setError(err?.message || 'Could not generate Feynman question. Please try again.');
     } finally {
       setIsLoadingQuestion(false);
     }
   };
 
   const handleSelectConcept = (concept: Concept) => {
+    if (isLoadingQuestion) return;
     setSelectedConcept(concept);
     fetchQuestion(concept.id);
   };
@@ -202,7 +211,7 @@ export const FeynmanWarmupModal: React.FC<FeynmanWarmupModalProps> = ({
             <div className="py-12 flex flex-col items-center justify-center space-y-2">
               <Loader2 className="w-7 h-7 text-[#4A6572] dark:text-[#94A3B8] animate-spin" />
               <p className="text-xs font-mono text-[#546E7A] dark:text-[#94A3B8]">
-                Formulating Feynman question targeting your recorded friction point...
+                Generating Feynman drill question from a fresh angle...
               </p>
             </div>
           ) : questionData && selectedConcept ? (
@@ -214,9 +223,21 @@ export const FeynmanWarmupModal: React.FC<FeynmanWarmupModalProps> = ({
                     <Sparkles className="w-3.5 h-3.5" />
                     Target: {selectedConcept.title}
                   </span>
-                  <span className="px-1.5 py-0.2 rounded border border-[#2C3E50]/20 dark:border-[#2E3F59] bg-[#D5DBDB] dark:bg-[#161F30] text-[#546E7A] dark:text-[#94A3B8] text-[10px]">
-                    Mastery: {selectedConcept.mastery_score}/5
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => fetchQuestion(selectedConcept.id)}
+                      disabled={isLoadingQuestion}
+                      title="Generate a new question with a different conceptual angle"
+                      className="px-2 py-0.5 rounded border border-[#2C3E50]/20 dark:border-[#2E3F59] bg-[#D5DBDB] dark:bg-[#161F30] hover:border-[#4A6572] text-[10px] font-mono flex items-center gap-1 transition-colors cursor-pointer disabled:opacity-50"
+                    >
+                      <RotateCcw className="w-3 h-3" />
+                      <span>{isLoadingQuestion ? 'Generating...' : 'New Angle'}</span>
+                    </button>
+                    <span className="px-1.5 py-0.2 rounded border border-[#2C3E50]/20 dark:border-[#2E3F59] bg-[#D5DBDB] dark:bg-[#161F30] text-[#546E7A] dark:text-[#94A3B8] text-[10px]">
+                      Mastery: {selectedConcept.mastery_score}/5
+                    </span>
+                  </div>
                 </div>
 
                 <h3 className="text-base font-bold text-[#2E4053] dark:text-[#E2E8F0] leading-snug">

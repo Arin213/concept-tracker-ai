@@ -3,7 +3,7 @@
     {
       "id": "usr_jobseeker_demo",
       "email": "candidate@looptracker.dev",
-      "created_at": "2026-10-08T10:56:07.796Z"
+      "created_at": "2026-10-09T11:06:45.333Z"
     }
   ],
   "concepts": [
@@ -13,15 +13,15 @@
       "title": "Raft Consensus Algorithm",
       "summary": "Leader election, log replication, and safety invariants in distributed replicated state machines. Relies on randomized election timers to avoid split votes.",
       "raw_notes": "Notes from tutorial:\n- Heartbeats prevent follower timeouts\n- Candidate increments currentTerm and votes for self\n- Stumbled when reading section 5.2: what happens when leader gets disconnected during log entry commit? Need to understand how follower truncates uncommitted entries upon rejoin.",
-      "mastery_score": 2,
+      "mastery_score": 1,
       "position_x": 120,
       "position_y": 140,
-      "color_code": "#f97316",
-      "last_friction_point": "Need sharper clarity on failure recovery phases.",
-      "suggested_next_step": "Diagram the flow on paper without checking documentation.",
-      "next_review_at": "2026-11-08T10:56:10.001Z",
-      "created_at": "2026-10-28T10:56:07.796Z",
-      "updated_at": "2026-11-07T10:56:10.001Z",
+      "color_code": "#ef4444",
+      "last_friction_point": "Split-vote deadlock recovery & handling uncommitted log divergence after network partition heals.",
+      "suggested_next_step": "Trace a 5-node cluster diagram where Node 1 is partitioned, Node 2 becomes leader in term 2, and Node 1 rejoins with stale uncommitted logs.",
+      "next_review_at": "2026-11-05T11:06:45.333Z",
+      "created_at": "2026-10-29T11:06:45.333Z",
+      "updated_at": "2026-11-05T11:06:45.333Z",
       "tags": [
         "distributed-systems",
         "consensus",
@@ -40,9 +40,9 @@
       "color_code": "#22c55e",
       "last_friction_point": "Reconciling concurrent timestamp clocks (Lamport vs Vector clocks) under sloppy quorums.",
       "suggested_next_step": "Review Dynamo paper section on hinted handoff and anti-entropy with Merkle trees.",
-      "next_review_at": "2026-11-12T10:56:07.796Z",
-      "created_at": "2026-10-24T10:56:07.796Z",
-      "updated_at": "2026-11-02T10:56:07.796Z",
+      "next_review_at": "2026-11-13T11:06:45.333Z",
+      "created_at": "2026-10-25T11:06:45.333Z",
+      "updated_at": "2026-11-03T11:06:45.333Z",
       "tags": [
         "distributed-systems",
         "databases"
@@ -60,9 +60,9 @@
       "color_code": "#f97316",
       "last_friction_point": "Confusing how priority lanes preempt in-progress render work without leaking partial DOM state.",
       "suggested_next_step": "Explain the difference between alternate fiber pointers (workInProgress vs current) using the double-buffering canvas analogy.",
-      "next_review_at": "2026-10-30T10:56:07.796Z",
-      "created_at": "2026-10-29T10:56:07.796Z",
-      "updated_at": "2026-10-30T10:56:07.796Z",
+      "next_review_at": "2026-10-31T11:06:45.333Z",
+      "created_at": "2026-10-30T11:06:45.333Z",
+      "updated_at": "2026-10-31T11:06:45.333Z",
       "tags": [
         "frontend",
         "react",
@@ -81,9 +81,9 @@
       "color_code": "#eab308",
       "last_friction_point": "Quantifying write amplification factor during leveled compaction vs size-tiered compaction.",
       "suggested_next_step": "Calculate write amplification for a 10MB write in a 4-level LSM tree.",
-      "next_review_at": "2026-11-06T10:56:07.796Z",
-      "created_at": "2026-10-26T10:56:07.796Z",
-      "updated_at": "2026-11-06T10:56:07.796Z",
+      "next_review_at": "2026-11-07T11:06:45.333Z",
+      "created_at": "2026-10-27T11:06:45.333Z",
+      "updated_at": "2026-11-07T11:06:45.333Z",
       "tags": [
         "databases",
         "internals",
@@ -102,9 +102,9 @@
       "color_code": "#10b981",
       "last_friction_point": "Composite index prefix matching rules on range queries.",
       "suggested_next_step": "Explain to a junior engineer how covering indexes eliminate table heap lookups.",
-      "next_review_at": "2026-11-21T10:56:07.796Z",
-      "created_at": "2026-10-18T10:56:07.796Z",
-      "updated_at": "2026-11-01T10:56:07.796Z",
+      "next_review_at": "2026-11-22T11:06:45.333Z",
+      "created_at": "2026-10-19T11:06:45.333Z",
+      "updated_at": "2026-11-02T11:06:45.333Z",
       "tags": [
         "databases",
         "sql",
@@ -123,9 +123,9 @@
       "color_code": "#f97316",
       "last_friction_point": "Race condition between EndpointSlice propagation and container SIGTERM during rolling updates.",
       "suggested_next_step": "Implement a preStop sleep 5s hook in Deployment YAML and test zero-downtime curl loop.",
-      "next_review_at": "2026-11-03T10:56:07.796Z",
-      "created_at": "2026-10-31T10:56:07.796Z",
-      "updated_at": "2026-11-03T10:56:07.796Z",
+      "next_review_at": "2026-11-04T11:06:45.333Z",
+      "created_at": "2026-11-01T11:06:45.333Z",
+      "updated_at": "2026-11-04T11:06:45.333Z",
       "tags": [
         "devops",
         "kubernetes",
@@ -144,9 +144,9 @@
       "color_code": "#22c55e",
       "last_friction_point": "Understanding cgroups v1 vs v2 unified hierarchy implications on Java 8 heap sizing.",
       "suggested_next_step": "Write a 20-line bash script creating a mini chroot container with isolated PID namespace.",
-      "next_review_at": "2026-11-15T10:56:07.796Z",
-      "created_at": "2026-10-20T10:56:07.796Z",
-      "updated_at": "2026-11-05T10:56:07.796Z",
+      "next_review_at": "2026-11-16T11:06:45.333Z",
+      "created_at": "2026-10-21T11:06:45.333Z",
+      "updated_at": "2026-11-06T11:06:45.333Z",
       "tags": [
         "linux",
         "containers",
@@ -165,9 +165,9 @@
       "color_code": "#eab308",
       "last_friction_point": "Proper token storage security tradeoffs in browser (HttpOnly cookies vs in-memory with refresh token rotation).",
       "suggested_next_step": "Draft an architectural diagram of Token Refresh rotation with replay detection.",
-      "next_review_at": "2026-11-05T10:56:07.796Z",
-      "created_at": "2026-10-27T10:56:07.796Z",
-      "updated_at": "2026-11-05T10:56:07.796Z",
+      "next_review_at": "2026-11-06T11:06:45.333Z",
+      "created_at": "2026-10-28T11:06:45.333Z",
+      "updated_at": "2026-11-06T11:06:45.333Z",
       "tags": [
         "security",
         "auth",
@@ -183,7 +183,7 @@
       "target_concept_id": "c-raft-consensus",
       "relationship_type": "prerequisite_of",
       "label": "Majority quorum is prerequisite for Raft leader elections",
-      "created_at": "2026-10-28T10:56:07.796Z"
+      "created_at": "2026-10-29T11:06:45.333Z"
     },
     {
       "id": "r-btree-lsm",
@@ -192,7 +192,7 @@
       "target_concept_id": "c-btree-storage",
       "relationship_type": "prerequisite_of",
       "label": "B+ Tree index mechanics form foundation for storage comparison",
-      "created_at": "2026-10-26T10:56:07.796Z"
+      "created_at": "2026-10-27T11:06:45.333Z"
     },
     {
       "id": "r-cgroups-k8s",
@@ -201,7 +201,7 @@
       "target_concept_id": "c-k8s-lifecycle",
       "relationship_type": "prerequisite_of",
       "label": "Kernel cgroups define container resource limits enforced by Kubelet",
-      "created_at": "2026-10-31T10:56:07.796Z"
+      "created_at": "2026-11-01T11:06:45.333Z"
     },
     {
       "id": "r-raft-k8s",
@@ -210,7 +210,7 @@
       "target_concept_id": "c-k8s-lifecycle",
       "relationship_type": "related_to",
       "label": "etcd backing Kubernetes control plane relies directly on Raft",
-      "created_at": "2026-11-02T10:56:07.796Z"
+      "created_at": "2026-11-03T11:06:45.333Z"
     },
     {
       "id": "r-fiber-btree",
@@ -219,30 +219,10 @@
       "target_concept_id": "c-react-fiber",
       "relationship_type": "related_to",
       "label": "Both balance tree traversal latency vs batched commits",
-      "created_at": "2026-11-03T10:56:07.796Z"
+      "created_at": "2026-11-04T11:06:45.333Z"
     }
   ],
   "study_sessions": [
-    {
-      "user_id": "usr_jobseeker_demo",
-      "session_type": "feynman_test",
-      "raw_session_input": "Q: How would you explain the fundamental mechanics of \"Raft Consensus Algorithm\" to a bright junior engineer without relying on buzzwords?\n\nExplanation:\nServers take turns electing a candidate with the highest log index to keep consensus safely agreed upon without conflicts.",
-      "ai_summary": "Feynman Test for \"Raft Consensus Algorithm\": Score 1 -> 2. Your explanation articulates the core intuition with good clarity (19 words provided). You focused directly on how compo",
-      "duration_minutes": 10,
-      "started_at": "2026-11-07T10:46:10.002Z",
-      "ended_at": "2026-11-07T10:56:10.002Z",
-      "id": "sess-1794048970002-edfg"
-    },
-    {
-      "user_id": "usr_jobseeker_demo",
-      "session_type": "dump",
-      "raw_session_input": "Studying LSM Trees and SSTables in RocksDB storage engine. Friction point: understanding write amplification during compactions.",
-      "ai_summary": "Processed study notes on \"Studying LSM Trees and SSTables in Rocks\". Extracted macro-architecture principles and learning targets.",
-      "duration_minutes": 15,
-      "started_at": "2026-11-07T10:41:08.070Z",
-      "ended_at": "2026-11-07T10:56:08.070Z",
-      "id": "sess-1794048968070-9fz6"
-    },
     {
       "id": "sess-01",
       "user_id": "usr_jobseeker_demo",
@@ -250,8 +230,8 @@
       "raw_session_input": "Read through Raft paper section 5. Stuck on term conflicts when leader drops.",
       "ai_summary": "Analyzed Raft leader election edge cases and uncommitted log handling during network partitions.",
       "duration_minutes": 35,
-      "started_at": "2026-11-04T10:56:07.796Z",
-      "ended_at": "2026-11-04T10:56:07.796Z"
+      "started_at": "2026-11-05T11:06:45.333Z",
+      "ended_at": "2026-11-05T11:06:45.333Z"
     },
     {
       "id": "sess-02",
@@ -260,8 +240,8 @@
       "raw_session_input": "Feynman test on Database Indexing B+ trees vs Binary Search trees.",
       "ai_summary": "Mastered B+ Tree fan-out and sequential leaf node scan efficiency.",
       "duration_minutes": 20,
-      "started_at": "2026-11-01T10:56:07.796Z",
-      "ended_at": "2026-11-01T10:56:07.796Z"
+      "started_at": "2026-11-02T11:06:45.333Z",
+      "ended_at": "2026-11-02T11:06:45.333Z"
     }
   ],
   "session_concepts": [
@@ -274,59 +254,9 @@
       "session_id": "sess-02",
       "concept_id": "c-database-indexing",
       "notes_added": "Passed Feynman test with 5/5"
-    },
-    {
-      "session_id": "sess-1794048968070-9fz6",
-      "concept_id": "c-1794048968068-usqb",
-      "notes_added": "Processed study notes on \"Studying LSM Trees and SSTables in Rocks\". Extracted macro-architecture pr"
-    },
-    {
-      "session_id": "sess-1794048970002-edfg",
-      "concept_id": "c-raft-consensus",
-      "notes_added": "Feynman Test for \"Raft Consensus Algorithm\": Score 1 -> 2. Your explanation articulates the core int"
     }
   ],
   "learning_states": [
-    {
-      "id": "ls-1794048970002-ef8s",
-      "concept_id": "c-raft-consensus",
-      "concept_title": "Raft Consensus Algorithm",
-      "previous_score": 1,
-      "new_score": 2,
-      "trigger_event": "feynman_test",
-      "recorded_at": "2026-11-07T10:56:10.002Z",
-      "feedback_notes": "Your explanation articulates the core intuition with good clarity (19 words provided). You focused directly on how components interact under normal and edge conditions."
-    },
-    {
-      "id": "ls-1794048970001-myu6",
-      "concept_id": "c-raft-consensus",
-      "concept_title": "Raft Consensus Algorithm",
-      "previous_score": 1,
-      "new_score": 2,
-      "trigger_event": "manual_adjustment",
-      "recorded_at": "2026-11-07T10:56:10.001Z",
-      "feedback_notes": "Mastery score changed manually in concept inspector"
-    },
-    {
-      "id": "ls-1794048968077-05b6",
-      "concept_id": "c-1794048968068-usqb",
-      "concept_title": "Studying LSM Trees and SSTables in Rocks",
-      "previous_score": 2,
-      "new_score": 4,
-      "trigger_event": "manual_adjustment",
-      "recorded_at": "2026-11-07T10:56:08.077Z",
-      "feedback_notes": "Mastery score changed manually in concept inspector"
-    },
-    {
-      "id": "ls-1794048968068-d4w2",
-      "concept_id": "c-1794048968068-usqb",
-      "concept_title": "Studying LSM Trees and SSTables in Rocks",
-      "previous_score": 0,
-      "new_score": 2,
-      "trigger_event": "session_dump",
-      "recorded_at": "2026-11-07T10:56:08.068Z",
-      "feedback_notes": "Initial concept registered from study dump"
-    },
     {
       "id": "ls-01",
       "concept_id": "c-database-indexing",
@@ -334,7 +264,7 @@
       "previous_score": 3,
       "new_score": 5,
       "trigger_event": "feynman_test",
-      "recorded_at": "2026-11-01T10:56:07.796Z",
+      "recorded_at": "2026-11-02T11:06:45.333Z",
       "feedback_notes": "Flawlessly explained high fan-out, block size matching, and avoiding heap scans with covering indexes without buzzwords."
     },
     {
@@ -344,7 +274,7 @@
       "previous_score": 2,
       "new_score": 1,
       "trigger_event": "session_dump",
-      "recorded_at": "2026-11-04T10:56:07.796Z",
+      "recorded_at": "2026-11-05T11:06:45.333Z",
       "feedback_notes": "Reported confusion over split-vote deadlocks and uncommitted log entry drops."
     },
     {
@@ -354,7 +284,7 @@
       "previous_score": 1,
       "new_score": 2,
       "trigger_event": "review",
-      "recorded_at": "2026-10-30T10:56:07.796Z",
+      "recorded_at": "2026-10-31T11:06:45.333Z",
       "feedback_notes": "Understood render phase vs commit phase distinction, but still uncertain about preemption lanes."
     }
   ]

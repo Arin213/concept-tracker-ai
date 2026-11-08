@@ -47,6 +47,11 @@ export default function App() {
 
   // User state from Firebase Auth
   const [user, setUser] = useState<User | null>(null);
+  const [isAuthLoading, setIsAuthLoading] = useState(false);
+  const [authNotification, setAuthNotification] = useState<{
+    type: 'success' | 'error' | 'info';
+    message: string;
+  } | null>(null);
 
   // Light / Dark Theme State (defaults to Milk Coffee)
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
@@ -82,6 +87,13 @@ export default function App() {
   const [isLiveVoiceOpen, setIsLiveVoiceOpen] = useState(false);
   const [dismissWarmupToast, setDismissWarmupToast] = useState(false);
 
+  // Reactive safeguard: auto-dismiss slide-over if the active concept is deleted
+  useEffect(() => {
+    if (selectedConcept && !concepts.some((c) => c.id === selectedConcept.id)) {
+      setSelectedConcept(null);
+    }
+  }, [concepts, selectedConcept]);
+
   // Firebase Auth Subscription
   useEffect(() => {
     const unsubscribe = subscribeToAuth(async (currentUser) => {
@@ -113,18 +125,52 @@ export default function App() {
   }, [concepts.length]);
 
   const handleSignInGoogle = async () => {
+    setIsAuthLoading(true);
+    setAuthNotification(null);
     try {
-      await signInWithGoogle();
+      const signedInUser = await signInWithGoogle();
+      setAuthNotification({
+        type: 'success',
+        message: `Welcome, ${signedInUser.displayName || signedInUser.email}! Your knowledge graph is now securely synchronized with Google Cloud Firestore.`
+      });
+      setTimeout(() => setAuthNotification(null), 5000);
     } catch (err: any) {
-      console.warn('Google Sign-In notice:', err?.message || err);
+      console.error('Google Sign-In notice:', err);
+      let message = 'Sign-in failed. Please try again.';
+      if (err?.code === 'auth/popup-blocked') {
+        message = 'The Google sign-in popup was blocked by your browser. Please allow popups for this site and try again.';
+      } else if (err?.code === 'auth/popup-closed-by-user') {
+        message = 'The sign-in popup was closed before completion.';
+      } else if (err?.code === 'auth/cancelled-popup-request') {
+        message = 'A sign-in window is already active.';
+      } else if (err?.code === 'auth/unauthorized-domain') {
+        message = 'This domain is not yet listed in Firebase Auth authorized domains.';
+      } else if (err?.message) {
+        message = err.message;
+      }
+      setAuthNotification({
+        type: 'error',
+        message
+      });
+      setTimeout(() => setAuthNotification(null), 8000);
+    } finally {
+      setIsAuthLoading(false);
     }
   };
 
   const handleSignOut = async () => {
+    setIsAuthLoading(true);
     try {
       await signOutUser();
+      setAuthNotification({
+        type: 'info',
+        message: 'Signed out successfully. Concepts are currently saved locally.'
+      });
+      setTimeout(() => setAuthNotification(null), 4000);
     } catch (err) {
       console.error('Sign-Out error:', err);
+    } finally {
+      setIsAuthLoading(false);
     }
   };
 
@@ -297,7 +343,35 @@ export default function App() {
         user={user}
         onSignInGoogle={handleSignInGoogle}
         onSignOut={handleSignOut}
+        isAuthLoading={isAuthLoading}
       />
+
+      {/* Auth Notification Toast Banner */}
+      {authNotification && (
+        <div
+          className={`px-3 sm:px-4 py-2 border-b text-xs font-mono flex items-center justify-between z-40 transition-all ${
+            authNotification.type === 'error'
+              ? 'bg-[#C0392B]/15 border-[#C0392B]/30 text-[#C0392B] dark:text-[#EF4444]'
+              : authNotification.type === 'success'
+              ? 'bg-[#27AE60]/15 border-[#27AE60]/30 text-[#27AE60] dark:text-[#10B981]'
+              : 'bg-[#4A6572]/15 border-[#4A6572]/30 text-[#4A6572] dark:text-[#94A3B8]'
+          }`}
+        >
+          <div className="flex items-center gap-2 overflow-hidden">
+            <span className="font-bold shrink-0">
+              {authNotification.type === 'error' ? 'Auth Notice:' : authNotification.type === 'success' ? 'Cloud Sync:' : 'Notice:'}
+            </span>
+            <span className="truncate">{authNotification.message}</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setAuthNotification(null)}
+            className="p-1 hover:opacity-75 cursor-pointer shrink-0 ml-2"
+          >
+            <X className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      )}
 
       {/* Main Canvas Area */}
       <main className="relative flex-1 w-full h-full overflow-hidden">
